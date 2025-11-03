@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Requests - Cashier Clears</title>
+    <!-- Include FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Ensure the table scrolls horizontally */
+        .table-container {
+            overflow-x: auto;
+            width: 100%;
+        }
+        /* Add some padding and styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+            cursor: pointer;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+      <style>
+    /* General body styling */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        margin: 20px;
+    }
+
+    /* Header styling */
+    h1 {
+        color: #d32f2f; /* Deep red for emphasis */
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+        font-weight: 600;
+    }
+
+    /* Button styling */
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #d32f2f; /* Matching the header color */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+        background-color: #b71c1c; /* Darker shade on hover */
+        transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    /* Search input styling */
+    #searchInput {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+        transition: border-color 0.3s ease;
+    }
+
+    #searchInput:focus {
+        border-color: #d32f2f; /* Highlight focus with red */
+        outline: none;
+    }
+
+    /* Table container styling */
+    .table-container {
+        overflow-x: auto;
+        width: 100%;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        border-radius: 8px;
+    }
+
+    /* Table styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #d32f2f; /* Red header for contrast */
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    th:hover {
+        background-color: #b71c1c; /* Darker shade on hover */
+    }
+
+    td {
+        color: #555;
+    }
+
+    /* Zebra striping for rows */
+    tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1; /* Highlight row on hover */
+    }
+
+    /* No data message styling */
+    td[colspan="11"] {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+        font-style: italic;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2em;
+        }
+
+        .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+    }
+  </style>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </style>
+</head>
+<body>
+  
+  <nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/complete">💰 Completed Requests</a></li>
+        </ul>
+    </nav>
+
+<!-- Heading Section -->
+<h1>Completed Blood Requests</h1>
+<p class="page-description">
+    This page displays a list of all completed blood requests. Use the search bar to filter results or click on column headers to sort.
+</p>
+
+<!-- Add this CSS for styling the description -->
+<style>
+    .page-description {
+        text-align: center;
+        color: #666;
+        font-size: 1.1em;
+        margin-top: -10px;
+        margin-bottom: 30px;
+        font-style: italic;
+    }
+</style>
+    <!-- Back to Main Page Link -->
+    <a href="/main" class="btn"><i class="fas fa-arrow-left"></i> Back to Main</a>
+
+    <!-- Search Input -->
+    <div style="margin-bottom: 20px;">
+        <input type="text" id="searchInput" placeholder="Search...">
+    </div>
+
+    <!-- Completed Requests Table -->
+    <div class="table-container">
+        <table id="completedRequestsTable">
+            <thead>
+                <tr>
+                    <th>ID <i class="fas fa-sort"></i></th>
+                    <th>Blood Unit ID <i class="fas fa-sort"></i></th>
+                    <th>Blood Group <i class="fas fa-sort"></i></th>
+                    <th>Donation Type <i class="fas fa-sort"></i></th>
+                    <th>Expiration Date <i class="fas fa-sort"></i></th>
+                    <th>Recipient Name <i class="fas fa-sort"></i></th>
+                    <th>Recipient Blood Type <i class="fas fa-sort"></i></th>
+                    <th>Hospital <i class="fas fa-sort"></i></th>
+                    <th>Doctor <i class="fas fa-sort"></i></th>
+                    <th>Approved Date <i class="fas fa-sort"></i></th>
+                    <th>Release Date <i class="fas fa-sort"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (completedRequests.length > 0) { %>
+                    <% completedRequests.forEach((request) => { %>
+                        <tr>
+                            <td><%= request.id %></td>
+                            <td><%= request.bloodUnitID %></td>
+                            <td><%= request.bloodGroup %></td>
+                            <td><%= request.donationType %></td>
+                            <td><%= request.expirationDate %></td>
+                            <td><%= request.recipientName %></td>
+                            <td><%= request.recipientBloodType %></td>
+                            <td><%= request.hospital %></td>
+                            <td><%= request.doctor %></td>
+                            <td><%= request.approvedDate %></td>
+                            <td><%= request.releaseDate %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="11">No completed requests found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <!-- Custom Script -->
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            var table = $('#completedRequestsTable').DataTable({
+                paging: true, // Enable pagination
+                searching: true, // Enable search
+                ordering: true, // Enable sorting
+                responsive: true, // Enable responsive design
+                scrollX: true, // Enable horizontal scrolling
+                dom: 'lrtip', // Layout control (no search input duplication)
+            });
+
+            // Custom search input
+            $('#searchInput').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+        });
+    </script>
+                      
+                      
+                      
+                      
+                      
+                      
+    <!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- HTML for the Charts -->
+<div style="width: 80%; margin: 0 auto;">
+    <canvas id="completionTrendsChart"></canvas>
+</div>
+<div style="width: 80%; margin: 40px auto;">
+    <canvas id="bloodGroupChart"></canvas>
+</div>
+<div style="width: 80%; margin: 40px auto;">
+    <canvas id="donationTypeChart"></canvas>
+</div>
+
+<!-- JavaScript to Extract Data and Render Charts -->
+<script>
+    // Function to extract data from the table
+    function extractDataFromTable() {
+        const table = document.getElementById("completedRequestsTable");
+        const rows = table.querySelectorAll("tbody tr");
+        const data = {
+            dates: [], // For completion trends over time
+            bloodGroups: {}, // For counts per blood group
+            donationTypes: {}, // For counts per donation type
+        };
+
+        rows.forEach((row) => {
+            const cells = row.querySelectorAll("td");
+
+            // Extract relevant data
+            const releaseDate = cells[10].textContent.trim(); // Release Date column
+            const bloodGroup = cells[2].textContent.trim(); // Blood Group column
+            const donationType = cells[3].textContent.trim(); // Donation Type column
+
+            // Add to dates array
+            if (!data.dates.includes(releaseDate)) {
+                data.dates.push(releaseDate);
+            }
+
+            // Count blood groups
+            if (!data.bloodGroups[bloodGroup]) {
+                data.bloodGroups[bloodGroup] = 0;
+            }
+            data.bloodGroups[bloodGroup]++;
+
+            // Count donation types
+            if (!data.donationTypes[donationType]) {
+                data.donationTypes[donationType] = 0;
+            }
+            data.donationTypes[donationType]++;
+        });
+
+        return data;
+    }
+
+    // Function to render the completion trends chart
+    function renderTrendsChart(data) {
+        const ctx = document.getElementById("completionTrendsChart").getContext("2d");
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: data.dates,
+                datasets: [
+                    {
+                        label: "Completed Requests",
+                        data: data.dates.map((date) =>
+                            data.dates.filter((d) => d === date).length
+                        ),
+                        borderColor: "#d32f2f",
+                        backgroundColor: "rgba(211, 47, 47, 0.2)",
+                        fill: true,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Completion Trends Over Time",
+                        font: { size: 18 },
+                    },
+                },
+                scales: {
+                    x: { title: { display: true, text: "Release Date" } },
+                    y: { title: { display: true, text: "Number of Completions" }, beginAtZero: true },
+                },
+            },
+        });
+    }
+
+    // Function to render the blood group chart
+    function renderBloodGroupChart(data) {
+        const ctx = document.getElementById("bloodGroupChart").getContext("2d");
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: Object.keys(data.bloodGroups),
+                datasets: [
+                    {
+                        label: "Number of Completions",
+                        data: Object.values(data.bloodGroups),
+                        backgroundColor: [
+                            "#d32f2f",
+                            "#1976d2",
+                            "#388e3c",
+                            "#fbc02d",
+                        ],
+                        borderColor: [
+                            "#b71c1c",
+                            "#1565c0",
+                            "#2e7d32",
+                            "#f9a825",
+                        ],
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Completion Counts by Blood Group",
+                        font: { size: 18 },
+                    },
+                },
+                scales: {
+                    x: { title: { display: true, text: "Blood Group" } },
+                    y: { title: { display: true, text: "Number of Completions" }, beginAtZero: true },
+                },
+            },
+        });
+    }
+
+    // Function to render the donation type chart
+    function renderDonationTypeChart(data) {
+        const ctx = document.getElementById("donationTypeChart").getContext("2d");
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: Object.keys(data.donationTypes),
+                datasets: [
+                    {
+                        label: "Number of Completions",
+                        data: Object.values(data.donationTypes),
+                        backgroundColor: [
+                            "#d32f2f",
+                            "#1976d2",
+                            "#388e3c",
+                            "#fbc02d",
+                        ],
+                        borderColor: [
+                            "#b71c1c",
+                            "#1565c0",
+                            "#2e7d32",
+                            "#f9a825",
+                        ],
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Completion Counts by Donation Type",
+                        font: { size: 18 },
+                    },
+                },
+                scales: {
+                    x: { title: { display: true, text: "Donation Type" } },
+                    y: { title: { display: true, text: "Number of Completions" }, beginAtZero: true },
+                },
+            },
+        });
+    }
+
+    // Extract data and render charts
+    document.addEventListener("DOMContentLoaded", () => {
+        const data = extractDataFromTable();
+        renderTrendsChart(data);
+        renderBloodGroupChart(data);
+        renderDonationTypeChart(data);
+    });
+</script>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+</body>
+                  
+                  <!-- Footer Section -->
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2025 Cashier Clears. All rights reserved.</p>
+        <div class="social-media-links">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+<!-- Add this CSS for styling the footer -->
+<style>
+    footer {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        margin-top: 40px;
+        border-top: 4px solid #d32f2f;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .social-media-links {
+        margin-top: 10px;
+    }
+
+    .social-media-links a {
+        color: white;
+        margin: 0 10px;
+        font-size: 1.2em;
+        transition: color 0.3s ease;
+    }
+
+    .social-media-links a:hover {
+        color: #d32f2f; /* Red color on hover */
+    }
+                  </style>
+                  </html>

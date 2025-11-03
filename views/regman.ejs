@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamoja Dokita® Blood Bank Inventory - Regional Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  
+  
+  <style>
+  
+  
+  /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation Section */
+/* Navigation Bar Styling */
+nav {
+    background-color: #b71c1c; /* Red background */
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Keeps the nav bar on top */
+}
+
+/* Navbar List */
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Navbar List Items */
+nav ul li {
+    margin: 0 20px;
+}
+
+/* Navbar Links */
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Navbar Link Hover Effect */
+nav ul li a:hover {
+    color: #f1f1f1; /* Lighter white on hover */
+    transform: scale(1.05); /* Slightly increase the size of the link on hover */
+}
+
+/* Icon Styling */
+nav ul li a i {
+    font-size: 1.5rem; /* Icon size */
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect on icons */
+nav ul li a:hover i {
+    transform: translateX(5px); /* Slightly move the icon to the right on hover */
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        font-size: 1.1rem; /* Slightly smaller font on mobile */
+    }
+
+    nav ul li a i {
+        font-size: 1.3rem; /* Adjust icon size for mobile */
+    }
+}
+
+/* Header Section */
+#header {
+    text-align: center;
+    margin: 30px 0;
+}
+
+#header h1 {
+    color: #b71c1c;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#header h2 {
+    color: #555;
+    font-size: 1.6rem;
+}
+
+#welcomeMessage {
+    margin-top: 20px;
+    color: #b71c1c;
+    font-size: 1.5rem;
+}
+
+/* Filter Section */
+.filter-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.filter-container select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+    transition: 0.3s ease;
+}
+
+.filter-container select:focus {
+    border-color: #b71c1c;
+    outline: none;
+}
+
+/* Table Section */
+.table-container {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.scrollable-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-table th,
+.scrollable-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.scrollable-table th {
+    background-color: #b71c1c;
+    color: white;
+    font-weight: bold;
+}
+
+.scrollable-table td {
+    background-color: white;
+    color: #333;
+}
+
+.scrollable-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#total-records {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Chart Section */
+.chart-container {
+    margin: 30px 0;
+    text-align: center;
+}
+
+#bloodGroupChart {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Pagination Section */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #b71c1c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: #f44336;
+}
+
+/* Export Section */
+.export-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.export-buttons button {
+    background-color: #b71c1c;
+    color: white;
+    padding: 12px 20px;
+    margin: 0 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.export-buttons button:hover {
+    background-color: #f44336;
+}
+
+/* Footer Section */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #b71c1c;
+    color: white;
+    margin-top: 40px;
+}
+
+  /* Footer Section */
+footer {
+    background-color: #b71c1c; /* Red background */
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-info {
+    margin-bottom: 20px;
+}
+
+.footer-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.footer-info p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #f44336; /* Lighter red for hover effect */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .footer-info h3 {
+        font-size: 1.5rem;
+    }
+
+    .footer-info p {
+        font-size: 0.9rem;
+    }
+
+    .footer-social {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .social-icon {
+        font-size: 1.3rem;
+        margin: 5px;
+    }
+}
+
+   
+  
+  
+  </style>
+</head>
+
+<body>
+    <!-- Navigation Section -->
+    <nav>
+        <ul class="menu">
+            <a href="/main" class="nav-link">
+    <i class="fas fa-home"></i> Back to Main
+</a>
+<a href="/regman" class="nav-link">
+    <i class="fas fa-dollar-sign"></i> Regional Managers
+</a>
+
+          <!-- Logout Link -->
+    <a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</nav>
+
+<script>
+    // Load user data from localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && user.role) {
+        const userRole = user.role;
+
+        // Show/hide menu items based on the role
+        document.querySelectorAll('.menu-item').forEach(item => {
+            const allowedRoles = item.getAttribute('data-role').split(' ');
+
+            if (!allowedRoles.includes(userRole)) {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Logout functionality
+    document.getElementById('logoutLink').addEventListener('click', () => {
+        localStorage.removeItem('user');
+        window.location.href = '/';  // Redirect to login
+    });
+      </script>
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <div id="main-container">
+        <!-- Header Section -->
+        <header id="header">
+            <h1>Pamoja Dokita® Blood Bank Management System</h1>
+            <h2>Regional Manager Dashboard - 2025</h2>
+
+            <h1 id="welcomeMessage">
+                <span id="welcomeText"></span>
+            </h1>
+
+            <!-- Welcome Message Script -->
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const user = JSON.parse(localStorage.getItem('user'));
+
+                    if (user) {
+                        document.getElementById('welcomeText').innerHTML = `Welcome, ${user.role} <strong>${user.email}</strong>! You're now part of the <strong>${user.region}</strong> branch of Pamoja Dokita® @ 2025.`;
+                    } else {
+                        document.getElementById('welcomeText').innerText = 'Welcome to Pamoja Dokita® @ 2025!';
+                    }
+                });
+            </script>
+        </header>
+
+        <!-- Blood Units Table Section -->
+        <main>
+            <section id="blood-units-section">
+                <h2>Available Blood Units</h2>
+                
+                <!-- Residence Filter -->
+                <div class="filter-container">
+                    <label for="residence-filter">Select Residence to Filter: </label>
+                    <select id="residence-filter">
+                        <option value="">All Residences</option>
+                        <% const residences = [...new Set(trial5Records.map(record => record.residence))]; %>
+                        <% residences.forEach(residence => { %>
+                            <option value="<%= residence %>"><%= residence || 'Unknown' %></option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <!-- Pie Chart Section -->
+                <div class="chart-container">
+                    <h3>Blood Group Distribution</h3>
+                    <canvas id="bloodGroupChart"></canvas>
+                    <p id="total-records">Total Records: <%= trial5Records.length %></p>
+                </div>
+
+                <!-- Table Container -->
+                <div class="table-container">
+                    <table id="bloodUnitsTable" class="scrollable-table">
+                        <thead>
+                            <tr>
+                                <th>Donation ID</th>
+                                <th>Blood Group</th>
+                                <th>Rhesus Factor</th>
+                                <th>Donation Volume (ml)</th>
+                                <th>Hemoglobin Level</th>
+                                <th>Donation Type</th>
+                                <th>Donation Date</th>
+                                <th>Residence</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <% trial5Records.forEach(record => { %>
+                                <tr>
+                                    <td><%= record.donationID || 'N/A' %></td>
+                                    <td><%= record.bloodGroup || 'Unknown' %></td>
+                                    <td><%= record.rhesusFactor || 'N/A' %></td>
+                                    <td><%= record.donationVolume || '0' %></td>
+                                    <td><%= record.hemoglobinLevel || '0' %></td>
+                                    <td><%= record.donationType || 'Unknown' %></td>
+                                    <td><%= record.donationDate || 'N/A' %></td>
+                                    <td><%= record.residence || 'N/A' %></td>
+                                    <td><%= record.notes || 'N/A' %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination Section -->
+                <div id="pagination" class="pagination"></div>
+
+                <!-- Export Buttons -->
+                <div class="export-buttons">
+                    <button id="export-pdf" onclick="exportToPDF()">Export to PDF</button>
+                    <button id="export-csv" onclick="exportToCSV()">Export to CSV</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Function to generate the chart
+        function generateChart(data) {
+            const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'Unknown'];
+            const counts = bloodGroups.map(group => data.filter(record => record.bloodGroup === group).length);
+
+            const ctx = document.getElementById('bloodGroupChart').getContext('2d');
+            const bloodGroupChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: bloodGroups,
+                    datasets: [{
+                        label: 'Blood Group Distribution',
+                        data: counts,
+                        backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#ff9f40', '#4bc0c0', '#9966ff', '#c9c9c9', '#ff0', '#0f0'],
+                        borderColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.label + ': ' + context.raw + ' units';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Filter records by residence and update chart and table
+        document.getElementById('residence-filter').addEventListener('change', function () {
+            const filterValue = this.value;
+            const filteredRecords = <% JSON.stringify(trial5Records) %>.filter(record => !filterValue || record.residence === filterValue);
+            
+            // Update the table
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = '';
+            filteredRecords.forEach(record => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.donationID || 'N/A'}</td>
+                    <td>${record.bloodGroup || 'Unknown'}</td>
+                    <td>${record.rhesusFactor || 'N/A'}</td>
+                    <td>${record.donationVolume || '0'}</td>
+                    <td>${record.hemoglobinLevel || '0'}</td>
+                    <td>${record.donationType || 'Unknown'}</td>
+                    <td>${record.donationDate || 'N/A'}</td>
+                    <td>${record.residence || 'N/A'}</td>
+                    <td>${record.notes || 'N/A'}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Update the total records count
+            document.getElementById('total-records').innerText = `Total Records: ${filteredRecords.length}`;
+
+            // Update the chart
+            generateChart(filteredRecords);
+        });
+
+        // Generate the chart for the initial dataset
+        generateChart(<%= JSON.stringify(trial5Records) %>);
+
+        // Export to CSV function
+        function exportToCSV() {
+            const rows = document.querySelectorAll('#bloodUnitsTable tr');
+            let csvContent = '';
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('th, td');
+                const rowArray = [];
+                cells.forEach(cell => rowArray.push(cell.innerText));
+                csvContent += rowArray.join(',') + '\n';
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            saveAs(blob, 'blood_units.csv');
+        }
+
+        // Export to PDF function
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const table = document.getElementById('bloodUnitsTable');
+            doc.autoTable({ html: table });
+            doc.save('blood_units.pdf');
+        }
+    </script>
+                  
+                  
+                
+</body>
+             <!-- Footer Section -->
+<footer>
+    <div class="footer-container">
+        <!-- Footer Info Section -->
+        <div class="footer-info">
+            <h3>Pamoja Dokita® Blood Bank</h3>
+            <p>Your trusted partner in saving lives with safe blood donations.</p>
+            <p>Regional Manager Dashboard - 2025</p>
+        </div>
+
+        <!-- Social Links Section -->
+        <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" class="social-icon">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-icon">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="social-icon">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://github.com" target="_blank" class="social-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://wa.me" target="_blank" class="social-icon">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+
+</html>

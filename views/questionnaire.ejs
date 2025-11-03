@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+
+    <title>Pamoja Dokita® Blood Donor Questionnaire</title>
+  
+  
+  <style>
+    /* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e74c3c;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e74c3c;
+    padding-bottom: 5px;
+}
+
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #34495e;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #e74c3c;
+    outline: none;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+input[readonly] {
+    background-color: #f4f4f4;
+    cursor: not-allowed;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #c0392b;
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Flexbox for Vital Signs Section */
+#health-assessment div {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#health-assessment div label {
+    margin-top: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    #health-assessment div {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    }
+  </style>>
+  
+  
+  
+  
+
+</head>
+
+<nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/questionaire">💰 Donor Form</a></li>
+        </ul>
+    </nav>
+<body><h1>Pamoja Dokita® Blood Bank Donor Questionnaire</h1>
+
+    <form action="/submit" method="POST">
+
+    <!-- I. Demographic Information -->
+
+    <h2>I. Demographic Information</h2>
+
+    <label>1. Last Name of Donor:</label>
+
+    <input type="text" name="last_name" required><br>
+
+    <label>2. First Name of Donor:</label>
+
+    <input type="text" name="first_name" required><br>
+
+    <label>3. Telephone Number:</label>
+
+    <input type="text" name="phone" required><br>
+
+    <label>4. Date of Birth:</label>
+
+<input type="date" name="dob" id="dob" required oninput="calculateAge()"><br>
+
+<label>5. Age:</label> <input type="number" name="age" id="age" readonly><br>
+
+<script>
+function calculateAge() {
+    const dobInput = document.getElementById('dob').value;
+    const ageInput = document.getElementById('age');
+
+    if (dobInput) {
+        const dob = new Date(dobInput);
+        const today = new Date();
+        
+        let age = today.getFullYear() - dob.getFullYear();
+        const monthDiff = today.getMonth() - dob.getMonth();
+        
+        // Adjust age if the birthday hasn’t occurred yet this year
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        
+        ageInput.value = age;
+    } else {
+        ageInput.value = '';
+    }
+}
+      </script><label>6. Residence/Quartier:</label>
+
+    <input type="text" name="residence" required><br>
+
+    <label>7. Type of Donor:</label>
+
+    <select name="donor_type" required>
+
+        <option value="">-- Select Donor Type --</option>
+
+        <option value="volunteer">Volunteer</option>
+
+        <option value="replacement">Replacement</option>
+
+    </select><br>
+
+    <!-- II. Medical History -->
+
+    <h2>II. Medical History</h2>
+
+    <label>8. Do you have any significant medical problems?</label><br>
+
+    <input type="radio" name="medical_problems" value="Yes"> Yes
+
+    <input type="radio" name="medical_problems" value="No"> No<br>
+
+    <input type="text" name="medical_details" placeholder="Specify medical problems..."><br>
+
+    <label>9. If female: Could you be pregnant?</label><br>
+
+    <input type="radio" name="pregnant" value="Yes"> Yes
+
+    <input type="radio" name="pregnant" value="No"> No<br>
+
+    <input type="text" name="pregnancy_details" placeholder="Provide details..."><br>
+
+    <label>10. Have you ever been treated for Cancer?</label><br>
+
+    <input type="radio" name="cancer" value="Yes"> Yes
+
+    <input type="radio" name="cancer" value="No"> No<br>
+
+    <input type="text" name="cancer_details" placeholder="Specify treatment details..."><br>
+
+    <label>11. Do you have any known allergies?</label><br>
+
+    <input type="radio" name="allergies" value="Yes"> Yes
+
+    <input type="radio" name="allergies" value="No"> No<br>
+
+    <input type="text" name="allergy_details" placeholder="Specify allergies..."><br>
+
+    <label>12. Do you have any chronic conditions?</label><br>
+
+    <input type="radio" name="chronic_conditions" value="Yes"> Yes
+
+    <input type="radio" name="chronic_conditions" value="No"> No<br>
+
+    <input type="text" name="chronic_details" placeholder="Specify condition..."><br>
+
+    <label>13. Have you had any recent surgeries?</label><br>
+
+    <input type="radio" name="surgery" value="Yes"> Yes
+
+    <input type="radio" name="surgery" value="No"> No<br>
+
+    <input type="text" name="surgery_details" placeholder="Specify surgery..."><br>
+
+    <label>14. Have you been diagnosed with a blood disorder?</label><br>
+
+    <input type="radio" name="blood_disorder" value="Yes"> Yes
+
+    <input type="radio" name="blood_disorder" value="No"> No<br>
+
+    <input type="text" name="blood_disorder_details" placeholder="Specify disorder..."><br>
+
+    <label>15. Are you currently taking any medications?</label><br>
+
+    <input type="radio" name="medications" value="Yes"> Yes
+
+    <input type="radio" name="medications" value="No"> No<br>
+
+    <input type="text" name="medication_details" placeholder="List medications..."><br>
+
+    <label>16. Have you ever had an organ transplant?</label><br>
+
+    <input type="radio" name="organ_transplant" value="Yes"> Yes
+
+    <input type="radio" name="organ_transplant" value="No"> No<br>
+
+    <input type="text" name="transplant_details" placeholder="Provide details..."><br>
+
+    <!-- III. Additional Health Factors -->
+
+    <h2>III. Additional Health Factors</h2>
+
+    <label>17. Are you breastfeeding?</label><br>
+
+    <input type="radio" name="breastfeeding" value="Yes"> Yes
+
+    <input type="radio" name="breastfeeding" value="No"> No<br>
+
+    <input type="text" name="breastfeeding_details" placeholder="Provide details..."><br>
+
+    <label>18. Do you have any sexually transmitted infections (STIs)?</label><br>
+
+    <input type="radio" name="sti" value="Yes"> Yes
+
+    <input type="radio" name="sti" value="No"> No<br>
+
+    <input type="text" name="sti_details" placeholder="Provide details..."><br>
+
+    <label>19. Have you ever come in contact with HIV/AIDS?</label><br>
+
+    <input type="radio" name="contact_hiv" value="Yes"> Yes
+
+    <input type="radio" name="contact_hiv" value="No"> No<br>
+
+    <label>20. Are you currently unwell?</label><br>
+
+    <input type="radio" name="currently_unwell" value="Yes"> Yes
+
+    <input type="radio" name="currently_unwell" value="No"> No<br>
+
+    <!-- IV. Health Assessment -->
+
+    <section id="health-assessment">
+
+  <h2><i class="fas fa-notes-medical"></i> IV. Health Assessment</h2>  <!-- Overall Observation -->  <label for="overall-observation">
+    21. <i class="fas fa-eye"></i> Overall Observation:
+  </label><br>
+  <select id="overall-observation" name="overall_observation" required>
+    <option value="healthy-looking">Healthy looking, no apparent distress</option>
+    <option value="sick-looking">Sick looking</option>
+    <option value="emaciated">Emaciated</option>
+    <option value="fatigue-looking">Fatigue looking</option>
+    <option value="short-of-breath">Short of breath</option>
+    <option value="anxious">Anxious</option>
+  </select><br><br>  <!-- Vital Signs -->  <label>
+    22. <i class="fas fa-thermometer-half"></i> Vital Signs:
+  </label><br>  <div style="display: flex; gap: 15px; align-items: center; flex-wrap: nowrap;">
+    <label>Temp: <input type="number" name="temperature" step="0.1" required style="width: 60px;"> °C</label>
+    <label>BP: <input type="text" name="bp-systolic" required style="width: 50px;"> /
+      <input type="text" name="bp-diastolic" required style="width: 50px;"> mmHg</label>
+    <label>Pulse: <input type="number" name="pulse" required style="width: 50px;"> /min</label>
+    <label>Resp: <input type="number" name="respiration_rate" required style="width: 50px;"> /min</label>
+  </div><br>  <!-- Heart and Lung Examination -->  <label>
+    26. <i class="fas fa-stethoscope"></i> Heart Examination:
+  </label><br>
+  <select id="heart-examination" name="heart_examination" required>
+    <option value="not-examined">Not examined</option>
+    <option value="s1-s2-audible">S1, S2 audible</option>
+    <option value="no-murmurs">No murmurs</option>
+    <option value="systolic-murmur">Systolic murmur</option>
+    <option value="diastolic-murmur">Diastolic murmur</option>
+    <option value="other-abnormal-heart-sounds">Other abnormal heart sounds</option>
+  </select><br><br>  <label>
+    27. <i class="fas fa-lungs"></i> Lung Examination:
+  </label><br>
+  <select id="lung-examination" name="lung_examination" required>
+    <option value="not-examined">Not examined</option>
+    <option value="clear-to-auscultation">Clear to auscultation</option>
+    <option value="bilateral-wheezing">Bilateral wheezing</option>
+    <option value="rhonchi">Rhonchi</option>
+    <option value="stridor">Stridor</option>
+    <option value="other-abnormal-breath-sounds">Other abnormal breath sounds</option>
+  </select><br><br>  <!-- Overall Impression -->  <label for="overall-impression">
+    28. <i class="fas fa-check-circle"></i> Overall Impression:
+  </label><br>
+  <select id="overall-impression" name="overall_impression" required>
+    <option value="fit-for-blood-donation">Fit for blood donation</option>
+    <option value="not-fit-for-blood-donation">Not fit for blood donation</option>
+  </select><br><br>
+      </section>
+        <!-- V. Consent for Blood Donation --><h2>V. Consent for Blood Donation</h2>
+
+    <label>29. I understand that I am donating blood voluntarily and give my consent.</label><br>
+
+    <input type="radio" name="consent" value="Yes" required> Yes
+
+    <input type="radio" name="consent" value="No"> No<br>
+
+    <label>30. I confirm that all the information provided is accurate.</label><br>
+
+    <input type="radio" name="confirm" value="Yes" required> Yes
+
+    <input type="radio" name="confirm" value="No"> No<br>
+
+    <label>31. Signature of Donor:</label>
+
+    <input type="text" name="signature" required><br>
+
+    <label>32. Date of Submission:</label>
+
+    <input type="date" name="submission_date" required><br>
+
+    <button type="submit">Submit Questionnaire</button>
+  </form>
+<br>
+
+<a href="/responses">View Submitted Responses</a>
+
+<br>
+
+<a href="/">Back to Main Page</a>
+
+  </body>
+
+</html>

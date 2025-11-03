@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashier - Pamoja Dokita 2025</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setupPagination("pending-table", 5, "pending-pagination");
+            setupPagination("cleared-table", 5, "cleared-pagination");
+        });
+
+        function setupPagination(tableId, rowsPerPage, paginationId) {
+            let table = document.getElementById(tableId);
+            let rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+            let totalPages = Math.ceil(rows.length / rowsPerPage);
+            let pagination = document.getElementById(paginationId);
+
+            function showPage(page) {
+                for (let i = 0; i < rows.length; i++) {
+                    rows[i].style.display = (i >= (page - 1) * rowsPerPage && i < page * rowsPerPage) ? "" : "none";
+                }
+            }
+
+            function createPaginationButtons() {
+                pagination.innerHTML = "";
+                for (let i = 1; i <= totalPages; i++) {
+                    let btn = document.createElement("button");
+                    btn.textContent = i;
+                    btn.onclick = () => showPage(i);
+                    pagination.appendChild(btn);
+                }
+            }
+
+            if (totalPages > 1) createPaginationButtons();
+            showPage(1);
+        }
+    </script>
+  
+  
+  <style>
+  
+  
+  /* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Navigation Bar */
+nav {
+    background: #1e1e1e;
+    padding: 15px 0;
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.menu li {
+    display: inline;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #e0e0e0;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.menu a:hover {
+    background: #ff5252;
+}
+
+/* Section Styling */
+main {
+    width: 90%;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+h1, h2 {
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: #ff5252;
+    font-size: 22px;
+}
+
+/* Table Container */
+.table-container {
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+}
+
+th {
+    background: #ff5252;
+    color: white;
+    font-size: 14px;
+}
+
+td {
+    background: #252525;
+    font-size: 14px;
+}
+
+tr:hover {
+    background: #333;
+}
+
+/* Status Icons */
+.status {
+    font-size: 18px;
+}
+
+/* Buttons */
+.confirm-btn {
+    background: #ff5252;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.confirm-btn:hover {
+    background: #d32f2f;
+    transform: scale(1.05);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.pagination button {
+    background: #ff5252;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.pagination button:hover {
+    background: #d32f2f;
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .confirm-btn, .pagination button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+  </style>
+  
+</head>
+<body>
+    
+
+    <header>
+       
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Check if a user is logged in using localStorage
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (user) {
+            // Display a friendly, conversational message
+            document.getElementById('welcomeText').innerHTML = `Welcome, ${user.role} <strong>${user.email}</strong>! You're now part of the <strong>${user.region}</strong> branch of Pamoja Dokita® @ 2025.`;
+
+            // Show the dashboard link and hide the role selection dialog
+            document.getElementById('dashboardLink').style.display = 'inline';
+            document.getElementById('roleDialog').style.display = 'none';
+        } else {
+            // Display a default welcome message if no user is logged in
+            document.getElementById('welcomeText').innerText = 'Welcome to Pamoja Dokita® @ 2025!';
+        }
+    });
+</script>
+      
+       <h1>Cashier Confirmation - Pamoja Dokita 2025</h1>
+      
+      <h1 id="welcomeMessage">
+    <span id="welcomeText"></span>
+</h1>
+    </header>
+  
+  
+  
+  <nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/cashier">💰 Cashier</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Pending Cashier Confirmation Table -->
+        <section id="pending-requests">
+            <h2>Pending Cashier Confirmation</h2>
+            <div class="table-container">
+                <table id="pending-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Blood Unit ID</th>
+                            <th>Blood Group</th>
+                            <th>Donation Type</th>
+                            <th>Expiration Date</th>
+                            <th>Recipient Name</th>
+                            <th>Recipient Blood Type</th>
+                            <th>Hospital</th>
+                            <th>Doctor</th>
+                            <th>Approved Date</th>
+                           <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% clearedRequests.forEach(record => { %>
+                            <tr>
+                                <td><%= record.id %></td>
+                                <td><%= record.bloodUnitID %></td>
+                                <td><%= record.bloodGroup %></td>
+                                <td><%= record.donationType %></td>
+                                <td><%= record.expirationDate %></td>
+                                <td><%= record.recipientName %></td>
+                                <td><%= record.recipientBloodType %></td>
+                                <td><%= record.hospital %></td>
+                                <td><%= record.doctor %></td>
+                                <td><%= record.approvedDate %></td>
+                                   <td class="status">💰❌</td>
+
+                                <td>
+                                    <form action="/confirm-cashier/<%= record.id %>" method="POST">
+                                        <button type="submit" class="confirm-btn">✅ Confirm</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <div id="pending-pagination" class="pagination"></div>
+            </div>
+        </section>
+
+        <!-- Cashier-Cleared Requests Table -->
+        <section id="cashier-cleared">
+            <h2>Cashier-Cleared Requests</h2>
+            <div class="table-container">
+                <table id="cleared-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Blood Unit ID</th>
+                            <th>Blood Group</th>
+                            <th>Donation Type</th>
+                            <th>Expiration Date</th>
+                            <th>Recipient Name</th>
+                            <th>Recipient Blood Type</th>
+                            <th>Hospital</th>
+                            <th>Doctor</th>
+                            <th>Approved Date</th>
+                            <th>Release Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% cashierRecords.forEach(record => { %>
+                            <tr>
+                                <td><%= record.id %></td>
+                                <td><%= record.bloodUnitID %></td>
+                                <td><%= record.bloodGroup %></td>
+                                <td><%= record.donationType %></td>
+                                <td><%= record.expirationDate %></td>
+                                <td><%= record.recipientName %></td>
+                                <td><%= record.recipientBloodType %></td>
+                                <td><%= record.hospital %></td>
+                                <td><%= record.doctor %></td>
+                                <td><%= record.approvedDate %></td>
+                                <td><%= record.releaseDate %></td>
+                                <td class="status">💰✅</td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <div id="cleared-pagination" class="pagination"></div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

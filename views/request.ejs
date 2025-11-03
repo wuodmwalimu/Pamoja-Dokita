@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/demo.css">
+  
+  
+  
+  <style>/* demo.css */
+
+/* General reset and body styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #d32f2f, #f44336, #ff7961);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Main container */
+.container {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    max-width: 900px;
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h2 {
+    font-size: 28px;
+    color: #d32f2f;
+    margin-bottom: 10px;
+}
+
+header .highlight {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Fieldset and legends */
+fieldset {
+    border: 2px solid #d32f2f;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fff5f5;
+}
+
+legend {
+    font-size: 20px;
+    color: #d32f2f;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+/* Form groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 16px;
+    color: #444;
+    font-weight: bold;
+}
+
+.form-group input, 
+.form-group select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    outline: none;
+    border-color: #d32f2f;
+    box-shadow: 0 0 8px rgba(211, 47, 47, 0.3);
+}
+
+/* Button styling */
+button[type="submit"] {
+    background: #d32f2f;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+button[type="submit"]:hover {
+    background: #b71c1c;
+    box-shadow: 0 2px 10px rgba(183, 28, 28, 0.3);
+}
+
+/* Icons */
+.fa {
+    font-size: 18px;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    header h2 {
+        font-size: 24px;
+    }
+
+    legend {
+        font-size: 18px;
+    }
+    }</style>
+    <title>Blood Donation Request - Charles Drew Pamoja Dokita® 2025</title>
+</head>
+<body>
+  
+<nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/request">💰 Make a Request</a></li>
+        </ul>
+    </nav>
+
+<div class="container">
+    <header>
+        <h2><i class="fa fa-heartbeat"></i> Blood Donation Request Form</h2>
+        <p class="highlight">
+            <i class="fa fa-exclamation-circle"></i> Fill out the form below to request a blood donation.
+        </p>
+    </header>
+<form action="/submit-request" method="POST" id="requestForm">
+    <fieldset>
+        <legend><i class="fa fa-user-md"></i> Recipient Information</legend><div class="form-group">
+        <label for="recipientName"><i class="fa fa-user"></i> Recipient's Full Name</label>
+        <input type="text" id="recipientName" name="recipientName" placeholder="Enter recipient's full name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="dob"><i class="fa fa-birthday-cake"></i> Date of Birth</label>
+        <input type="date" id="dob" name="dob" required onchange="calculateAge()">
+        <small id="dobError" class="error-message" style="display: none; color: red;">Please enter a valid date of birth.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="age"><i class="fa fa-calendar"></i> Age</label>
+        <input type="number" id="age" name="age" placeholder="Calculated age" readonly required>
+    </div>
+
+    <div class="form-group">
+        <label for="bloodType"><i class="fa fa-tint"></i> Blood Type</label>
+        <select id="bloodType" name="bloodType" required>
+            <option value="">Select blood type</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="units"><i class="fa fa-plus-circle"></i> Units Needed</label>
+        <input type="number" id="units" name="units" min="1" placeholder="Enter number of units" required>
+    </div>
+
+    <div class="form-group">
+        <label for="gender"><i class="fa fa-venus-mars"></i> Gender</label>
+        <select id="gender" name="gender" required>
+            <option value="">Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend><i class="fa fa-hospital-o"></i> Medical & Hospital Information</legend>
+
+    <div class="form-group">
+        <label for="country"><i class="fa fa-globe"></i> Country</label>
+        <select id="country" name="country" onchange="populateRegions()" required>
+            <option value="">Select a country</option>
+            <option value="Kenya">Kenya</option>
+            <option value="Cameroon">Cameroon</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="region"><i class="fa fa-map"></i> Region/County</label>
+        <select id="region" name="region" onchange="populateHospitals()" required>
+            <option value="">Select region</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="hospital"><i class="fa fa-hospital-o"></i> Hospital</label>
+        <select id="hospital" name="hospital" onchange="fillHospitalInfo()" required>
+            <option value="">Select hospital</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="doctor"><i class="fa fa-user-md"></i> Attending Doctor</label>
+        <input type="text" id="doctor" name="doctor" placeholder="Doctor's name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="contactHospital"><i class="fa fa-phone-square"></i> Hospital Contact</label>
+        <input type="tel" id="contactHospital" name="contactHospital" placeholder="Hospital contact number" readonly required>
+    </div>
+
+    <div class="form-group">
+        <label for="location"><i class="fa fa-map-marker"></i> Location</label>
+        <input type="text" id="location" name="location" placeholder="Hospital location" readonly required>
+    </div>
+</fieldset>
+
+<button type="submit"><i class="fa fa-paper-plane"></i> Submit Request</button>
+
+  </form><script>
+// Improved age calculation
+function calculateAge() {
+    const dobInput = document.getElementById('dob');
+    const ageInput = document.getElementById('age');
+    const dobError = document.getElementById('dobError');
+    
+    const dob = new Date(dobInput.value);
+    const today = new Date();
+    
+    if (isNaN(dob.getTime()) || dob > today) {
+        dobError.style.display = 'block';
+        ageInput.value = '';
+        return;
+    }
+    
+    dobError.style.display = 'none';
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        age--;
+    }
+    
+    ageInput.value = age >= 0 ? age : '';
+}
+  </script>
+  
+  
+  
+</div>
+
+<script>
+    function calculateAge() {
+        const dob = document.getElementById('dob').value;
+        const ageInput = document.getElementById('age');
+        if (dob) {
+            const birthDate = new Date(dob);
+            const today = new Date();
+            const age = today.getFullYear() - birthDate.getFullYear();
+            ageInput.value = age;
+        }
+    }
+
+    const hospitalData = {
+    Kenya: {
+        "Nairobi": [
+            { name: "Kenyatta National Hospital", contact: "0712345678", location: "Nairobi CBD" },
+            { name: "Aga Khan University Hospital", contact: "0723456789", location: "Parklands, Nairobi" }
+        ],
+        "Mombasa": [
+            { name: "Coast General Hospital", contact: "0734567890", location: "Mombasa Town" },
+            { name: "Aga Khan Hospital Mombasa", contact: "0745678901", location: "Vanga Road, Mombasa" }
+        ],
+        "Kisumu": [
+            { name: "Jaramogi Oginga Odinga Teaching and Referral Hospital", contact: "0756789012", location: "Kisumu City" }
+        ],
+        "Nakuru": [
+            { name: "Nakuru Level 5 Hospital", contact: "0767890123", location: "Nakuru Town" }
+        ],
+        "Eldoret": [
+            { name: "Moi Teaching and Referral Hospital", contact: "0778901234", location: "Eldoret Town" }
+        ],
+        "Kakamega": [
+            { name: "Kakamega County General Hospital", contact: "0789012345", location: "Kakamega Town" }
+        ],
+        "Kisii": [
+            { name: "Kisii Teaching and Referral Hospital", contact: "0790123456", location: "Kisii Town" }
+        ],
+        "Machakos": [
+            { name: "Machakos Level 5 Hospital", contact: "0701234567", location: "Machakos Town" }
+        ],
+        "Meru": [
+            { name: "Meru Teaching and Referral Hospital", contact: "0712345678", location: "Meru Town" }
+        ],
+        "Thika": [
+            { name: "Thika Level 5 Hospital", contact: "0723456789", location: "Thika Town" }
+        ],
+        "Nyeri": [
+            { name: "Nyeri County Referral Hospital", contact: "0734567890", location: "Nyeri Town" }
+        ],
+        "Garissa": [
+            { name: "Garissa County Referral Hospital", contact: "0745678901", location: "Garissa Town" }
+        ],
+        "Embu": [
+            { name: "Embu Level 5 Hospital", contact: "0756789012", location: "Embu Town" }
+        ],
+        "Bungoma": [
+            { name: "Bungoma County Referral Hospital", contact: "0767890123", location: "Bungoma Town" }
+        ],
+        "Kiambu": [
+            { name: "Kiambu Level 5 Hospital", contact: "0778901234", location: "Kiambu Town" }
+        ]
+    },
+    Cameroon: {
+        "Littoral": [
+            { name: "Douala General Hospital", contact: "671234567", location: "Douala City" },
+            { name: "Laquintinie Hospital", contact: "672345678", location: "Douala" }
+        ],
+        "Centre": [
+            { name: "Yaoundé Central Hospital", contact: "682345678", location: "Yaoundé" },
+            { name: "General Hospital Yaoundé", contact: "683456789", location: "Yaoundé" }
+        ],
+        "West": [
+            { name: "Bafoussam Regional Hospital", contact: "693456789", location: "Bafoussam" }
+        ],
+        "North West": [
+            { name: "Bamenda Regional Hospital", contact: "694567890", location: "Bamenda" }
+        ],
+        "South West": [
+            { name: "Buea Regional Hospital", contact: "695678901", location: "Buea" }
+        ],
+        "Adamawa": [
+            { name: "Ngaoundere Regional Hospital", contact: "696789012", location: "Ngaoundere" }
+        ],
+        "East": [
+            { name: "Bertoua Regional Hospital", contact: "697890123", location: "Bertoua" }
+        ],
+        "Far North": [
+            { name: "Maroua Regional Hospital", contact: "698901234", location: "Maroua" }
+        ],
+        "North": [
+            { name: "Garoua Regional Hospital", contact: "699012345", location: "Garoua" }
+        ],
+        "South": [
+            { name: "Ebolowa Regional Hospital", contact: "690123456", location: "Ebolowa" }
+        ]
+    }
+};
+    function populateRegions() {
+        const country = document.getElementById("country").value;
+        const regionSelect = document.getElementById("region");
+        regionSelect.innerHTML = "<option value=''>Select region</option>";
+
+        if (country && hospitalData[country]) {
+            Object.keys(hospitalData[country]).forEach(region => {
+                regionSelect.innerHTML += `<option value="${region}">${region}</option>`;
+            });
+        }
+    }
+
+    function populateHospitals() {
+        const country = document.getElementById("country").value;
+        const region = document.getElementById("region").value;
+        const hospitalSelect = document.getElementById("hospital");
+        hospitalSelect.innerHTML = "<option value=''>Select hospital</option>";
+
+        if (country && region && hospitalData[country][region]) {
+            hospitalData[country][region].forEach(hospital => {
+                hospitalSelect.innerHTML += `<option value="${hospital.name}">${hospital.name}</option>`;
+            });
+        }
+    }
+
+    function fillHospitalInfo() {
+        const country = document.getElementById("country").value;
+        const region = document.getElementById("region").value;
+        const hospital = document.getElementById("hospital").value;
+        const contact = document.getElementById("contactHospital");
+        const location = document.getElementById("location");
+
+        if (country && region && hospital) {
+            const hospitalInfo = hospitalData[country][region].find(h => h.name === hospital);
+            contact.value = hospitalInfo.contact;
+            location.value = hospitalInfo.location;
+        }
+    }
+</script>
+</body>
+</html>

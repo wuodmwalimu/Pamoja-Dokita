@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Reports</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/reports">💰 Reports</a></li>
+        </ul>
+    </nav>
+    <h1><i class="fas fa-tint"></i> Blood Donation Reports</h1>
+
+    <!-- Stats Section -->
+    <div class="stats-container">
+        <h2><i class="fas fa-chart-bar"></i> Key Stats</h2>
+        <div class="stats-grid">
+            <div><i class="fas fa-hand-holding-water"></i> Total Donations: <span id="totalDonations">0</span></div>
+            <div><i class="fas fa-weight"></i> Total Volume Collected: <span id="totalVolume">0 ml</span></div>
+            <div><i class="fas fa-user-friends"></i> Most Common Blood Group: <span id="commonBloodGroup">N/A</span></div>
+            <div><i class="fas fa-calendar-alt"></i> Donations This Month: <span id="donationsThisMonth">0</span></div>
+            <div><i class="fas fa-calendar-check"></i> Donations Last Month: <span id="donationsLastMonth">0</span></div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-container">
+        <h2><i class="fas fa-chart-pie"></i> Charts & Visualizations</h2>
+        <canvas id="bloodGroupChart"></canvas>
+        <canvas id="donationTrendsChart"></canvas>
+        <canvas id="donorDemographicsChart"></canvas>
+        <canvas id="donationVolumeChart"></canvas>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-container">
+        <h2><i class="fas fa-table"></i> Donation Records</h2>
+        <table id="donationTable">
+            <thead>
+                <tr>
+                    <th>Donation ID</th>
+                    <th>Residence</th>
+                    <th>Donor Type</th>
+                    <th>Submission Date</th>
+                    <th>Blood Group</th>
+                    <th>Donation Volume</th>
+                    <th>Donation Type</th>
+                    <th>Donation Date</th>
+                    <th>Status</th>
+                    <th>Expiration Date</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody id="donationTableBody">
+                <tr><td colspan="11">Loading donation records...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Client-side logic -->
+    <script>
+        // Fetch and render donation data
+        async function fetchDonationData() {
+            try {
+                const response = await fetch('/api/donations');
+                if (!response.ok) throw new Error('Failed to fetch donation records');
+                
+                const records = await response.json();
+                renderStats(records);
+                renderTable(records);
+                fetchAndRenderCharts();
+            } catch (error) {
+                console.error('❌ Error fetching donation data:', error.message);
+            }
+        }
+
+        // Render stats
+        function renderStats(records) {
+            document.getElementById('totalDonations').innerText = records.length;
+            document.getElementById('totalVolume').innerText = `${records.reduce((acc, record) => acc + (record.donationVolume || 0), 0)} ml`;
+            document.getElementById('commonBloodGroup').innerText = getMostCommonBloodGroup(records) || 'N/A';
+            document.getElementById('donationsThisMonth').innerText = getDonationsThisMonth(records) || 0;
+            document.getElementById('donationsLastMonth').innerText = getDonationsLastMonth(records) || 0;
+        }
+
+        // Render table
+        function renderTable(records) {
+            const tableBody = document.getElementById('donationTableBody');
+            tableBody.innerHTML = records.length ? records.map(record => `
+                <tr>
+                    <td>${record.donationID || 'N/A'}</td>
+                    <td>${record.residence || 'N/A'}</td>
+                    <td>${record.donorType || 'N/A'}</td>
+                    <td>${record.submissionDate || 'N/A'}</td>
+                    <td>${record.bloodGroup || 'N/A'}</td>
+                    <td>${record.donationVolume ? `${record.donationVolume} ml` : '0 ml'}</td>
+                    <td>${record.donationType || 'N/A'}</td>
+                    <td>${record.donationDate || 'N/A'}</td>
+                    <td>${record.status || 'N/A'}</td>
+                    <td>${record.expirationDate || 'N/A'}</td>
+                    <td>${record.notes || 'N/A'}</td>
+                </tr>
+            `).join('') : '<tr><td colspan="11">No donation records found</td></tr>';
+        }
+
+        // Chart rendering
+        async function fetchAndRenderCharts() {
+            try {
+                const response = await fetch('/api/chart-data');
+                if (!response.ok) throw new Error('Failed to fetch chart data');
+
+                const chartData = await response.json();
+
+                if (chartData.bloodGroups) {
+                    new Chart(document.getElementById('bloodGroupChart'), {
+                        type: 'pie',
+                        data: {
+                            labels: Object.keys(chartData.bloodGroups),
+                            datasets: [{
+                                data: Object.values(chartData.bloodGroups),
+                                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#FF9F40']
+                            }]
+                        }
+                    });
+                }
+
+                if (chartData.donationTrends?.dates?.length) {
+                    new Chart(document.getElementById('donationTrendsChart'), {
+                        type: 'line',
+                        data: {
+                            labels: chartData.donationTrends.dates,
+                            datasets: [{
+                                label: 'Monthly Donations',
+                                data: chartData.donationTrends.counts,
+                                borderColor: '#36A2EB',
+                                fill: false
+                            }]
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('❌ Error fetching chart data:', error.message);
+            }
+        }
+
+        // Utility functions
+        function getMostCommonBloodGroup(records) {
+            const bloodGroups = records.reduce((acc, record) => {
+                acc[record.bloodGroup] = (acc[record.bloodGroup] || 0) + 1;
+                return acc;
+            }, {});
+            return Object.keys(bloodGroups).reduce((a, b) => bloodGroups[a] > bloodGroups[b] ? a : b, 'N/A');
+        }
+
+        function getDonationsThisMonth(records) {
+            const currentMonth = new Date().getMonth();
+            return records.filter(record => new Date(record.donationDate).getMonth() === currentMonth).length;
+        }
+
+        function getDonationsLastMonth(records) {
+            const lastMonth = new Date().getMonth() - 1;
+            return records.filter(record => new Date(record.donationDate).getMonth() === lastMonth).length;
+        }
+
+        // Initialize the dashboard
+        window.onload = fetchDonationData;
+    </script>
+</body>
+</html>

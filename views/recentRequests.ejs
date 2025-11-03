@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Recent Blood Donation Requests - Pamoja Dokita® 2025</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styling */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Table Styling */
+        .request-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .request-table thead tr {
+            background-color: #3498db;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .request-table th,
+        .request-table td {
+            padding: 12px 15px;
+        }
+
+        .request-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .request-table tbody tr:nth-of-type(even) {
+            background-color: #f8f9fa;
+        }
+
+        .request-table tbody tr:last-of-type {
+            border-bottom: 2px solid #3498db;
+        }
+
+        .request-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Badge for Blood Type */
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            background-color: #e74c3c;
+            color: #ffffff;
+        }
+
+        /* Urgency Styling */
+        .urgency {
+            font-weight: bold;
+        }
+
+        .urgency.low {
+            color: #27ae60;
+        }
+
+        .urgency.medium {
+            color: #f1c40f;
+        }
+
+        .urgency.high {
+            color: #e74c3c;
+        }
+
+        /* Button Styling */
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-approve {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .btn-approve:hover {
+            background-color: #219653;
+        }
+
+        .btn-deny {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-deny:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            display: inline-block;
+            margin-top: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        /* Footer Styling */
+        .page-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-footer p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content .close {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 15px;
+        }
+
+        .dropdown-content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .dropdown-content label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .request-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+  <nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/recentRequests">💰 Recent Requests</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <header class="page-header">
+            <h2><i class="fa fa-list"></i> Recent Blood Donation Requests</h2>
+            <p>Track and manage recent blood donation requests within the Pamoja Dokita® 2025 system. View details, monitor urgency, and take quick actions.</p>
+        </header>
+
+        <!-- Table for displaying requests -->
+        <table class="request-table">
+            <thead>
+                <tr>
+                    <th><i class="fa fa-user"></i> Recipient</th>
+                    <th><i class="fa fa-tint"></i> Blood Type</th>
+                    <th><i class="fa fa-calendar-day"></i> Request Date</th>
+                    <th><i class="fa fa-user-md"></i> Doctor</th>
+                    <th><i class="fa fa-hospital"></i> Hospital</th>
+                    <th><i class="fa fa-location-dot"></i> Location</th>
+                    <th><i class="fa fa-box"></i> Units Needed</th>
+                    <th><i class="fa fa-fire"></i> Urgency</th>
+                    <th><i class="fa fa-phone"></i> Contact</th>
+                    <th><i class="fa fa-sticky-note"></i> Denial Reason</th>
+                    <th><i class="fa fa-clock"></i> Submitted On</th>
+                    <th><i class="fa fa-user-edit"></i> Submitted By</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% requests.forEach(request => { %>
+                    <tr>
+                        <td><%= request.recipientName %></td>
+                        <td><span class="badge"><%= request.bloodType %></span></td>
+                        <td><%= new Date(request.requestDate).toLocaleDateString() %></td>
+                        <td><%= request.doctor %></td>
+                        <td><%= request.hospital %></td>
+                        <td><%= request.location %></td>
+                        <td><%= request.units %></td>
+                        <td><span class="urgency"><%= request.urgency %></span></td>
+                        <td><%= request.contactHospital %></td>
+                        <td><%= request.reason || 'N/A' %></td>
+                        <td><%= new Date(request.timestamp).toLocaleString() %></td>
+                        <td><%= request.submittedBy %></td>
+                        <td>
+                            <!-- Approve Button -->
+                            <form action="/approve-request" method="POST" style="display: inline;">
+                                <input type="hidden" name="requestId" value="<%= request.id %>">
+                                <button type="submit" class="btn btn-approve"><i class="fa fa-check"></i> Approve</button>
+                            </form>
+
+                            <!-- Deny Button -->
+                            <button class="btn btn-deny" onclick="showDenyModal('<%= request.id %>')"><i class="fa fa-times"></i> Deny</button>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <!-- Deny Request Modal -->
+        <div id="denyModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeDenyModal()">&times;</span>
+                <h3>Provide Reason for Denial</h3>
+                <form id="denyForm" method="POST" action="/deny-request">
+                    <input type="hidden" id="denyRequestId" name="requestId">
+                    
+                    <label for="reason">Select Reason(s) for Denial:</label>
+                    <div class="dropdown">
+                        <button type="button" class="dropdown-btn" onclick="toggleDropdown()">Select Reasons <i class="fa fa-caret-down"></i></button>
+                        <div id="reasonDropdown" class="dropdown-content">
+                            <label><input type="checkbox" name="reason" value="Blood type mismatch"> Blood type mismatch</label><br>
+                            <label><input type="checkbox" name="reason" value="Insufficient stock"> Insufficient stock</label><br>
+                            <label><input type="checkbox" name="reason" value="Incomplete patient details"> Incomplete patient details</label><br>
+                            <label><input type="checkbox" name="reason" value="Medical complications"> Medical complications</label><br>
+                            <label><input type="checkbox" name="reason" value="Expired request"> Expired request</label><br>
+                            <label><input type="checkbox" id="otherCheckbox" value="Other" onclick="toggleOtherReason()"> Other (specify below)</label><br>
+                            <textarea id="otherReason" name="reason" placeholder="Describe other reason (if selected)" style="display: none;"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i> Deny Request</button>
+                </form>
+            </div>
+        </div>
+
+        <footer class="page-footer">
+            <a href="/request" class="btn btn-primary"><i class="fa fa-plus-circle"></i> New Request</a>
+            <p>&copy; 2025 Pamoja Dokita® — Empowering safer blood management and patient care.</p>
+        </footer>
+    </div>
+
+    <!-- Modal JavaScript -->
+    <script>
+        // Function to show the deny modal
+        function showDenyModal(requestId) {
+            document.getElementById("denyRequestId").value = requestId;
+            document.getElementById("denyModal").style.display = "flex"; // Show modal
+        }
+
+        // Function to close the deny modal
+        function closeDenyModal() {
+            document.getElementById("denyModal").style.display = "none"; // Hide modal
+        }
+
+        // Function to toggle the dropdown
+        function toggleDropdown() {
+            const dropdown = document.getElementById("reasonDropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        // Function to toggle the "Other" reason textarea
+        function toggleOtherReason() {
+            const otherReasonTextarea = document.getElementById("otherReason");
+            otherReasonTextarea.style.display = document.getElementById("otherCheckbox").checked ? "block" : "none";
+        }
+
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById("denyModal");
+            if (event.target === modal) {
+                closeDenyModal();
+            }
+        };
+    </script>
+</body>
+  </html>

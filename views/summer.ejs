@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Management - Charles Drew Pamoja Dokita® 2025</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  
+  
+  
+  <style>
+    
+    
+    
+   /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background: #d32f2f;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ffccbc;
+}
+
+/* Main Content */
+main {
+    display: grid;
+    gap: 20px;
+}
+
+/* Informational Section */
+.info-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #d32f2f;
+}
+
+.info-section p {
+    color: #666;
+}
+
+/* Table Sections */
+.table-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #d32f2f;
+}
+
+.table-section p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+/* Scrollable table container (Horizontal only) */
+.table-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding-bottom: 10px;
+    max-width: 100%; /* Prevents table from breaking layout */
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table thead {
+    background: #d32f2f;
+    color: #fff;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Prevent cell wrapping */
+}
+
+/* Sticky headers */
+table th {
+    background: #d32f2f;
+    color: #fff;
+    padding: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* Table rows */
+table tbody tr:hover {
+    background: #ffebee;
+}
+
+table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+/* Pagination */
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    background: #d32f2f;
+    color: #fff !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+    outline: none;
+    display: inline-block;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #b71c1c;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #4caf50;
+    color: #fff;
+    font-weight: bold;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    background: #ccc;
+    color: #666 !important;
+    cursor: not-allowed;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: #fff;
+    background: #d32f2f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #b71c1c;
+}
+
+.btn-process {
+    background: #4caf50;
+}
+
+.btn-process:hover {
+    background: #388e3c;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background: #d32f2f;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .dataTables_wrapper .dataTables_paginate {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    } 
+    
+    /* Navigation Bar Styling */
+nav {
+    background: #d32f2f;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation List */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Navigation List Item */
+nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Link */
+nav ul li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.1s ease;
+}
+
+/* Navigation Link Hover Effect */
+nav ul li a:hover {
+    background: #b71c1c;
+    transform: translateY(-2px);
+}
+
+/* Active/Clicked Link */
+nav ul li a:active {
+    background: #9a0007;
+    transform: translateY(1px);
+}
+
+/* Icon Styling */
+nav ul li a i {
+    font-size: 1.2rem;
+    }
+    
+  </style>
+</head>
+<body>
+    <h1 id="welcomeMessage">
+    <span id="welcomeText"></span>
+</h1>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Check if a user is logged in using localStorage
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (user) {
+            // Display a friendly, conversational message
+            document.getElementById('welcomeText').innerHTML = `Welcome, ${user.role} <strong>${user.email}</strong>! You're now part of the <strong>${user.hospital}</strong> branch in the <strong>${user.region}</strong> region of Pamoja Dokita® @ 2025.`;
+
+            // Show the dashboard link and hide the role selection dialog
+            document.getElementById('dashboardLink').style.display = 'inline';
+            document.getElementById('roleDialog').style.display = 'none';
+        } else {
+            // Display a default welcome message if no user is logged in
+            document.getElementById('welcomeText').innerText = 'Welcome to Pamoja Dokita® @ 2025!';
+        }
+    });
+</script>
+
+  <nav>
+    <ul>
+        <li><a href="/main"><i class="fas fa-home"></i> Home</a></li>
+    </ul>
+  </nav>
+  
+  
+  
+  
+  <!-- Registered Donors Section -->
+<section class="table-section">
+    <h2><i class="fas fa-users"></i> Registered Donors</h2>
+    <p>These are the donors who have registered but are yet to complete the donation process.</p>
+    
+    <div class="table-wrapper">
+        <table id="registered-donors">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-id-badge"></i> ID</th>
+                    <th><i class="fas fa-user"></i> Last Name</th>
+                    <th><i class="fas fa-user"></i> First Name</th>
+                    <th><i class="fas fa-phone"></i> Telephone</th>
+                    <th><i class="fas fa-calendar-alt"></i> DOB</th>
+                    <th><i class="fas fa-hourglass-half"></i> Age</th>
+                    <th><i class="fas fa-map-marker-alt"></i> Residence</th>
+                    <th><i class="fas fa-hand-holding-heart"></i> Donor Type</th>
+                    <th><i class="fas fa-calendar-check"></i> Submission Date</th>
+                    <th><i class="fas fa-cogs"></i> Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (trial1Data.length > 0) { %>
+                    <% trial1Data.forEach((donor) => { %>
+                        <tr>
+                            <td><%= donor.id %></td>
+                            <td><%= donor.lastName %></td>
+                            <td><%= donor.firstName %></td>
+                            <td><%= donor.telephone %></td>
+                            <td><%= donor.dob %></td>
+                            <td><%= donor.age %></td>
+                            <td><%= donor.residence %></td>
+                            <td><%= donor.donorType %></td>
+                            <td><%= donor.submissionDate %></td>
+                            <td>
+                                <form action="/move-to-trial3" method="POST">
+                                    <input type="hidden" name="id" value="<%= donor.id %>">
+                                    <button type="submit" class="btn btn-process">
+                                        <i class="fas fa-database"></i> Add to Unprocessed Donations                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="10">No pending donors in Trial 1.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        
+        <!-- Pagination Controls for Registered Donors -->
+        <div class="pagination">
+            <button id="prevPage" disabled>⬅️ Previous</button>
+            <span id="pageIndicator">Page 1</span>
+            <button id="nextPage">Next ➡️</button>
+        </div>
+    </div>
+</section>
+
+<!-- Unprocessed Donations Section -->
+<section class="table-section">
+    <h2><i class="fas fa-hourglass-half"></i> Unprocessed [Deidentified] Donations</h2>
+    <p>These are the donations that have been completed but are yet to be processed.</p>
+    
+    <div class="table-wrapper">
+        <table id="unprocessed-donations">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-id-badge"></i> ID</th>
+                    <th><i class="fas fa-user"></i> Last Name</th>
+                    <th><i class="fas fa-user"></i> First Name</th>
+                    <th><i class="fas fa-phone"></i> Telephone</th>
+                    <th><i class="fas fa-calendar-alt"></i> DOB</th>
+                    <th><i class="fas fa-hourglass-half"></i> Age</th>
+                    <th><i class="fas fa-map-marker-alt"></i> Residence</th>
+                    <th><i class="fas fa-hand-holding-heart"></i> Donor Type</th>
+                    <th><i class="fas fa-calendar-check"></i> Submission Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (trial3Data.length > 0) { %>
+                    <% trial3Data.forEach((donor) => { %>
+                        <tr>
+                            <td><%= donor.id %></td>
+                            <td><%= donor.lastName %></td>
+                            <td><%= donor.firstName %></td>
+                            <td><%= donor.telephone %></td>
+                            <td><%= donor.dob %></td>
+                            <td><%= donor.age %></td>
+                            <td><%= donor.residence %></td>
+                            <td><%= donor.donorType %></td>
+                            <td><%= donor.submissionDate %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="9">No completed donors in Trial 3.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        
+        <!-- Pagination Controls for Unprocessed Donations -->
+        <div class="pagination">
+            <button id="prevPage" disabled>⬅️ Previous</button>
+            <span id="pageIndicator">Page 1</span>
+            <button id="nextPage">Next ➡️</button>
+        </div>
+    </div>
+                      </section>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                <script>
+                  
+                  
+                  document.addEventListener("DOMContentLoaded", () => {
+    // Get logged-in user from localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user) {
+        // Display a personalized, conversational welcome message
+        document.getElementById('welcomeText').innerHTML = `Welcome, ${user.role} <strong>${user.email}</strong>! You're now part of the <strong>${user.hospital}</strong> branch in the <strong>${user.region}</strong> region of Pamoja Dokita® @ 2025.`;
+
+        // Show the dashboard link and hide the role selection dialog
+        document.getElementById('dashboardLink').style.display = 'inline';
+        document.getElementById('roleDialog').style.display = 'none';
+        
+        // Now, filter donor data based on the logged-in user's hospital
+        const userHospital = user.hospital;  // The logged-in user's hospital (residence)
+
+        if (userHospital) {
+            filterDonorsByHospital(userHospital);
+        }
+    } else {
+        // Display a default message if no user is logged in
+        document.getElementById('welcomeText').innerText = 'Welcome to Pamoja Dokita® @ 2025!';
+    }
+});
+
+function filterDonorsByHospital(hospital) {
+    // Assuming trial1Data and trial3Data are available in the page context (e.g., from the server-side)
+    const trial1Data = <%= JSON.stringify(trial1Data) %>; // Replace with actual server-side data
+    const trial3Data = <%= JSON.stringify(trial3Data) %>; // Replace with actual server-side data
+
+    // Filter function to check if residence matches the logged-in user's hospital
+    const filteredTrial1Data = trial1Data.filter(donor => donor.residence === hospital);
+    const filteredTrial3Data = trial3Data.filter(donor => donor.residence === hospital);
+
+    // Render filtered data for Trial 1 and Trial 3
+    renderDonors(filteredTrial1Data, 'registered-donors');
+    renderDonors(filteredTrial3Data, 'unprocessed-donations');
+}
+
+function renderDonors(donors, tableId) {
+    const tableBody = document.querySelector(`#${tableId} tbody`);
+    tableBody.innerHTML = ''; // Clear any existing rows
+
+    donors.forEach(donor => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${donor.id}</td>
+            <td>${donor.lastName}</td>
+            <td>${donor.firstName}</td>
+            <td>${donor.telephone}</td>
+            <td>${donor.dob}</td>
+            <td>${donor.age}</td>
+            <td>${donor.residence}</td>
+            <td>${donor.donorType}</td>
+            <td>${donor.submissionDate}</td>
+            <td>
+                <form action="/move-to-trial3" method="POST">
+                    <input type="hidden" name="id" value="${donor.id}">
+                    <button type="submit" class="btn btn-process">
+                        <i class="fas fa-database"></i> Add to Unprocessed Donations
+                    </button>
+                </form>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+                  </script>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+  
+  <script>
+    
+    
+    // Pagination logic for both tables
+function setupPagination(tableId, rowsPerPage) {
+    let currentPage = 1; // Track the current page
+    const tableRows = document.querySelectorAll(`#${tableId} tbody tr`); // Get all rows in the table
+    const pageIndicator = document.querySelector(`#${tableId} + .pagination #pageIndicator`); // Page indicator for this table
+    const prevButton = document.querySelector(`#${tableId} + .pagination #prevPage`); // Previous button for this table
+    const nextButton = document.querySelector(`#${tableId} + .pagination #nextPage`); // Next button for this table
+
+    // Function to update the table display based on the current page
+    function updateTable() {
+        // Hide all rows
+        tableRows.forEach(row => row.style.display = "none");
+
+        // Show rows for the current page
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        for (let i = start; i < end && i < tableRows.length; i++) {
+            tableRows[i].style.display = "";
+        }
+
+        // Update the page indicator
+        pageIndicator.textContent = `Page ${currentPage}`;
+
+        // Enable/disable Previous and Next buttons
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === Math.ceil(tableRows.length / rowsPerPage);
+    }
+
+    // Event listener for the Previous button
+    prevButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            updateTable();
+        }
+    });
+
+    // Event listener for the Next button
+    nextButton.addEventListener("click", () => {
+        if (currentPage < Math.ceil(tableRows.length / rowsPerPage)) {
+            currentPage++;
+            updateTable();
+        }
+    });
+
+    // Initialize the table display
+    updateTable();
+}
+
+// Set up pagination for both tables
+setupPagination("registered-donors", 10); // 5 rows per page for the Registered Donors table
+setupPagination("unprocessed-donations", 12); // 5 rows per page for the Unprocessed Donations table
+    
+                  </script>
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Charles Drew - Pamoja Dokita® | Empowering Healthcare Through Innovation</p>
+    </footer>
+</body>
+              </html>

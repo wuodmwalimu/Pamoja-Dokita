@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamoja Dokita® Login</title>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+  
+  
+  
+  
+  <style>
+    
+    
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: url('https://cdn.glitch.global/4c98e77d-b77f-40ca-a254-2dafe787f759/WhatsApp%20Image%202025-03-12%20at%2010.47.34.jpeg?v=1741763421625') 
+    no-repeat center center/cover;
+    position: relative;
+}
+
+/* Overlay for better readability */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.container {
+    display: flex;
+    width: 90%;
+    max-width: 1100px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.95);
+    position: relative;
+    z-index: 2;
+}
+
+/* Info Section */
+.info-section {
+    width: 50%;
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffffff, #f8f8f8);
+    color: #333;
+}
+
+.info-section img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-section h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #b22222;
+    font-weight: 600;
+}
+
+.info-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.info-section a {
+    color: #b22222;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.info-section a:hover {
+    color: #e74c3c;
+}
+
+/* Role Dialog */
+.role-dialog {
+    margin-top: 20px;
+}
+
+.role-dialog h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.role-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.role-btn.active {
+    background-color: #b22222;
+    color: #fff;
+}
+
+.role-btn:hover {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+/* Login Section */
+.login-section {
+    width: 50%;
+    padding: 50px;
+    background: linear-gradient(135deg, #b22222, #e74c3c);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 3px solid #fff;
+}
+
+.login-section h2 {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    color: #ffcccb;
+}
+
+.login-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-section label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #ffcccb;
+}
+
+.login-section input, 
+.login-section select {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ffcccb;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.login-section input:focus, 
+.login-section select:focus {
+    border-color: #b22222;
+    outline: none;
+}
+
+.login-section button {
+    padding: 12px;
+    background-color: #ffcccb;
+    color: #b22222;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-section button:hover {
+    background-color: #f08080;
+}
+
+/* Messages */
+#successMessage {
+    margin-top: 20px;
+    color: #28a745;
+    font-size: 14px;
+    text-align: center;
+}
+
+#errorMessage {
+    margin-top: 20px;
+    color: #ff6b6b;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .info-section, .login-section {
+        width: 100%;
+        padding: 30px;
+    }
+    .login-section {
+        border-left: none;
+        border-top: 3px solid #fff;
+    }
+}
+  </style>
+</head>
+<body>
+    <div class="container">
+        <div class="info-section">
+            <img src="https://cdn.glitch.global/4c98e77d-b77f-40ca-a254-2dafe787f759/pamoja.jpg?v=1741443946818" alt="Pamoja Dokita® Logo" class="logo">
+            <h1 id="welcomeMessage">
+                <span id="welcomeText"></span>
+            </h1>
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <p>🏥 A comprehensive blood bank management system designed to streamline collaboration and ensure safer blood management.</p>
+            <a href="/main" class="main-btn" id="dashboardLink" style="display: none;">🏠 Go to Dashboard</a>
+            <div id="roleDialog" class="role-dialog">
+                <h3>👤 Who are you logging in as?</h3>
+                <button id="showRegularForm" class="role-btn active">👥 Other User</button>
+                <button id="showRegionalForm" class="role-btn">👔 Regional Manager</button>
+            </div>
+        </div>
+
+        <div class="login-section">
+            <h2>🔒 Login</h2>
+
+            <!-- Regular User Login Form (Default) -->
+            <form id="regularUserForm" class="login-form" aria-labelledby="loginForm">
+                <label for="regularEmail">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input type="email" id="regularEmail" name="email" placeholder="Enter email" required aria-describedby="emailHelp">
+
+                <label for="regularPassword">
+                    <i class="fas fa-key"></i> Password
+                </label>
+                <input type="password" id="regularPassword" name="password" placeholder="Enter password" required aria-describedby="passwordHelp">
+
+                <label for="roleSelect">
+                    <i class="fas fa-user-tag"></i> Role
+                </label>
+                <select id="roleSelect" name="role" required>
+                    <option value="" disabled selected>Select your role</option>
+                    <option value="Receptionist">Receptionist</option>
+                    <option value="Nurse">Nurse</option>
+                    <option value="Blood Bank Technician">Blood Bank Technician</option>
+                    <option value="Lab Manager (Doctor)">Lab Manager (Doctor)</option>
+                    <option value="Cashier">Cashier</option>
+                    <option value="Admin">Admin</option>
+                </select>
+
+                <button type="button" onclick="loginRegularUser()" class="login-btn">🚪 Login</button>
+            </form>
+
+            <!-- Regional Manager Login Form -->
+            <form id="regionalManagerForm" class="login-form" style="display: none;" aria-labelledby="regmanLoginForm">
+                <label for="regmanEmail">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input type="email" id="regmanEmail" name="email" placeholder="Enter email" required aria-describedby="regmanEmailHelp">
+
+                <label for="regmanPassword">
+                    <i class="fas fa-key"></i> Password
+                </label>
+                <input type="password" id="regmanPassword" name="password" placeholder="Enter password" required aria-describedby="regmanPasswordHelp">
+                
+                <label for="roleSelectRegman">
+                    <i class="fas fa-user-tag"></i> Role
+                </label>
+                <select id="roleSelectRegman" name="role" required>
+                    <option value="Regional Manager" selected>Regional Manager</option>
+                </select>
+
+                <button type="button" onclick="loginRegionalManager()" class="login-btn">🚪 Login</button>
+            </form>
+
+            <!-- Success and Error Messages -->
+            <p id="successMessage" class="success-message" style="display: none;"></p>
+            <p id="errorMessage" class="error-message" style="display: none;"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                showSuccessMessage(`Welcome, <strong>${user.email}</strong> (${user.role}) from <strong>${user.region}</strong> at <strong>${user.hospital}</strong>!`);
+                document.getElementById('dashboardLink').style.display = 'inline'; 
+                document.getElementById('roleDialog').style.display = 'none'; 
+            } else {
+                document.getElementById('welcomeText').innerText = 'Welcome to Pamoja Dokita®';
+            }
+
+            const showRegularForm = document.getElementById('showRegularForm');
+            const showRegionalForm = document.getElementById('showRegionalForm');
+            const regularUserForm = document.getElementById('regularUserForm');
+            const regionalManagerForm = document.getElementById('regionalManagerForm');
+
+            // Show "Other User" form by default
+            regularUserForm.style.display = 'block';
+
+            showRegularForm.addEventListener('click', () => {
+                switchForm(showRegularForm, showRegionalForm, regularUserForm, regionalManagerForm);
+            });
+
+            showRegionalForm.addEventListener('click', () => {
+                switchForm(showRegionalForm, showRegularForm, regionalManagerForm, regularUserForm);
+            });
+        });
+
+        function switchForm(activeBtn, inactiveBtn, showForm, hideForm) {
+            activeBtn.classList.add('active');
+            inactiveBtn.classList.remove('active');
+            showForm.style.display = 'block';
+            hideForm.style.display = 'none';
+        }
+
+        function showSuccessMessage(message) {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.innerHTML = message;
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        function showErrorMessage(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.innerText = message;
+            errorMessage.style.display = 'block';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        function loginRegularUser() {
+            const email = document.getElementById('regularEmail').value;
+            const password = document.getElementById('regularPassword').value;
+            const role = document.getElementById('roleSelect').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password, role })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    showErrorMessage(data.error);
+                } else {
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    showSuccessMessage(`Welcome, <strong>${data.user.email}</strong> (${data.user.role}) from <strong>${data.user.region}</strong> at <strong>${data.user.hospital}</strong>!`);
+                    setTimeout(() => {
+                        window.location.href = '/main';
+                    }, 2000);
+                }
+            });
+        }
+
+        function loginRegionalManager() {
+            const email = document.getElementById('regmanEmail').value;
+            const password = document.getElementById('regmanPassword').value;
+            const role = document.getElementById('roleSelectRegman').value;
+
+            fetch('/regman-login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password, role })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    showErrorMessage(data.error);
+                } else {
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    showSuccessMessage(`Welcome, <strong>${data.user.email}</strong> from <strong>${data.user.hospital}</strong>!`);
+                    setTimeout(() => {
+                        window.location.href = '/regman';
+                    }, 2000);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

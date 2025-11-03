@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Management - Trial 3 to Trial 4</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* General Page Styling */
+
+      
+      
+      
+   /* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main Content Layout */
+main {
+    flex: 1;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Headings */
+h1, h2 {
+    text-align: center;
+    color: #b71c1c;
+    margin-bottom: 20px;
+}
+
+h2 i {
+    margin-right: 10px;
+}
+
+/* Table Section */
+.table-section {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Scrollable Table Container */
+.table-wrapper {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Table Styling */
+.table-section table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Prevent cell content from wrapping */
+}
+
+table th {
+    background: #d32f2f;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+table tr:hover {
+    background: #ffebee;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    background: #b71c1c;
+    color: #fff;
+}
+
+.pagination button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-process {
+    background: #388e3c;
+    color: #fff;
+}
+
+.btn-process:hover {
+    background: #2e7d32;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #b71c1c;
+    color: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* Modal Overlay */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #d32f2f;
+}
+
+/* Form Fields */
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.input-group i {
+    margin-right: 10px;
+    color: #d32f2f;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+      }   
+      
+      
+      
+      
+      
+      
+    </style>
+</head>
+<body>
+    
+    <!-- Main Content -->
+    <main>
+       
+      
+      <nav>
+    <ul>
+        <li><a href="/main"><i class="fas fa-home"></i> Home</a></li>
+    </ul>
+      </nav>
+      
+      
+      <style>
+        /* Navigation Bar Styling */
+nav {
+    background: #d32f2f;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation List */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Navigation List Item */
+nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Link */
+nav ul li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.1s ease;
+}
+
+/* Navigation Link Hover Effect */
+nav ul li a:hover {
+    background: #b71c1c;
+    transform: translateY(-2px);
+}
+
+/* Active/Clicked Link */
+nav ul li a:active {
+    background: #9a0007;
+    transform: translateY(1px);
+}
+
+/* Icon Styling */
+nav ul li a i {
+    font-size: 1.2rem;
+        }
+        
+      </style>
+      
+      <!-- Trial 3 - Unprocessed Donations -->
+<section class="table-section">
+    <h2><i class="fas fa-hourglass-half"></i> Unprocessed Donations</h2>
+    <p>These are the donations that have been completed but are yet to be processed.  
+       <strong>Click on a donation to begin processing!</strong> You can add more details or update donor information.</p>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th><i class="fas fa-id-badge"></i> ID</th>
+                    <th><i class="fas fa-user"></i> Last Name</th>
+                    <th><i class="fas fa-user"></i> First Name</th>
+                    <th><i class="fas fa-phone"></i> Telephone</th>
+                    <th><i class="fas fa-calendar-alt"></i> DOB</th>
+                    <th><i class="fas fa-hourglass"></i> Age</th>
+                    <th><i class="fas fa-map-marker-alt"></i> Residence</th>
+                    <th><i class="fas fa-hand-holding-heart"></i> Donor Type</th>
+                    <th><i class="fas fa-calendar-check"></i> Submission Date</th>
+                    <th><i class="fas fa-cogs"></i> Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Check if trial3Data is defined and has data -->
+                <% if (typeof trial3Data !== 'undefined' && trial3Data.length > 0) { %>
+                    <% trial3Data.forEach((donor) => { %>
+                        <tr>
+                            <td><%= donor.id %></td>
+                            <td><%= donor.lastName %></td>
+                            <td><%= donor.firstName %></td>
+                            <td><%= donor.telephone %></td>
+                            <td><%= donor.dob %></td>
+                            <td><%= donor.age %></td>
+                            <td><%= donor.residence %></td>
+                            <td><%= donor.donorType %></td>
+                            <td><%= donor.submissionDate %></td>
+                            <td>
+                                <button class="btn btn-process" onclick="openModal('<%= donor.id %>')">
+                                    <i class="fas fa-plus"></i> Add Details
+                                </button>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="10">No completed donors in Trial 3.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination Controls (To be implemented later) -->
+    <div class="pagination">
+        <button id="prevPage" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+        <span id="pageInfo">Page 1</span>
+        <button id="nextPage">Next <i class="fas fa-chevron-right"></i></button>
+    </div>
+                      </section>
+      
+      
+      
+      
+
+    <!-- Modal for Adding Details -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-plus"></i> Add Donation Details</h2>
+            <form id="detailsForm" action="/add-to-trial4" method="POST">
+                <input type="hidden" id="donorId" name="donorId">
+
+                <!-- Blood Group -->
+                <div class="input-group">
+                    <i class="fas fa-tint"></i>
+                    <select id="bloodGroup" name="bloodGroup" required>
+                        <option value="" disabled selected>Select Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+
+                <!-- Rhesus Factor -->
+                <div class="input-group">
+                    <i class="fas fa-dna"></i>
+                    <select id="rhesusFactor" name="rhesusFactor" required>
+                        <option value="" disabled selected>Select Rhesus Factor</option>
+                        <option value="Positive">Positive</option>
+                        <option value="Negative">Negative</option>
+                    </select>
+                </div>
+<div class="input-group">
+    <i class="fas fa-weight"></i>
+    <select id="donationVolume" name="donationVolume" required>
+        <option value="" disabled selected>Select Donation Volume</option>
+        <option value="350">350 ml (Small Volume)</option>
+        <option value="450">450 ml (Standard Whole Blood)</option>
+        <option value="500">500 ml (Large Volume)</option>
+        <option value="600">600 ml (Plasma/Platelets)</option>
+        <option value="700">700 ml (High-Volume Apheresis)</option>
+    </select>
+</div>
+
+                <!-- Hemoglobin Level -->
+                <div class="input-group">
+                    <i class="fas fa-heartbeat"></i>
+                    <input type="number" id="hemoglobinLevel" name="hemoglobinLevel" placeholder="Hemoglobin Level (g/dL)" required>
+                </div>
+
+                <!-- Donation Type -->
+                <div class="input-group">
+                    <i class="fas fa-syringe"></i>
+                    <select id="donationType" name="donationType" required>
+    <option value="" disabled selected>Select Donation Type</option>
+    <option value="Whole Blood Donation">Whole Blood Donation</option>
+    <option value="Plasma Donation">Plasma Donation</option>
+    <option value="Platelet Donation">Platelet Donation</option>
+    <option value="Double Red Cell Donation">Double Red Cell Donation</option>
+    <option value="Granulocyte Donation">Granulocyte Donation</option>
+    <option value="Autologous Blood Donation">Autologous Blood Donation (for personal use)</option>
+    <option value="Directed Blood Donation">Directed Blood Donation (for a specific recipient)</option>
+    <option value="Convalescent Plasma Donation">Convalescent Plasma Donation (for recovering patients)</option>
+    <option value="Cord Blood Donation">Cord Blood Donation (after childbirth)</option>
+    <option value="Peripheral Blood Stem Cell (PBSC) Donation">Peripheral Blood Stem Cell (PBSC) Donation</option>
+                  </select>
+                </div>
+
+                <!-- Donation Date -->
+                <div class="input-group">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="date" id="donationDate" name="donationDate" required>
+                </div>
+
+                <!-- Additional Notes -->
+                <div class="input-group">
+                    <i class="fas fa-sticky-note"></i>
+                    <textarea id="notes" name="notes" placeholder="Additional Notes"></textarea>
+                </div>
+
+                <!-- Buttons -->
+                <div class="input-group">
+                    <button type="submit" class="btn">Confirm</button>
+                    <button type="button" class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+                
+                      
+     <section class="table-section">
+    <h1><i class="fas fa-spinner"></i> Donations Being Processed</h1>
+    <p>These donations are currently being processed. You can review the donor’s details, blood information, and any notes added during the assessment.  
+        <strong>Click on a row to view or update donation details!</strong>
+    </p>
+
+    <% if (trial4Data.length > 0) { %>
+        <div class="table-container">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-id-badge"></i> ID</th>
+                        <th><i class="fas fa-user"></i> Last Name</th>
+                        <th><i class="fas fa-user"></i> First Name</th>
+                        <th><i class="fas fa-phone"></i> Telephone</th>
+                        <th><i class="fas fa-calendar-alt"></i> Date of Birth</th>
+                        <th><i class="fas fa-hourglass"></i> Age</th>
+                        <th><i class="fas fa-map-marker-alt"></i> Residence</th>
+                        <th><i class="fas fa-hand-holding-heart"></i> Donor Type</th>
+                        <th><i class="fas fa-calendar-check"></i> Submission Date</th>
+                        <th><i class="fas fa-tint"></i> Blood Group</th>
+                        <th><i class="fas fa-tint-slash"></i> Rhesus Factor</th>
+                        <th><i class="fas fa-vial"></i> Donation Volume</th>
+                        <th><i class="fas fa-flask"></i> Hemoglobin Level</th>
+                        <th><i class="fas fa-hand-holding-medical"></i> Donation Type</th>
+                        <th><i class="fas fa-calendar-day"></i> Donation Date</th>
+                        <th><i class="fas fa-sticky-note"></i> Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% trial4Data.forEach((donor) => { %>
+                        <tr onclick="openDonationDetails('<%= donor.id %>')">
+                            <td><%= donor.id %></td>
+                            <td><%= donor.lastName %></td>
+                            <td><%= donor.firstName %></td>
+                            <td><%= donor.telephone %></td>
+                            <td><%= donor.dob %></td>
+                            <td><%= donor.age %></td>
+                            <td><%= donor.residence %></td>
+                            <td><%= donor.donorType %></td>
+                            <td><%= donor.submissionDate %></td>
+                            <td><%= donor.bloodGroup %></td>
+                            <td><%= donor.rhesusFactor %></td>
+                            <td><%= donor.donationVolume %></td>
+                            <td><%= donor.hemoglobinLevel %></td>
+                            <td><%= donor.donationType %></td>
+                            <td><%= donor.donationDate %></td>
+                            <td><%= donor.notes %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination Controls (To be implemented) -->
+        <div class="pagination">
+            <button id="prevPage" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+            <span id="pageInfo">Page 1</span>
+            <button id="nextPage">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    <% } else { %>
+        <p>No records found in Trial 4.</p>
+    <% } %>
+      </section>                 
+                      
+                      
+                      
+  </main>      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Charles Drew - Pamoja Dokita® | Empowering Healthcare Through Innovation</p>
+    </footer>
+
+    <!-- JavaScript for Modal -->
+    <script>
+        // Open modal and set donor ID
+        function openModal(donorId) {
+            document.getElementById('donorId').value = donorId;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+      
+      
+      
+      
+      
+      
+      document.addEventListener("DOMContentLoaded", () => {
+    const table = document.querySelector(".table-section table tbody");
+    const rows = table.querySelectorAll("tr");
+    const rowsPerPage = 10;
+    let currentPage = 1;
+
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+    const prevButton = document.getElementById("prevPage");
+    const nextButton = document.getElementById("nextPage");
+    const pageInfo = document.getElementById("pageInfo");
+
+    // Function to show only the rows for the current page
+    function showPage(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        rows.forEach((row, index) => {
+            row.style.display = index >= start && index < end ? "" : "none";
+        });
+
+        // Update pagination buttons
+        pageInfo.textContent = `Page ${page} of ${totalPages}`;
+        prevButton.disabled = page === 1;
+        nextButton.disabled = page === totalPages;
+    }
+
+    // Pagination button events
+    prevButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    });
+
+    nextButton.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    });
+
+    // Initial page load
+    showPage(currentPage);
+
+    // Add some dynamic page behavior
+    const scrollToTopButton = document.createElement("button");
+    scrollToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i> Top';
+    scrollToTopButton.className = "btn btn-process scroll-top";
+    document.body.appendChild(scrollToTopButton);
+
+    scrollToTopButton.style.display = "none";
+
+    // Show/hide scroll-to-top button
+    window.addEventListener("scroll", () => {
+        scrollToTopButton.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+
+    scrollToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    console.log("Pagination and page behavior loaded successfully!");
+});
+      
+      
+      
+      
+    </script>
+</body>
+  </html>

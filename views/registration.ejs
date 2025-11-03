@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Registration Form</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file later -->
+</head>
+<body>
+  <nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/registration">💰 Registration</a></li>
+        </ul>
+    </nav>
+    <div class="form-container">
+        <h1>Donor Registration Form</h1>
+        <form action="/submit-donor" method="POST" class="form-grid">
+            <!-- Personal Information -->
+            <div class="form-card">
+                <h3>Personal Information</h3>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="telephone">Telephone Number</label>
+                    <input type="text" id="telephone" name="telephone" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="residence">Residence/Quartier</label>
+                    <input type="text" id="residence" name="residence" required>
+                </div>
+                <div class="form-group">
+                    <label for="donorType">Type of Donor</label>
+                    <select id="donorType" name="donorType" required>
+                        <option value="voluntary">Voluntary</option>
+                        <option value="replacement">Replacement</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Medical History -->
+            <div class="form-card">
+                <h3>Medical History</h3>
+                <div class="form-group">
+                    <label>Do you have any significant medical problems?</label>
+                    <label><input type="radio" name="medicalProblems" value="yes" required> Yes</label>
+                    <label><input type="radio" name="medicalProblems" value="no"> No</label>
+                    <div id="medicalProblemsDetails" class="conditional-field">
+                        <label for="medicalProblemsSpecify">Specify medical problems</label>
+                        <textarea id="medicalProblemsSpecify" name="medicalProblemsSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>If female: Could you be pregnant?</label>
+                    <label><input type="radio" name="pregnant" value="yes" required> Yes</label>
+                    <label><input type="radio" name="pregnant" value="no"> No</label>
+                    <div id="pregnancyDetails" class="conditional-field">
+                        <label for="pregnancySpecify">Provide pregnancy details</label>
+                        <textarea id="pregnancySpecify" name="pregnancySpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Have you ever been treated for Cancer?</label>
+                    <label><input type="radio" name="cancerTreatment" value="yes" required> Yes</label>
+                    <label><input type="radio" name="cancerTreatment" value="no"> No</label>
+                    <div id="cancerTreatmentDetails" class="conditional-field">
+                        <label for="cancerTreatmentSpecify">Specify cancer treatment details</label>
+                        <textarea id="cancerTreatmentSpecify" name="cancerTreatmentSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Do you have any known allergies?</label>
+                    <label><input type="radio" name="allergies" value="yes" required> Yes</label>
+                    <label><input type="radio" name="allergies" value="no"> No</label>
+                    <div id="allergiesDetails" class="conditional-field">
+                        <label for="allergiesSpecify">Specify allergies</label>
+                        <textarea id="allergiesSpecify" name="allergiesSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Do you have any chronic conditions?</label>
+                    <label><input type="radio" name="chronicConditions" value="yes" required> Yes</label>
+                    <label><input type="radio" name="chronicConditions" value="no"> No</label>
+                    <div id="chronicConditionsDetails" class="conditional-field">
+                        <label for="chronicConditionsSpecify">Specify chronic conditions</label>
+                        <textarea id="chronicConditionsSpecify" name="chronicConditionsSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Have you had any recent surgeries?</label>
+                    <label><input type="radio" name="surgeries" value="yes" required> Yes</label>
+                    <label><input type="radio" name="surgeries" value="no"> No</label>
+                    <div id="surgeriesDetails" class="conditional-field">
+                        <label for="surgeriesSpecify">Specify surgery details</label>
+                        <textarea id="surgeriesSpecify" name="surgeriesSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Have you been diagnosed with a blood disorder?</label>
+                    <label><input type="radio" name="bloodDisorder" value="yes" required> Yes</label>
+                    <label><input type="radio" name="bloodDisorder" value="no"> No</label>
+                    <div id="bloodDisorderDetails" class="conditional-field">
+                        <label for="bloodDisorderSpecify">Specify blood disorder details</label>
+                        <textarea id="bloodDisorderSpecify" name="bloodDisorderSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Are you currently taking any medications?</label>
+                    <label><input type="radio" name="medications" value="yes" required> Yes</label>
+                    <label><input type="radio" name="medications" value="no"> No</label>
+                    <div id="medicationsDetails" class="conditional-field">
+                        <label for="medicationsSpecify">List medications</label>
+                        <textarea id="medicationsSpecify" name="medicationsSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Have you ever had an organ transplant?</label>
+                    <label><input type="radio" name="organTransplant" value="yes" required> Yes</label>
+                    <label><input type="radio" name="organTransplant" value="no"> No</label>
+                    <div id="organTransplantDetails" class="conditional-field">
+                        <label for="organTransplantSpecify">Provide transplant details</label>
+                        <textarea id="organTransplantSpecify" name="organTransplantSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Are you breastfeeding?</label>
+                    <label><input type="radio" name="breastfeeding" value="yes" required> Yes</label>
+                    <label><input type="radio" name="breastfeeding" value="no"> No</label>
+                    <div id="breastfeedingDetails" class="conditional-field">
+                        <label for="breastfeedingSpecify">Provide breastfeeding details</label>
+                        <textarea id="breastfeedingSpecify" name="breastfeedingSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Do you have any sexually transmitted infections (STIs)?</label>
+                    <label><input type="radio" name="stis" value="yes" required> Yes</label>
+                    <label><input type="radio" name="stis" value="no"> No</label>
+                    <div id="stisDetails" class="conditional-field">
+                        <label for="stisSpecify">Provide STI details</label>
+                        <textarea id="stisSpecify" name="stisSpecify"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Have you ever come in contact with HIV/AIDS?</label>
+                    <label><input type="radio" name="hivContact" value="yes" required> Yes</label>
+                    <label><input type="radio" name="hivContact" value="no"> No</label>
+                </div>
+                <div class="form-group">
+                    <label>Are you currently unwell?</label>
+                    <label><input type="radio" name="unwell" value="yes" required> Yes</label>
+                    <label><input type="radio" name="unwell" value="no"> No</label>
+                </div>
+            </div>
+
+            <!-- Physical Examination -->
+            <div class="form-card">
+                <h3>Physical Examination</h3>
+                <div class="form-group">
+                    <label for="temperature">Temperature</label>
+                    <input type="number" id="temperature" name="temperature" required>
+                </div>
+                <div class="form-group">
+                    <label for="bpSystolic">BP Systolic</label>
+                    <input type="text" id="bpSystolic" name="bpSystolic" required>
+                </div>
+                <div class="form-group">
+                    <label for="bpDiastolic">BP Diastolic</label>
+                    <input type="text" id="bpDiastolic" name="bpDiastolic" required>
+                </div>
+                <div class="form-group">
+                    <label for="pulse">Pulse</label>
+                    <input type="number" id="pulse" name="pulse" required>
+                </div>
+                <div class="form-group">
+                    <label for="respirationRate">Respiration Rate</label>
+                    <input type="number" id="respirationRate" name="respirationRate" required>
+                </div>
+                <div class="form-group">
+                    <label for="heartExamination">Heart Examination</label>
+                    <select id="heartExamination" name="heartExamination" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="lungExamination">Lung Examination</label>
+                    <select id="lungExamination" name="lungExamination" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="overallImpression">Overall Impression</label>
+                    <select id="overallImpression" name="overallImpression" required>
+                        <option value="fit">Fit</option>
+                        <option value="unfit">Unfit</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Consent and Submission -->
+            <div class="form-card">
+                <h3>Consent and Submission</h3>
+                <div class="form-group">
+                    <label>Consent for Blood Donation</label>
+                    <label><input type="radio" name="consent" value="yes" required> Yes</label>
+                    <label><input type="radio" name="consent" value="no"> No</label>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Information Accuracy</label>
+                    <label><input type="radio" name="infoAccuracy" value="yes" required> Yes</label>
+                    <label><input type="radio" name="infoAccuracy" value="no"> No</label>
+                </div>
+                <div class="form-group">
+                    <label for="signature">Signature of Donor</label>
+                    <input type="text" id="signature" name="signature" required>
+                </div>
+                <div class="form-group">
+                    <label for="submissionDate">Date of Submission</label>
+                    <input type="date" id="submissionDate" name="submissionDate" required>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to handle conditional fields
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const targetId = e.target.name + "Details";
+                const targetField = document.getElementById(targetId);
+                if (targetField && e.target.value === "yes") {
+                    targetField.classList.add('active');
+                } else if (targetField) {
+                    targetField.classList.remove('active');
+                }
+            });
+        });
+
+        // Calculate age based on date of birth
+        const dobInput = document.getElementById('dob');
+        const ageInput = document.getElementById('age');
+        dobInput.addEventListener('change', () => {
+            const dob = new Date(dobInput.value);
+            const today = new Date();
+            const age = today.getFullYear() - dob.getFullYear();
+            ageInput.value = age;
+        });
+    </script>
+</body>
+</html>

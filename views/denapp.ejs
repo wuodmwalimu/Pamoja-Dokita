@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved and Denied Requests | Pamoja Dokita® 2025</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="sop.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1><i class="fas fa-tint"></i> Approved and Denied Requests</h1>
+            <p>Track and manage blood donation requests within the Pamoja Dokita® 2025 system.</p>
+        </header>
+
+        <!-- Navigation Menu -->
+        <div class="menu">
+            <a href="main"><i class="fas fa-home"></i> Home</a>
+            <a href="/request"><i class="fas fa-plus-circle"></i> New Request</a>
+            <a href="/recentRequests"><i class="fas fa-list"></i> Recent Requests</a>
+            <a href="/denapp"><i class="fas fa-check-circle"></i> Approved/Denied</a>
+        </div>
+
+        <!-- Approved Requests Section -->
+        <section id="approved-requests">
+            <div class="table-wrapper">
+                <h2><i class="fas fa-check-circle"></i> Approved Requests</h2>
+                <table id="approvedRequestsTable" class="display">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-user"></i> Recipient</th>
+                            <th><i class="fas fa-calendar-alt"></i> DOB</th>
+                            <th><i class="fas fa-hourglass"></i> Age</th>
+                            <th><i class="fas fa-tint"></i> Blood Type</th>
+                            <th><i class="fas fa-box"></i> Units</th>
+                            <th><i class="fas fa-venus-mars"></i> Gender</th>
+                            <th><i class="fas fa-globe"></i> Country</th>
+                            <th><i class="fas fa-map-marker-alt"></i> Region</th>
+                            <th><i class="fas fa-hospital"></i> Hospital</th>
+                            <th><i class="fas fa-user-md"></i> Doctor</th>
+                            <th><i class="fas fa-phone"></i> Contact</th>
+                            <th><i class="fas fa-map"></i> Location</th>
+                            <th><i class="fas fa-calendar-check"></i> Approved Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% approvedRequests.forEach(request => { %>
+                            <tr>
+                                <td><%= request.recipientName %></td>
+                                <td><%= request.dob %></td>
+                                <td><%= request.age %></td>
+                                <td><span class="badge"><%= request.bloodType %></span></td>
+                                <td><%= request.units %></td>
+                                <td><%= request.gender %></td>
+                                <td><%= request.country %></td>
+                                <td><%= request.region %></td>
+                                <td><%= request.hospital %></td>
+                                <td><%= request.doctor %></td>
+                                <td><%= request.contactHospital %></td>
+                                <td><%= request.location %></td>
+                                <td><%= new Date(request.approvedDate).toLocaleDateString() %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Denied Requests Section -->
+        <section id="denied-requests">
+            <div class=" table-wrapper">
+                <h2><i class="fas fa-times-circle"></i> Denied Requests</h2>
+                <table id="deniedRequestsTable" class="display">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-user"></i> Recipient</th>
+                            <th><i class="fas fa-calendar-alt"></i> DOB</th>
+                            <th><i class="fas fa-hourglass"></i> Age</th>
+                            <th><i class="fas fa-tint"></i> Blood Type</th>
+                            <th><i class="fas fa-box"></i> Units</th>
+                            <th><i class="fas fa-venus-mars"></i> Gender</th>
+                            <th><i class="fas fa-globe"></i> Country</th>
+                            <th><i class="fas fa-map-marker-alt"></i> Region</th>
+                            <th><i class="fas fa-hospital"></i> Hospital</th>
+                            <th><i class="fas fa-user-md"></i> Doctor</th>
+                            <th><i class="fas fa-phone"></i> Contact</th>
+                            <th><i class="fas fa-map"></i> Location</th>
+                            <th><i class="fas fa-ban"></i> Reason</th>
+                            <th><i class="fas fa-calendar-times"></i> Denied Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% deniedRequests.forEach(request => { %>
+                            <tr>
+                                <td><%= request.recipientName %></td>
+                                <td><%= request.dob %></td>
+                                <td><%= request.age %></td>
+                                <td><span class="badge"><%= request.bloodType %></span></td>
+                                <td><%= request.units %></td>
+                                <td><%= request.gender %></td>
+                                <td><%= request.country %></td>
+                                <td><%= request.region %></td>
+                                <td><%= request.hospital %></td>
+                                <td><%= request.doctor %></td>
+                                <td><%= request.contactHospital %></td>
+                                <td><%= request.location %></td>
+                                <td><%= request.reason %></td>
+                                <td><%= new Date(request.deniedDate).toLocaleDateString() %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 Charles Drew - Pamoja Dokita®. Empowering safer blood management and patient care.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <style>
+ 
+      /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+header h1 {
+    font-size: 2em;
+    color: #d9534f;
+}
+
+header p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* Navigation Menu */
+.menu {
+    display: flex;
+    justify-content: space-around;
+    background: #d9534f;
+    padding: 10px 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    transition: background 0.3s;
+}
+
+.menu a:hover {
+    background: #c9302c;
+    border-radius: 5px;
+}
+
+/* Card Style */
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Section Titles */
+h2 {
+    font-size: 1.5em;
+    color: #5cb85c;
+    margin-bottom: 15px;
+}
+
+/* Table Wrapper for Horizontal Scroll */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 0.9em;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+/* Table Styling */
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table thead th {
+    background: #5bc0de;
+    color: #fff;
+}
+
+table tbody tr:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background: #f1f1f1;
+}
+
+/* Badge Styling */
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 0.8em;
+    background: #d9534f;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #5bc0de;
+    color: #fff;
+    margin-top: auto;
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    table th, table td {
+        padding: 8px;
+    }
+      }
+      
+          </style>
+          
+          
+          
+          
+          
+    <script>
+        $(document).ready(function() {
+            $('#approvedRequestsTable, #deniedRequestsTable').DataTable({
+                dom: 'Bfrtip',
+                lengthMenu: [10, 25, 50, 100],
+                buttons: [
+                    { extend: 'csv', text: 'Export CSV', className: 'btn btn-success' },
+                    { extend: 'pdf', text: 'Export PDF', className: 'btn btn-danger' }
+                ]
+            });
+        });
+    </script>
+</body>
+      </html>

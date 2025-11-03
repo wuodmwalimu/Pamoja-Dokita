@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamoja Dokita® Blood Bank Inventory</title>
+    <link rel="stylesheet" href="/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* styles.css */
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Stats Section */
+.stats {
+    margin-bottom: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-item {
+    background: #007bff;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.stat-item p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Charts Section */
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.chart-container {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 400px;
+}
+
+.chart-container h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+/* Table Section */
+h2 {
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollable Table Container */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+/* Table Wrapper for Scroll */
+.table-wrapper {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* Table Styling */
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    white-space: nowrap;
+}
+
+table th {
+    background: #007bff;
+    color: #fff;
+    position: sticky;
+    top: 0;
+}
+
+table tbody tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background: #e9f5ff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-grid, .chart-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+
+    .table-wrapper {
+        max-height: 400px;
+    }
+    }
+  </style>
+</head>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamoja Dokita® Blood Bank Inventory</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/bank">💰 Bank</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Pamoja Dokita® Blood Bank Inventory</h1>
+
+        <!-- Updated Statistics Section -->
+        <div class="stats">
+            <h2>Blood Bank Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>Total Units</h3>
+                    <p id="totalUnits">0</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Blood Type Variety</h3>
+                    <p id="bloodTypeVariety">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Updated Charts Section -->
+        <div class="charts">
+            <h2>Blood Inventory Insights</h2>
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h3>Blood Type Distribution</h3>
+                    <canvas id="bloodTypeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blood Units Table -->
+        <h2>Available Blood Units</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Donation ID</th>
+                    <th>Blood Group</th>
+                    <th>Rhesus Factor</th>
+                    <th>Donation Volume (ml)</th>
+                    <th>Donation Type</th>
+                    <th>Donation Date</th>
+                    <th>Residence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% trial5Records.forEach(record => { %>
+                <tr>
+                    <td><%= record.donationID || 'N/A' %></td>
+                    <td><%= record.bloodGroup || 'Unknown' %></td>
+                    <td><%= record.rhesusFactor || 'N/A' %></td>
+                    <td><%= record.donationVolume || 0 %></td>
+                    <td><%= record.donationType || 'Unknown' %></td>
+                    <td><%= record.donationDate || 'N/A' %></td>
+                    <td><%= record.residence || 'Unknown' %></td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript for Stats and Charts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const records = <%= JSON.stringify(trial5Records) %>;
+            
+            // Update statistics based on table data
+            document.getElementById("totalUnits").innerText = records.length;
+            document.getElementById("bloodTypeVariety").innerText = new Set(records.map(r => r.bloodGroup)).size;
+            
+            // Render blood type distribution chart
+            const bloodTypeCounts = {};
+            records.forEach(record => {
+                bloodTypeCounts[record.bloodGroup] = (bloodTypeCounts[record.bloodGroup] || 0) + 1;
+            });
+            
+            const ctx = document.getElementById("bloodTypeChart").getContext("2d");
+            new Chart(ctx, {
+                type: "pie",
+                data: {
+                    labels: Object.keys(bloodTypeCounts),
+                    datasets: [{
+                        label: "Blood Type Distribution",
+                        data: Object.values(bloodTypeCounts),
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#FF9800'],
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+  
+  
+  
+  
+  
+  
+  

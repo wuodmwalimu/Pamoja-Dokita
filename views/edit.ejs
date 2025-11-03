@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Donor Details</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Edit Donor Details</h1>
+    <form action="/edit/<%= donor.id %>" method="POST">
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" name="last_name" value="<%= donor.last_name %>" required>
+
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" name="first_name" value="<%= donor.first_name %>" required>
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" value="<%= donor.phone %>" required>
+
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" value="<%= donor.dob %>" required>
+
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" value="<%= donor.age %>" required>
+
+        <label for="residence">Residence</label>
+        <input type="text" id="residence" name="residence" value="<%= donor.residence %>" required>
+
+        <label for="donor_type">Donor Type</label>
+        <input type="text" id="donor_type" name="donor_type" value="<%= donor.donor_type %>" required>
+
+        <label for="medical_problems">Medical Problems</label>
+        <textarea id="medical_problems" name="medical_problems"><%= donor.medical_problems %></textarea>
+
+        <label for="medical_details">Medical Details</label>
+        <textarea id="medical_details" name="medical_details"><%= donor.medical_details %></textarea>
+
+        <label for="pregnant">Pregnant</label>
+        <input type="text" id="pregnant" name="pregnant" value="<%= donor.pregnant %>">
+
+        <label for="pregnancy_details">Pregnancy Details</label>
+        <textarea id="pregnancy_details" name="pregnancy_details"><%= donor.pregnancy_details %></textarea>
+
+        <label for="cancer">Cancer</label>
+        <input type="text" id="cancer" name="cancer" value="<%= donor.cancer %>">
+
+        <label for="cancer_details">Cancer Details</label>
+        <textarea id="cancer_details" name="cancer_details"><%= donor.cancer_details %></textarea>
+
+        <label for="allergies">Allergies</label>
+        <input type="text" id="allergies" name="allergies" value="<%= donor.allergies %>">
+
+        <label for="allergy_details">Allergy Details</label>
+        <textarea id="allergy_details" name="allergy_details"><%= donor.allergy_details %></textarea>
+
+        <label for="chronic_conditions">Chronic Conditions</label>
+        <input type="text" id="chronic_conditions" name="chronic_conditions" value="<%= donor.chronic_conditions %>">
+
+        <label for="chronic_details">Chronic Details</label>
+        <textarea id="chronic_details" name="chronic_details"><%= donor.chronic_details %></textarea>
+
+        <label for="surgery">Surgery</label>
+        <input type="text" id="surgery" name="surgery" value="<%= donor.surgery %>">
+
+        <label for="surgery_details">Surgery Details</label>
+        <textarea id="surgery_details" name="surgery_details"><%= donor.surgery_details %></textarea>
+
+        <label for="blood_disorder">Blood Disorder</label>
+        <input type="text" id="blood_disorder" name="blood_disorder" value="<%= donor.blood_disorder %>">
+
+        <label for="blood_disorder_details">Blood Disorder Details</label>
+        <textarea id="blood_disorder_details" name="blood_disorder_details"><%= donor.blood_disorder_details %></textarea>
+
+        <label for="medications">Medications</label>
+        <input type="text" id="medications" name="medications" value="<%= donor.medications %>">
+
+        <label for="medication_details">Medication Details</label>
+        <textarea id="medication_details" name="medication_details"><%= donor.medication_details %></textarea>
+
+        <label for="organ_transplant">Organ Transplant</label>
+        <input type="text" id="organ_transplant" name="organ_transplant" value="<%= donor.organ_transplant %>">
+
+        <label for="transplant_details">Transplant Details</label>
+        <textarea id="transplant_details" name="transplant_details"><%= donor.transplant_details %></textarea>
+
+        <label for="breastfeeding">Breastfeeding</label>
+        <input type="text" id="breastfeeding" name="breastfeeding" value="<%= donor.breastfeeding %>">
+
+        <label for="breastfeeding_details">Breastfeeding Details</label>
+        <textarea id="breastfeeding_details" name="breastfeeding_details"><%= donor.breastfeeding_details %></textarea>
+
+        <label for="sti">STI</label>
+        <input type="text" id="sti" name="sti" value="<%= donor.sti %>">
+
+        <label for="sti_details">STI Details</label>
+        <textarea id="sti_details" name="sti_details"><%= donor.sti_details %></textarea>
+
+        <label for="contact_hiv">Contact with HIV</label>
+        <input type="text" id="contact_hiv" name="contact_hiv" value="<%= donor.contact_hiv %>">
+
+        <label for="currently_unwell">Currently Unwell</label>
+        <input type="text" id="currently_unwell" name="currently_unwell" value="<%= donor.currently_unwell %>">
+
+        <label for="temperature">Temperature</label>
+        <input type="text" id="temperature" name="temperature" value="<%= donor.temperature %>">
+
+        <label for="blood_pressure">Blood Pressure</label>
+        <input type="text" id="blood_pressure" name="blood_pressure" value="<%= donor.blood_pressure %>">
+
+        <label for="pulse">Pulse</label>
+        <input type="text" id="pulse" name="pulse" value="<%= donor.pulse %>">
+
+        <label for="respiration_rate">Respiration Rate</label>
+        <input type="text" id="respiration_rate" name="respiration_rate" value="<%= donor.respiration_rate %>">
+
+        <label for="heart_examination">Heart Examination</label>
+        <input type="text" id="heart_examination" name="heart_examination" value="<%= donor.heart_examination %>">
+
+        <label for="lung_examination">Lung Examination</label>
+        <input type="text" id="lung_examination" name="lung_examination" value="<%= donor.lung_examination %>">
+
+        <label for="overall_observation">Overall Observation</label>
+        <textarea id="overall_observation" name="overall_observation"><%= donor.overall_observation %></textarea>
+
+        <label for="overall_impression">Overall Impression</label>
+        <textarea id="overall_impression" name="overall_impression"><%= donor.overall_impression %></textarea>
+
+        <label for="consent">Consent</label>
+        <input type="checkbox" id="consent" name="consent" <% if (donor.consent) { %> checked <% } %> >
+
+        <label for="confirm">Confirm</label>
+        <input type="checkbox" id="confirm" name="confirm" <% if (donor.confirm) { %> checked <% } %> >
+
+        <label for="signature">Signature</label>
+        <input type="text" id="signature" name="signature" value="<%= donor.signature %>" required>
+
+        <label for="submission_date">Submission Date</label>
+        <input type="date" id="submission_date" name="submission_date" value="<%= donor.submission_date %>" required>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

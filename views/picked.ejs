@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picked Blood Requests</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  
+  
+  
+  
+  
+  
+  <style>
+    /* General styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f9f9f9;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #d9534f;
+}
+
+nav {
+    background: #d9534f;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+nav ul li a:hover {
+    background: #c9302c;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background: #d9534f;
+    color: #fff;
+}
+
+tbody tr:hover {
+    background: #f5f5f5;
+}
+
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button styling */
+.btn {
+    padding: 10px 20px;
+    background: #5bc0de;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #31b0d5;
+}
+
+.btn-danger {
+    background: #d9534f;
+}
+
+.btn-danger:hover {
+    background: #c9302c;
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    color: #d9534f;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #c9302c;
+}
+
+/* Input fields */
+form input, form textarea, form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    background: #d9534f;
+    color: #fff;
+    border-radius: 5px;
+    }
+    
+    
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</head>
+<body>
+  <nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/picked">💰 Picked Donations</a></li>
+        </ul>
+    </nav>
+    <h1>Picked Blood Requests</h1>
+
+    <!-- Back to Main Page Link -->
+    <a href="/main" class="btn"><i class="fas fa-arrow-left"></i> Back to Main</a>
+
+    <h2>Available Blood Units (Cashier Clears)</h2>
+    <div class="table-container">
+        <table id="cashierClearsTable" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Blood Unit ID</th>
+                    <th>Blood Group</th>
+                    <th>Recipient</th>
+                    <th>Hospital</th>
+                    <th>Doctor</th>
+                    <th>Approved Date</th>
+                    <th>Release Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (cashierClears.length > 0) { %>
+                    <% cashierClears.forEach((request) => { %>
+                        <tr>
+                            <td><%= request.id %></td>
+                            <td><%= request.bloodUnitID %></td>
+                            <td><%= request.bloodGroup %></td>
+                            <td><%= request.recipientName %></td>
+                            <td><%= request.hospital %></td>
+                            <td><%= request.doctor %></td>
+                            <td><%= request.approvedDate %></td>
+                            <td><%= request.releaseDate %></td>
+                            <td>
+                                <button 
+                                    class="btn confirm-btn" 
+                                    onclick="openConfirmModal('<%= request.bloodUnitID %>', '<%= request.recipientName %>')">
+                                    <i class="fas fa-check-circle"></i> Confirm Pickup
+                                </button>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="9">No available requests found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Picked Blood Units</h2>
+    <div class="table-container">
+        <table id="pickedTable" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Blood Unit ID</th>
+                    <th>Blood Group</th>
+                    <th>Recipient</th>
+                    <th>Hospital</th>
+                    <th>Confirmed By</th>
+                    <th>Confirmed Date</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (picked.length > 0) { %>
+                    <% picked.forEach((request) => { %>
+                        <tr>
+                            <td><%= request.id %></td>
+                            <td><%= request.bloodUnitID %></td>
+                            <td><%= request.bloodGroup %></td>
+                            <td><%= request.recipientName %></td>
+                            <td><%= request.hospital %></td>
+                            <td><%= request.confirmedBy %></td>
+                            <td><%= request.confirmedDate %></td>
+                            <td><%= request.additionalNotes || '—' %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="8">No picked requests found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for Confirming Pickup -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeConfirmModal()">&times;</span>
+            <h2>Confirm Pickup</h2>
+            <form id="confirmPickupForm">
+                <input type="hidden" id="bloodUnitID" name="bloodUnitID">
+                <input type="hidden" id="recipientName" name="recipientName">
+                
+                <label for="confirmedBy"><i class="fas fa-user"></i> Confirmed By:</label>
+                <input type="text" id="confirmedBy" name="confirmedBy" required>
+
+                <label for="additionalNotes"><i class="fas fa-sticky-note"></i> Additional Notes:</label>
+                <textarea id="additionalNotes" name="additionalNotes"></textarea>
+
+                <button type="button" class="btn save-btn" onclick="submitConfirmation()">
+                    <i class="fas fa-save"></i> Save Confirmation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function openConfirmModal(bloodUnitID, recipientName) {
+            document.getElementById('bloodUnitID').value = bloodUnitID;
+            document.getElementById('recipientName').value = recipientName;
+            document.getElementById('confirmModal').style.display = 'block';
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmModal').style.display = 'none';
+        }
+
+        function submitConfirmation() {
+            const formData = {
+                bloodUnitID: document.getElementById('bloodUnitID').value,
+                recipientName: document.getElementById('recipientName').value,
+                confirmedBy: document.getElementById('confirmedBy').value,
+                additionalNotes: document.getElementById('additionalNotes').value
+            };
+
+            fetch('/confirm-pickup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire('Success!', data.message, 'success').then(() => {
+                    location.reload();
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire('Error', 'Failed to confirm pickup', 'error');
+            });
+        }
+    </script>
+</body>
+                  </html>

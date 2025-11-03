@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charles Drew - Pamoja Dokita® 2025</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+  
+  <header class="header-section">
+    <div class="header-content">
+        <h1 class="main-title">Charles Drew - <span class="brand-name">Pamoja Dokita® 2025</span></h1>
+        <p class="subtitle">Blood Bank Inventory Management System</p>
+    </div>
+  </header>
+  
+  
+ <style>
+
+
+   
+   
+   
+   
+ /* Style the list container */
+.card ul {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin: 10px 0;
+}
+
+/* Style each list item */
+.card ul li {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 5px;
+    background: rgba(255, 0, 0, 0.1); /* Light red background */
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #8B0000; /* Deep red */
+}
+
+/* Custom bullet/icon */
+.card ul li::before {
+    content: "★"; /* Fancy bullet (can be any Unicode symbol or FontAwesome) */
+    color: #FF4D4D;
+    font-size: 16px;
+    margin-right: 10px;
+   }
+   
+   
+   
+   
+   
+   
+   
+   /* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #c0392b; /* Bold red background */
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.main-title {
+    color: #ffffff; /* White text */
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.brand-name {
+    color: #ffdddd; /* Lighter shade of white for contrast */
+}
+
+.subtitle {
+    color: #ffffff;
+    font-size: 1.2em;
+    margin-top: 10px;
+    font-weight: 300;
+    letter-spacing: 1px;
+   }
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #c0392b; /* Matching red background */
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add depth */
+}
+
+nav a, .dropdown a {
+    padding: 15px 20px;
+    margin: 5px;
+    color: #ffffff; /* White text */
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 5px; /* Soft rounded edges */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover, .dropdown a:hover {
+    background-color: #e74c3c; /* Brighter red on hover */
+    color: #ffdddd; /* Lighter text on hover */
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #b83227; /* Darker red for dropdown */
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+    z-index: 10;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    padding: 12px 20px;
+    color: #ffffff;
+    text-align: left;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+.dropdown-content a:hover {
+    background-color: #e74c3c; /* Hover effect for dropdown items */
+    color: #ffdddd;
+   }
+
+/* Main Content */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Card Styles */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card p, .card ul {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+button {
+    background-color: #1abc9c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #16a085;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Help & Support Section */
+.help-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.help-container.visible {
+    display: flex;
+}
+
+.help-content {
+    background: white;
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.help-content h2 {
+    font-size: 1.5rem;
+}
+
+.help-scrollable {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.faq-list li {
+    margin-bottom: 10px;
+}
+
+.social-icons a {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #1abc9c;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 30px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-us h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.contact-us p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.social-links a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .social-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+/* Form Styles */
+input[type="text"], input[type="date"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: vertical;
+}
+
+form button {
+    width: 100%;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dropdown-content {
+        left: 0;
+        width: 100%;
+    }
+}
+
+/* Popup Styles */
+.event-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.event-popup.visible {
+    display: flex;
+}
+
+.event-popup-content {
+    background: white;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.close-event-form {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* Product Details */
+.product-info {
+    display: none;
+    padding: 20px;
+    background: #f9f9f9;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-info h3 {
+    margin-bottom: 10px;
+}
+
+/* Icons */
+.fas, .fab {
+    font-size: 20px;
+}
+
+ 
+
+
+      
+      
+      
+      
+
+   
+   
+   
+  </style>
+  
+  
+  
+       
+</head>
+
+  
+  <body>
+    
+
+                    
+                          
+ 
+   
+      
+      
+    <header>
+   
+      <nav>
+    <!-- Donations Management Dropdown -->
+    <div class="dropdown">
+        <a href="#"><i class="fas fa-tint"></i> Donations Management <i class="fas fa-caret-down"></i></a>
+        <div class="dropdown-content">
+            <a href="/donor" class="menu-item" data-role="Receptionist Nurse Lab Manager (Doctor) Admin"><i class="fas fa-user-edit"></i> Register Donor</a>
+            <a href="/patient" class="menu-item" data-role="Receptionist Nurse Lab Manager (Doctor) Admin"><i class="fas fa-hand-holding-medical"></i> View Registered Donors</a>
+            <a href="/summer" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-clipboard-check"></i> Begin Processing Donations</a>
+            <a href="/erick" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-hourglass-half"></i> Donations Being Processed</a>
+            <a href="/test" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-vial"></i> Processed Accepted Donations</a>
+            <a href="/responses" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-list"></i> Donation Responses</a>
+            <a href="/recentRequests" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-history"></i> Recent Requests</a>
+            <a href="/inProcessing" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-spinner"></i> In-Processing Donations</a>
+        </div>
+    </div>
+
+    <!-- Requests Management Dropdown -->
+    <div class="dropdown">
+        <a href="#"><i class="fas fa-tasks"></i> Requests Management <i class="fas fa-caret-down"></i></a>
+        <div class="dropdown-content">
+            <a href="/request" class="menu-item" data-role="Nurse Lab Manager (Doctor) Admin"><i class="fas fa-paper-plane"></i> Make a Request</a>
+            <a href="/records" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-history"></i> Recent Requests</a>
+            <a href="/recentRequests" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-history"></i> Manage Requests (Approve/Deny)</a>
+            <a href="/complete" class="menu-item" data-role="Lab Manager (Doctor) Admin Cashier"><i class="fas fa-check-circle"></i> Completed Requests (Awaiting Pickup)</a>
+            <a href="/denapp" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-eye"></i> View Approved and Denied Requests</a>
+        </div>
+    </div>
+
+    <!-- Other Menu Links -->
+    <a href="/inventories" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-dolly"></i> Release from Inventory</a>
+    <a href="/cashiered" class="menu-item" data-role="Cashier Admin"><i class="fas fa-dolly"></i> Cashier Portal</a>
+    <a href="#" id="open-consent-form"><i class="fas fa-file-alt"></i> Blood Donation Consent Form</a>
+    <a href="/regman" class="menu-item" data-role="Regional Manager"><i class="fas fa-user-tie"></i> Regional Manager Portal</a>
+    <a href="/picked" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-box"></i> Picked Up</a>
+    <a href="/reports" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-chart-line"></i> Reports</a>
+    <a href="/discard" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-trash-alt"></i> Discard Page</a>
+    <a href="/education" class="menu-item" data-role="Lab Manager (Doctor) Admin"><i class="fas fa-book"></i> Education & Resources</a>
+    <a href="/usez" class="menu-item" data-role="Admin"><i class="fas fa-users-cog"></i> Manage Users</a>
+
+    <!-- Logout Link -->
+    <a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</nav>
+
+<script>
+    // Load user data from localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user && user.role) {
+        const userRole = user.role;
+
+        // Show/hide menu items based on the role
+        document.querySelectorAll('.menu-item').forEach(item => {
+            const allowedRoles = item.getAttribute('data-role').split(' ');
+
+            if (!allowedRoles.includes(userRole)) {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Logout functionality
+    document.getElementById('logoutLink').addEventListener('click', () => {
+        localStorage.removeItem('user');
+        window.location.href = '/';  // Redirect to login
+    });
+      </script>
+      
+  
+      
+      
+<h1 id="welcomeMessage">
+    <span id="welcomeText"></span>
+</h1>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Check if a user is logged in using localStorage
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (user) {
+            // Display a friendly, conversational message
+            document.getElementById('welcomeText').innerHTML = `Welcome, ${user.role} <strong>${user.email}</strong>! You're now part of the <strong>${user.hospital}</strong> branch in the <strong>${user.region}</strong> region of Pamoja Dokita® @ 2025.`;
+
+            // Show the dashboard link and hide the role selection dialog
+            document.getElementById('dashboardLink').style.display = 'inline';
+            document.getElementById('roleDialog').style.display = 'none';
+        } else {
+            // Display a default welcome message if no user is logged in
+            document.getElementById('welcomeText').innerText = 'Welcome to Pamoja Dokita® @ 2025!';
+        }
+    });
+</script>
+
+
+
+      
+      
+      
+
+      
+      
+</header>
+
+      
+    <!-- Main Content -->
+    <main>
+        <section id="section" >
+            <div class="card">
+                <h2>Welcome to the Blood Bank Management System</h2>
+                <p>Manage blood donations, donor information, and blood requests efficiently.</p>
+                <ul>
+                    <li>Track blood donations and inventory.</li>
+                    <li>Manage donor questionnaires and responses.</li>
+                    <li>Process blood requests from hospitals and clinics.</li>
+                    <li>Monitor stock levels and expiry dates.</li>
+                    <li>Handle transfusion records and patient histories.</li>
+                    <li>Provide educational materials for staff and donors.</li>
+                </ul>
+            </div>
+        </section>
+
+        
+                
+              
+          <!-- Include FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+      
+      
+      
+      
+
+      
+      
+      
+      
+
+      <div id="blood-group-counts" class="card">
+    <p>Loading blood group counts...</p>
+</div>
+                                               
+
+<script>
+    // Fetch blood group counts from the server
+    fetch('/blood-group-counts')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+            const container = document.getElementById('blood-group-counts');
+            container.innerHTML = ''; // Clear loading message
+
+            // Check if any data is returned
+            if (Object.keys(data).length === 0) {
+                container.innerHTML = "<p>No blood group data available.</p>";
+                return;
+            }
+
+            // Loop through each blood group and display its count
+            bloodGroups.forEach(group => {
+                const count = data[group] || 0; // Default to 0 if no records exist
+                const icon = count > 0 ? 'fa-check-circle' : 'fa-times-circle'; // Icon based on count
+                const status = count > 0 ? `${count} unit(s)` : 'Not Available'; // Status message
+
+                // Create a div for each blood group
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'blood-group-item';
+                groupDiv.innerHTML = `
+                    <i class="fas fa-tint blood-icon"></i> <!-- Blood drop icon -->
+                    <span>${group}: ${status}</span>
+                    <i class="fas ${icon}"></i> <!-- Availability icon -->
+                `;
+
+                // Append the div to the container
+                container.appendChild(groupDiv);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching blood group counts:", error);
+            document.getElementById('blood-group-counts').innerHTML = "<p>Error loading blood group counts.</p>";
+        });
+</script>
+<style>
+    /* Container styling with red background */
+    #blood-group-counts {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+        gap: 20px;
+        padding: 20px;
+        background-color: #8B0000; /* Dark red background */
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Blood group card styling */
+    .blood-group-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        border: 2px solid #FFCDD2;
+        border-radius: 10px;
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: #FFF5F5; /* Light red background */
+        font-size: 22px;
+        font-weight: bold;
+        color: #8B0000;
+        text-align: center;
+    }
+
+    /* Icons */
+    .fa-check-circle {
+        color: #28a745;
+    }
+
+    .fa-times-circle {
+        color: #dc3545;
+    }
+
+    .blood-icon {
+        color: #FF0000; /* Bright red for blood drop */
+        font-size: 28px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        #blood-group-counts {
+            grid-template-columns: repeat(2, 1fr); /* 2 cards per row for smaller screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        #blood-group-counts {
+            grid-template-columns: 1fr; /* Stack cards on very small screens */
+        }
+    }
+      </style>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
+      <!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Flex container for charts -->
+<div class="charts-wrapper">
+    <div class="chart-container">
+        <canvas id="blood-group-chart"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="donation-trend-chart"></canvas>
+    </div>
+</div>
+
+<script>
+    // Function to render the blood group distribution chart
+    function renderBloodGroupChart(data) {
+        const ctx = document.getElementById('blood-group-chart').getContext('2d');
+        const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+        const counts = bloodGroups.map(group => data[group] || 0);
+
+        // Destroy existing chart if it exists
+        if (window.bloodChart) window.bloodChart.destroy();
+
+        window.bloodChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: bloodGroups,
+                datasets: [{
+                    label: 'Blood Group Distribution',
+                    data: counts,
+                    backgroundColor: [
+                        '#FF4C4C', '#FF6B6B', '#FF8A8A', '#FFAAAA', 
+                        '#FF3333', '#FF1A1A', '#FF6666', '#D80000'
+                    ],
+                    borderColor: '#FF3333',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true, position: 'top', labels: { color: '#ffffff' } },
+                    tooltip: { backgroundColor: '#1e1e1e', titleColor: '#ffffff', bodyColor: '#bbbbbb' }
+                },
+                scales: {
+                    x: { ticks: { color: '#ffffff' }, grid: { color: '#444444' } },
+                    y: { beginAtZero: true, ticks: { color: '#ffffff' }, grid: { color: '#444444' } }
+                }
+            }
+        });
+    }
+
+    // Function to render donation trends chart
+    function renderDonationTrendChart(data) {
+        const ctx = document.getElementById('donation-trend-chart').getContext('2d');
+        const dates = Object.keys(data).sort();
+        const counts = dates.map(date => data[date]);
+
+        // Destroy existing chart if it exists
+        if (window.donationTrendChart) window.donationTrendChart.destroy();
+
+        window.donationTrendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Donations Over Time',
+                    data: counts,
+                    borderColor: '#FF4C4C',
+                    backgroundColor: 'rgba(255, 76, 76, 0.2)',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true, position: 'top', labels: { color: '#ffffff' } },
+                    tooltip: { backgroundColor: '#1e1e1e', titleColor: '#ffffff', bodyColor: '#bbbbbb' }
+                },
+                scales: {
+                    x: { ticks: { color: '#ffffff' }, grid: { color: '#444444' } },
+                    y: { beginAtZero: true, ticks: { color: '#ffffff' }, grid: { color: '#444444' } }
+                }
+            }
+        });
+    }
+
+    // Fetch data for blood group chart
+    fetch('/blood-group-counts')
+        .then(response => response.json())
+        .then(data => renderBloodGroupChart(data))
+        .catch(error => console.error("Error fetching blood group counts:", error));
+
+    // Fetch data for donation trends chart
+    fetch('/donation-trend-data')
+        .then(response => response.json())
+        .then(data => renderDonationTrendChart(data))
+        .catch(error => console.error("Error loading donation trend chart:", error));
+</script>
+
+<style>
+    /* Style for the chart layout */
+    .charts-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    /* Style for individual chart containers */
+    .chart-container {
+        flex: 1;
+        min-width: 300px;
+        max-width: 48%;
+        padding: 20px;
+        border: 1px solid #444;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        background-color: #1e1e1e;
+        overflow-x: auto;
+    }
+      </style>
+      
+
+      
+      
+
+      
+      
+      
+      
+
+
+      
+      
+      
+      
+      
+      
+      
+      
+      <!-- Container to display request counts -->
+<div id="request-counts" class="card">
+    <p>Loading request counts...</p>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+
+
+
+<!-- Blood Bank Policies -->
+<section id="blood-bank-policies">
+    <div class="card">
+        <h2>Blood Bank Policies</h2>
+        <p>Learn about donation policies, storage guidelines, and safety protocols.</p>
+    </div>
+</section>
+
+<!-- Other Blood Products Section -->
+<section id="other-blood-products">
+    <div class="card">
+        <h2>Other Blood Products</h2>
+        <p>Discover the different components derived from donated blood.</p>
+
+        <ul class="blood-product-list">
+            <li class="blood-product" onclick="toggleDetails('prbc')">
+                <i class="fas fa-tint"></i> Packed Red Blood Cells
+            </li>
+            <li class="blood-product" onclick="toggleDetails('platelets')">
+                <i class="fas fa-hand-holding-water"></i> Platelets
+            </li>
+            <li class="blood-product" onclick="toggleDetails('plasma')">
+                <i class="fas fa-flask"></i> Fresh Frozen Plasma
+            </li>
+            <li class="blood-product" onclick="toggleDetails('cryo')">
+                <i class="fas fa-snowflake"></i> Cryoprecipitate
+            </li>
+        </ul>
+
+        <!-- Product Details (Hidden by Default) -->
+        <div id="product-details">
+            <div class="product-info" id="prbc">
+                <h3>Packed Red Blood Cells (PRBCs)</h3>
+                <p>Used for treating anemia and blood loss. PRBCs are stored at 1-6°C and can last up to 42 days.</p>
+                <button class="close-btn" onclick="closeDetails()">Close</button>
+            </div>
+            <div class="product-info" id="platelets">
+                <h3>Platelets</h3>
+                <p>Essential for blood clotting. Stored at room temperature and must be used within 5 days.</p>
+                <button class="close-btn" onclick="closeDetails()">Close</button>
+            </div>
+            <div class="product-info" id="plasma">
+                <h3>Fresh Frozen Plasma (FFP)</h3>
+                <p>Rich in clotting factors and used for bleeding disorders. Stored frozen and lasts up to a year.</p>
+                <button class="close-btn" onclick="closeDetails()">Close</button>
+            </div>
+            <div class="product-info" id="cryo">
+                <h3>Cryoprecipitate</h3>
+                <p>Contains fibrinogen and clotting factors. Used for hemophilia and stored frozen.</p>
+                <button class="close-btn" onclick="closeDetails()">Close</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Script for Product Details Toggle -->
+<script>
+    function toggleDetails(productId) {
+        document.querySelectorAll('.product-info').forEach(el => el.style.display = 'none');
+        document.getElementById(productId).style.display = 'block';
+    }
+
+    function closeDetails() {
+        document.querySelectorAll('.product-info').forEach(el => el.style.display = 'none');
+    }
+</script>
+
+<!-- Help & Support Button -->
+<button id="help-btn" class="help-button">
+    <i class="fas fa-question-circle"></i> Help & Support
+</button>
+
+<!-- Help & Support Section (Hidden by Default) -->
+<div id="help-section" class="help-container hidden">
+    <div class="help-content">
+        <h2>Help & Support</h2>
+        <p>If you need assistance, browse our FAQs or contact us.</p>
+
+        <!-- Scrollable FAQ Section -->
+        <div class="help-scrollable">
+            <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+            <ul class="faq-list">
+                <li><strong>Who can donate blood?</strong><br>Anyone aged 18-65, in good health, and meeting donation criteria.</li>
+                <li><strong>How often can I donate blood?</strong><br>Whole blood donations every 8 weeks; platelets every 2 weeks.</li>
+                <li><strong>What should I do before donating?</strong><br>Stay hydrated, eat a healthy meal, and avoid alcohol before donation.</li>
+                <li><strong>Is donating blood safe?</strong><br>Yes! All needles and equipment are sterile and used only once.</li>
+                <li><strong>How long does blood donation take?</strong><br>A whole blood donation takes about 10-15 minutes, plus a short recovery period.</li>
+                <li><strong>Can I donate if I have a tattoo?</strong><br>Yes, if the tattoo was done at a licensed facility and is over 4 months old.</li>
+            </ul>
+
+            <!-- Contact Information -->
+            <h3><i class="fas fa-phone"></i> Contact Us</h3>
+            <p>Email: <a href="mailto:support@bloodbank.com">support@bloodbank.com</a></p>
+            <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+
+            <!-- Social Media Links -->
+            <h3><i class="fas fa-share-alt"></i> Connect With Us</h3>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+
+            <!-- Placeholder for Live Chat -->
+            <h3><i class="fas fa-comments"></i> Live Chat (Coming Soon)</h3>
+            <p>We are working on a live chat feature to assist you in real-time. Stay tuned!</p>
+        </div>
+
+        <!-- Close Button Inside Help Section -->
+        <button id="close-help" class="close-btn">&times;</button>
+    </div>
+</div>
+
+<script>
+    // Show Help Section when button is clicked
+    document.getElementById('help-btn').addEventListener('click', function () {
+        const helpSection = document.getElementById('help-section');
+        helpSection.classList.remove('hidden'); // Show the help section
+        helpSection.classList.add('visible');  // Add visible class to make it display
+    });
+
+    // Close Help Section when close button is clicked
+    document.getElementById('close-help').addEventListener('click', function () {
+        const helpSection = document.getElementById('help-section');
+        helpSection.classList.remove('visible'); // Hide the help section
+        helpSection.classList.add('hidden'); // Add hidden class to ensure it's not visible
+    });
+
+    // Ensure the help section is hidden initially
+    document.getElementById('help-section').classList.add('hidden');
+</script>
+
+
+      
+      
+      
+    <script>
+    // Fetch request counts from the server
+    fetch('/request-counts')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const container = document.getElementById('request-counts');
+            container.innerHTML = ''; // Clear loading message
+
+            const requestTypes = [
+                { name: 'Pending', key: 'requests', icon: 'fa-envelope', color: '#ffc107' },
+                { name: 'Approved', key: 'approved_requests', icon: 'fa-check-circle', color: '#28a745' },
+                { name: 'Denied', key: 'denied_requests', icon: 'fa-times-circle', color: '#dc3545' },
+                { name: 'Cleared', key: 'cleared_requests', icon: 'fa-trash-alt', color: '#6c757d' },
+                { name: 'Cashier Cleared', key: 'cashier_clears', icon: 'fa-money-bill-wave', color: '#007bff' },
+                { name: 'Picked', key: 'picked', icon: 'fa-truck', color: '#17a2b8' }
+            ];
+
+            // Create section card container
+            const sectionCard = document.createElement('div');
+            sectionCard.className = 'section-card';
+
+            // Loop through request types and display counts in separate cards
+            requestTypes.forEach(type => {
+                const count = data[type.key] || 0;
+                const statusMessage = count > 0 
+                    ? `${count} ${type.name} request${count > 1 ? 's' : ''}` 
+                    : `No ${type.name.toLowerCase()} requests.`;
+
+                const card = document.createElement('div');
+                card.className = 'request-card';
+                card.style.borderColor = type.color;
+
+                card.innerHTML = `
+                    <div class="request-card-header" style="background-color: ${type.color}; color: #fff;">
+                        <i class="fas ${type.icon}"></i>
+                    </div>
+                    <div class="request-card-body">
+                        <h3>${type.name}</h3>
+                        <p>${statusMessage}</p>
+                    </div>
+                `;
+
+                sectionCard.appendChild(card);
+            });
+
+            // Append section card container to the main container
+            container.appendChild(sectionCard);
+        })
+        .catch(error => {
+            console.error("Error fetching request counts:", error);
+            document.getElementById('request-counts').innerHTML = "<p>Error loading request counts.</p>";
+        });
+</script>
+      <style>
+/* Grid container */
+.section-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-rows: repeat(2, auto); /* 2 rows */
+    gap: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #8B0000, #FF4D4D);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    justify-content: center;
+}
+
+/* Each card */
+.request-card {
+    padding: 12px;
+    border: 1.5px solid #FFCDD2;
+    border-radius: 8px;
+    background: #FFF5F5;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 14px;
+}
+
+/* Hover effect */
+.request-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Card header (icon) */
+.request-card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    font-size: 28px;
+    width: 45px;
+    height: 45px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.request-card-header i {
+    color: white;
+}
+
+/* Card body (text) */
+.request-card-body h3 {
+    margin: 0;
+    font-size: 15px;
+    color: #8B0000;
+    font-weight: 600;
+}
+
+.request-card-body p {
+    font-size: 12px;
+    color: #333;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .section-card {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns, 3 rows */
+        gap: 12px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .section-card {
+        grid-template-columns: repeat(1, 1fr); /* Stack cards in 1 column */
+        gap: 10px;
+        padding: 10px;
+    }
+}
+      </style>  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+     
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+<!-- User Guide -->
+<section id="user-guide" >
+    <div class="card">
+        <h2>User Guide</h2>
+        <p>Download the Blood Bank User Guide for detailed system instructions.</p>
+        
+        <a href="https://cdn.glitch.global/4c98e77d-b77f-40ca-a254-2dafe787f759/PAMOJA%20DOKITA%20%E2%80%93BLOOD%20BANK%20USER%20GUIDE.pptx?v=1741426301041" 
+           download="PAMOJA_DOKITA_BLOOD_BANK_USER_GUIDE.pptx" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            📥 Download User Guide
+        </a>
+    </div>
+</section>
+
+<!-- Volunteer & Training Section -->
+<section id="volunteer-training" >
+    <div class="card">
+        <h2>Volunteer & Training</h2>
+        <p>Find out how you can volunteer or train to become a certified donor assistant.</p>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" >
+    <div class="card">
+        <h2>Donor & Recipient Testimonials</h2>
+        <p>Read stories from people whose lives have been impacted by blood donations.</p>
+    </div>
+</section>
+
+<!-- FAQs Section -->
+<section id="faqs" >
+    <div class="card">
+        <h2>FAQs</h2>
+        <p>Find answers to common questions about blood donation and the process.</p>
+    </div>
+</section>
+
+      
+      
+    <!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="contact-us">
+            <h2>Contact Us</h2>
+            <p>Need help? Reach out to our team for assistance.</p>
+            <div class="social-links">
+                <a href="mailto:support@pamojadokita.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://facebook.com/pamojadokita" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://x.com/pamojadokita" target="_blank"><i class="fab fa-x-twitter"></i> X</a>
+                <a href="https://linkedin.com/company/pamojadokita" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://instagram.com/pamojadokita" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://youtube.com/@pamojadokita" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                <a href="https://whatsapp.com/send?phone=1234567890" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+        <p>&copy; 2025 Charles Drew - Pamoja Dokita®. All rights reserved.</p>
+    </div>
+</footer>
+
+      
+
+      
+      
+      
+      
+    
+      
+      
+      
+      
+  </main>
+  </body>
+</html>
+      
+      
+      
+
+      
+      
+      
+      
+      
+  
+
+
+
+
+
+
+
+      
+      
+      
+
+
+
+
+

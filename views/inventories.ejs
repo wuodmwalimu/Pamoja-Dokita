@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Inventory</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1 id="welcomeMessage">
+    <span id="welcomeText"></span>
+</h1>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Check if a user is logged in using localStorage
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (user) {
+            // Display a friendly, conversational message
+            document.getElementById('welcomeText').innerHTML = `Welcome, ${user.role} <strong>${user.email}</strong>! You're now part of the <strong>${user.hospital}</strong> branch in the <strong>${user.region}</strong> region of Pamoja Dokita® @ 2025.`;
+
+            // Show the dashboard link and hide the role selection dialog
+            document.getElementById('dashboardLink').style.display = 'inline';
+            document.getElementById('roleDialog').style.display = 'none';
+        } else {
+            // Display a default welcome message if no user is logged in
+            document.getElementById('welcomeText').innerText = 'Welcome to Pamoja Dokita® @ 2025!';
+        }
+    });
+</script>
+
+    <div class="container">
+        <h1>Blood Inventory Management</h1>
+
+        <!-- Cashier Cleared Section -->
+        <section class="section">
+            <h2>Cashier Cleared Requests</h2>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Recipient</th>
+                        <th>Blood Type</th>
+                        <th>Units</th>
+                        <th>Hospital</th>
+                        <th>Doctor</th>
+                        <th>Cashier</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% cashierCleared.forEach(request => { %>
+                        <tr>
+                            <td><%= request.recipientName %></td>
+                            <td><%= request.bloodType %></td>
+                            <td><%= request.units %></td>
+                            <td><%= request.hospital %></td>
+                            <td><%= request.doctor %></td>
+                            <td><%= request.cashierName %></td>
+                            <td>
+                                <button class="release-btn" data-request='<%= JSON.stringify(request) %>'>Release</button>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </section>
+    </div>
+      <div class="released-donations-section">
+    <h2>Released Donations</h2>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Donation ID</th>
+                <th>Donation Type</th>
+                <th>Blood Type</th>
+                <th>Donation Date</th>
+                <th>Recipient</th>
+                <th>Units</th>
+                <th>Hospital</th>
+                <th>Doctor</th>
+                <th>Approved Date</th>
+                <th>Cashier</th>
+                <th>Additional Notes</th>
+                <th>Released By</th>
+                <th>Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% releasedDonations.forEach(record => { %>
+                <tr>
+                    <td><%= record.id %></td>
+                    <td><%= record.donationID %></td>
+                    <td><%= record.donationType %></td>
+                    <td><%= record.bloodType %></td>
+                    <td><%= record.donationDate %></td>
+                    <td><%= record.recipientName %></td>
+                    <td><%= record.units %></td>
+                    <td><%= record.hospital %></td>
+                    <td><%= record.doctor %></td>
+                    <td><%= record.approvedDate %></td>
+                    <td><%= record.cashierName %></td>
+                    <td><%= record.additionalNotes %></td>
+                    <td><%= record.releasedBy %></td>
+                    <td><%= record.releaseDate %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+    
+        
+        <!-- Release Modal -->
+<div id="releaseModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Release Donation</h2>
+        <form id="releaseForm">
+            <label for="recipientName">Recipient:</label>
+            <input type="text" id="recipientName" name="recipientName" readonly>
+
+            <label for="units">Units:</label>
+            <input type="text" id="units" name="units" readonly>
+
+            <label for="hospital">Hospital:</label>
+            <input type="text" id="hospital" name="hospital" readonly>
+
+            <label for="doctor">Doctor:</label>
+            <input type="text" id="doctor" name="doctor" readonly>
+
+            <label for="bloodType">Blood Type:</label>
+            <input type="text" id="bloodType" name="bloodType" readonly>
+
+            <label for="cashierName">Cashier Name:</label>
+            <input type="text" id="cashierName" name="cashierName" readonly>
+
+            <label for="approvedDate">Approved Date:</label>
+            <input type="text" id="approvedDate" name="approvedDate" readonly>
+
+            <label for="approvedBy">Approved By:</label>
+            <input type="text" id="approvedBy" name="approvedBy" readonly>
+
+            <label for="additionalNotes">Additional Notes:</label>
+            <textarea id="additionalNotes" name="additionalNotes"></textarea>
+
+            <label for="releaseDate">Release Date:</label>
+            <input type="text" id="releaseDate" name="releaseDate" readonly>
+
+            <label for="trial5Select">Select a Donation (trial5):</label>
+            <select id="trial5Select" name="donationID">
+                <option value="">Select a record</option>
+                <% trial5Data.forEach(record => { %>
+                    <option value="<%= record.donationID %>" 
+                        data-type="<%= record.donationType %>" 
+                        data-blood="<%= record.bloodType %>" 
+                        data-date="<%= record.donationDate %>">
+                        <%= record.donationID %> - <%= record.donationType %> (<%= record.bloodType %>)
+                    </option>
+                <% }); %>
+            </select>
+
+            <label for="donationType">Donation Type:</label>
+            <input type="text" id="donationType" name="donationType" readonly>
+
+            <label for="donationDate">Donation Date:</label>
+            <input type="text" id="donationDate" name="donationDate" readonly>
+
+            <button type="submit">Confirm Release</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        let selectedRequest = {};
+        
+        $(".release-btn").click(function() {
+            selectedRequest = JSON.parse($(this).attr("data-request"));
+
+            // Prefill fields, marking missing values as "N/A"
+            $("#recipientName").val(selectedRequest.recipientName || "N/A");
+            $("#units").val(selectedRequest.units || "N/A");
+            $("#hospital").val(selectedRequest.hospital || "N/A");
+            $("#doctor").val(selectedRequest.doctor || "N/A");
+            $("#bloodType").val(selectedRequest.bloodType || "N/A");
+            $("#cashierName").val(selectedRequest.cashierName || "N/A");
+
+            // Set current date and time for approvedDate and releaseDate
+            let currentDate = new Date().toLocaleString();
+            $("#approvedDate").val(currentDate);
+            $("#releaseDate").val(currentDate);
+
+            // Fetch user from localStorage
+            let user = JSON.parse(localStorage.getItem('user'));
+
+            if (user && user.email) {
+                let emailParts = user.email.split("@")[0].split(".");
+                let releasedBy = emailParts.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(" ");
+                $("#approvedBy").val(releasedBy);
+            } else {
+                $("#approvedBy").val("N/A");
+            }
+
+            $("#releaseModal").show();
+        });
+
+        $(".close").click(function() {
+            $("#releaseModal").hide();
+        });
+
+        $("#trial5Select").change(function() {
+            let selectedOption = $(this).find("option:selected");
+            if (selectedOption.val()) {
+                $("#donationType").val(selectedOption.data("type") || "N/A");
+                $("#donationDate").val(selectedOption.data("date") || "N/A");
+
+                if (!$("#bloodType").val() || $("#bloodType").val() === "N/A") {
+                    $("#bloodType").val(selectedOption.data("blood") || "N/A");
+                }
+            }
+        });
+
+        $("#releaseForm").submit(function(e) {
+            e.preventDefault();
+
+            let releaseData = {
+                donationID: $("#trial5Select").val() || "N/A",
+                donationType: $("#donationType").val() || "N/A",
+                bloodType: $("#bloodType").val() || "N/A",
+                donationDate: $("#donationDate").val() || "N/A",
+                recipientName: $("#recipientName").val() || "N/A",
+                units: $("#units").val() || "N/A",
+                hospital: $("#hospital").val() || "N/A",
+                doctor: $("#doctor").val() || "N/A",
+                cashierName: $("#cashierName").val() || "N/A",
+                approvedDate: $("#approvedDate").val(),
+                approvedBy: $("#approvedBy").val(),
+                additionalNotes: $("#additionalNotes").val(),
+                releaseDate: $("#releaseDate").val()
+            };
+
+            $.post('/release-donation', releaseData, function(response) {
+                alert("Donation successfully released!");
+                location.reload();
+            }).fail(function(xhr) {
+                alert("Error: " + xhr.responseText);
+            });
+        });
+    });
+              </script>
+        
+        

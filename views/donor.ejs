@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Management - Charles Drew Pamoja Dokita® 2025</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #004466;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #005580;
+    transition: background 0.3s;
+}
+
+nav a:hover {
+    background-color: #0077b3;
+}
+
+/* Form Card */
+.form-section {
+    max-width: 800px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #004466;
+    text-align: center;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 50px;
+}
+
+/* Button Styling */
+.btn {
+    display: block;
+    width: 100%;
+    background-color: #004466;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 20px;
+}
+
+.btn:hover {
+    background-color: #0077b3;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+  
+  </style>
+  
+</head>
+<body>
+
+<header>
+    <h1><i class="fas fa-hand-holding-medical"></i> Charles Drew - Pamoja Dokita® 2025 Donor Management</h1>
+    <p>Ensuring safe and efficient blood management for better patient care.</p>
+    <nav>
+        <a href="main"><i class="fas fa-home"></i> Main Page</a>
+        <a href="/donor"><i class="fas fa-user-plus"></i> Add Donor</a>
+        <a href="/donations"><i class="fas fa-tint"></i> Manage Donations</a>
+        <a href="/reports"><i class="fas fa-chart-line"></i> Reports</a>
+        <a href="/settings"><i class="fas fa-cogs"></i> Settings</a>
+    </nav>
+</header>
+
+<main>
+    <!-- Donor Form Section -->
+    <section class="form-section card">
+        <h2><i class="fas fa-user-edit"></i> Add New Donor</h2>
+        <p>Fill in the donor details below. Accurate information helps us streamline the donation process and ensure safer blood management.</p>
+        
+        <form action="/add-donor" method="POST">
+            <div class="form-grid">
+                <!-- Personal Information -->
+                <div class="form-group">
+                    <label for="lastName"><i class="fas fa-user"></i> Last Name</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Enter Last Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="firstName"><i class="fas fa-user"></i> First Name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter First Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="telephone"><i class="fas fa-phone"></i> Telephone Number</label>
+                    <input type="tel" id="telephone" name="telephone" placeholder="Enter Telephone Number" required>
+                </div>
+                
+              
+              
+              
+              
+              
+              
+              <div class="form-group">
+    <label for="dob"><i class="fas fa-calendar-alt"></i> Date of Birth</label>
+    <input type="date" id="dob" name="dob" required onchange="calculateAge()">
+</div>
+<div class="form-group">
+    <label for="age"><i class="fas fa-calendar-alt"></i> Age</label>
+    <input type="number" id="age" name="age" readonly>
+</div>
+
+<script>
+function calculateAge() {
+    const dobInput = document.getElementById('dob').value;
+    const ageInput = document.getElementById('age');
+    
+    if (dobInput) {
+        const dob = new Date(dobInput);
+        const today = new Date();
+        
+        let age = today.getFullYear() - dob.getFullYear();
+        const monthDiff = today.getMonth() - dob.getMonth();
+        
+        // Adjust age if the birthday hasn't occurred yet this year
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        
+        ageInput.value = age;
+    }
+}
+              </script>
+              
+              
+              
+              
+              
+              
+              
+              
+              <div class="form-group">
+    <label for="residence"><i class="fas fa-home"></i> Residence/Quartier</label>
+    <select id="residence" name="residence" required>
+        <option value="" disabled selected>Select Residence</option>
+        <option value="HGOPY">HGOPY</option>
+        <option value="HCY">HCY</option>
+        <option value="HGY">HGY</option>
+        <option value="CHRACERH">CHRACERH</option>
+        <option value="Hop Caisse">Hop Caisse</option>
+        <option value="Hop Biyem Assi">Hop Biyem Assi</option>
+        <option value="LAQUINTINIE">LAQUINTINIE</option>
+        <option value="Hop Gem Douala">Hop Gem Douala</option>
+        <option value="HGOPED">HGOPED</option>
+        <option value="Notre Dame">Notre Dame</option>
+        <option value="Kenya">Kenya</option>
+        <option value="Nairobi">Nairobi</option>
+        <option value="Nairobi Hospital">Nairobi Hospital</option>
+        <option value="City Hospital">City Hospital</option>
+        <option value="Royal Hospital">Royal Hospital</option>
+        <option value="General Hospital">General Hospital</option>
+        <option value="Mombasa">Mombasa</option>
+        <option value="Mombasa Hospital">Mombasa Hospital</option>
+        <option value="Coast Hospital">Coast Hospital</option>
+        <option value="Beachside Hospital">Beachside Hospital</option>
+        <option value="Seaside Hospital">Seaside Hospital</option>
+        <option value="Kisumu">Kisumu</option>
+        <option value="Kisumu Hospital">Kisumu Hospital</option>
+        <option value="Lakeview Hospital">Lakeview Hospital</option>
+        <option value="Western Hospital">Western Hospital</option>
+        <option value="Sunrise Hospital">Sunrise Hospital</option>
+        <option value="Nakuru">Nakuru</option>
+        <option value="Nakuru Hospital">Nakuru Hospital</option>
+        <option value="Rift Valley Hospital">Rift Valley Hospital</option>
+        <option value="Central Hospital">Central Hospital</option>
+        <option value="Premier Hospital">Premier Hospital</option>
+    </select>
+</div>
+
+              
+              
+              
+                <div class="form-group">
+                    <label for="donorType"><i class="fas fa-tint"></i> Type of Donor</label>
+                    <select id="donorType" name="donorType" required>
+                        <option value="voluntary">Voluntary</option>
+                        <option value="replacement">Replacement</option>
+                    </select>
+                </div>
+
+                <!-- Medical History -->
+                <div class="form-group">
+                    <label><i class="fas fa-heartbeat"></i> Do you have any significant medical problems?</label>
+                    <label><input type="radio" name="medicalProblems" value="yes" required> Yes</label>
+                    <label><input type="radio" name="medicalProblems" value="no"> No</label>
+                    <textarea id="medicalProblemsSpecify" name="medicalProblemsSpecify" placeholder="Specify medical problems"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-female"></i> If female: Could you be pregnant?</label>
+                    <label><input type="radio" name="pregnant" value="yes" required> Yes</label>
+                    <label><input type="radio" name="pregnant" value="no"> No</label>
+                    <textarea id="pregnancySpecify" name="pregnancySpecify" placeholder="Provide pregnancy details"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-dna"></i> Have you ever been treated for Cancer?</label>
+                    <label><input type="radio" name="cancerTreatment" value="yes" required> Yes</label>
+                    <label><input type="radio" name="cancerTreatment" value="no"> No</label>
+                    <textarea id="cancerTreatmentSpecify" name="cancerTreatmentSpecify" placeholder="Specify cancer treatment details"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-allergies"></i> Do you have any known allergies?</label>
+                    <label><input type="radio" name="allergies" value="yes" required> Yes</label>
+                    <label><input type="radio" name="allergies" value="no"> No</label>
+                    <textarea id="allergiesSpecify" name="allergiesSpecify" placeholder="Specify allergies"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-wheelchair"></i> Do you have any chronic conditions?</label>
+                    <label><input type="radio" name="chronicConditions" value="yes" required> Yes</label>
+                    <label><input type="radio" name="chronicConditions" value="no"> No</label>
+                    <textarea id="chronicConditionsSpecify" name="chronicConditionsSpecify" placeholder="Specify chronic conditions"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-procedures"></i> Have you had any recent surgeries?</label>
+                    <label><input type="radio" name="surgeries" value="yes" required> Yes</label>
+                    <label><input type="radio" name="surgeries" value="no"> No</label>
+                    <textarea id="surgeriesSpecify" name="surgeriesSpecify" placeholder="Specify surgery details"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-tint"></i> Have you been diagnosed with a blood disorder?</label>
+                    <label><input type="radio" name="bloodDisorder" value="yes" required> Yes</label>
+                    <label><input type="radio" name="bloodDisorder" value="no"> No</label>
+                    <textarea id="bloodDisorderSpecify" name="bloodDisorderSpecify" placeholder="Specify blood disorder details"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-pills"></i> Are you currently taking any medications?</label>
+                    <label><input type="radio" name="medications" value="yes" required> Yes</label>
+                    <label><input type="radio" name="medications" value="no"> No</label>
+                    <textarea id="medicationsSpecify" name="medicationsSpecify" placeholder="List medications"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-heart"></i> Have you ever had an organ transplant?</label>
+                    <label><input type="radio" name="organTransplant" value="yes" required> Yes</label>
+                    <label><input type="radio" name="organTransplant" value="no"> No</label>
+                    <textarea id="organTransplantSpecify" name="organTransplantSpecify" placeholder="Provide transplant details"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-baby"></i> Are you breastfeeding?</label>
+                    <label><input type="radio" name="breastfeeding" value="yes" required> Yes</label>
+                    <label><input type="radio" name="breastfeeding" value="no"> No</label>
+                    <textarea id="breastfeedingSpecify" name="breastfeedingSpecify" placeholder="Provide breastfeeding details"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-virus"></i> Do you have any sexually transmitted infections (STIs)?</label>
+                    <label><input type="radio" name="stis" value="yes" required> Yes</label>
+                    <label><input type="radio" name="stis" value="no"> No</label>
+                    <textarea id="stisSpecify" name="stisSpecify" placeholder="Provide STI details"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-virus-slash"></i> Have you ever come in contact with HIV/AIDS?</label>
+                    <label><input type="radio" name="hivContact" value="yes" required> Yes</label>
+                    <label><input type="radio" name="hivContact" value="no"> No</label>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-thermometer"></i> Are you currently unwell?</label>
+                    <label><input type="radio" name="unwell" value="yes" required> Yes</label>
+                    <label><input type="radio" name="unwell" value="no"> No</label>
+                </div>
+
+                <!-- Physical Examination -->
+                <div class="form-group">
+                    <label><i class="fas fa-thermometer-half"></i> Temperature</label>
+                    <input type="number" id="temperature" name="temperature" placeholder="Enter Temperature" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-heartbeat"></i> BP Systolic</label>
+                    <input type="text" id="bpSystolic" name="bpSystolic" placeholder="Enter BP Systolic" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-heartbeat"></i> BP Diastolic</label>
+                    <input type="text" id="bpDiastolic" name="bpDiastolic" placeholder="Enter BP Diastolic" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-heartbeat"></i> Pulse</label>
+                    <input type="number" id="pulse" name="pulse" placeholder="Enter Pulse" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lungs"></i> Respiration Rate</label>
+                    <input type="number" id="respirationRate" name="respirationRate" placeholder="Enter Respiration Rate" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-heart"></i> Heart Examination</label>
+                    <select id="heartExamination" name="heartExamination" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lungs"></i> Lung Examination</label>
+                    <select id="lungExamination" name="lungExamination" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-stethoscope"></i> Overall Impression</label>
+                    <select id="overallImpression" name="overallImpression" required>
+                        <option value="fit">Fit</option>
+                        <option value="unfit">Unfit</option>
+                    </select>
+                </div>
+
+                <!-- Consent and Submission -->
+                <div class="form-group">
+                    <label><i class="fas fa-check-circle"></i> Consent for Blood Donation</label>
+                    <label><input type="radio" name="consent" value="yes" required> Yes</label>
+                    <label><input type="radio" name="consent" value="no"> No</label>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-check-double"></i> Confirm Information Accuracy</label>
+                    <label><input type="radio" name="infoAccuracy" value="yes" required> Yes</label>
+                    <label><input type="radio" name="infoAccuracy" value="no"> No</label>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-signature"></i> Signature of Donor</label>
+                    <input type="text" id="signature" name="signature" placeholder="Enter Signature" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-check"></i> Date of Submission</label>
+                    <input type="date" id="submissionDate" name="submissionDate" required>
+                </div>
+            </div>
+
+            <!-- Save Button -->
+            <button type="submit" class="btn"><i class="fas fa-save"></i> Save Donor</button>
+        </form>
+    </section>
+
+    <!-- Donation Tables Section 
+    <section class="tables-section">
+        <div class="grid-container">
+          
+            <div class="table-card">
+                <h2><i class="fas fa-hourglass-half"></i> Pending Donations</h2>
+                <p>Review donors waiting to start the donation process.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Telephone</th>
+                            <th>DOB</th>
+                            <th>Age</th>
+                            <th>Residence</th>
+                            <th>Donor Type</th>
+                            <th>Medical Problems</th>
+                            <th>Pregnant</th>
+                            <th>Cancer Treatment</th>
+                            <th>Allergies</th>
+                            <th>Chronic Conditions</th>
+                            <th>Surgeries</th>
+                            <th>Blood Disorder</th>
+                            <th>Medications</th>
+                            <th>Organ Transplant</th>
+                            <th>Breastfeeding</th>
+                            <th>STIs</th>
+                            <th>HIV Contact</th>
+                            <th>Unwell</th>
+                            <th>Temperature</th>
+                            <th>BP Systolic</th>
+                            <th>BP Diastolic</th>
+                            <th>Pulse</th>
+                            <th>Respiration Rate</th>
+                            <th>Heart Examination</th>
+                            <th>Lung Examination</th>
+                            <th>Overall Impression</th>
+                            <th>Consent</th>
+                            <th>Info Accuracy</th>
+                            <th>Signature</th>
+                            <th>Submission Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% pendingDonations.forEach((donation) => { %>
+                            <tr>
+                                <td><%= donation.id %></td>
+                                <td><%= donation.lastName %></td>
+                                <td><%= donation.firstName %></td>
+                                <td><%= donation.telephone %></td>
+                                <td><%= donation.dob %></td>
+                                <td><%= donation.age %></td>
+                                <td><%= donation.residence %></td>
+                                <td><%= donation.donorType %></td>
+                                <td><%= donation.medicalProblems %></td>
+                                <td><%= donation.pregnant %></td>
+                                <td><%= donation.cancerTreatment %></td>
+                                <td><%= donation.allergies %></td>
+                                <td><%= donation.chronicConditions %></td>
+                                <td><%= donation.surgeries %></td>
+                                <td><%= donation.bloodDisorder %></td>
+                                <td><%= donation.medications %></td>
+                                <td><%= donation.organTransplant %></td>
+                                <td><%= donation.breastfeeding %></td>
+                                <td><%= donation.stis %></td>
+                                <td><%= donation.hivContact %></td>
+                                <td><%= donation.unwell %></td>
+                                <td><%= donation.temperature %></td>
+                                <td><%= donation.bpSystolic %></td>
+                                <td><%= donation.bpDiastolic %></td>
+                                <td><%= donation.pulse %></td>
+                                <td><%= donation.respirationRate %></td>
+                                <td><%= donation.heartExamination %></td>
+                                <td><%= donation.lungExamination %></td>
+                                <td><%= donation.overallImpression %></td>
+                                <td><%= donation.consent %></td>
+                                <td><%= donation.infoAccuracy %></td>
+                                <td><%= donation.signature %></td>
+                                <td><%= donation.submissionDate %></td>
+                                <td>
+                                    <form action="/process-donation" method="POST">
+                                        <input type="hidden" name="id" value="<%= donation.id %>">
+                                        <button type="submit" class="btn btn-process">
+                                            <i class="fas fa-play-circle"></i> Start Processing
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div> 
+-->
+
+            <!-- Donations in Processing 
+            <div class="table-card">
+                <h2><i class="fas fa-spinner"></i> Donations In Processing</h2>
+                <p>Track donations currently being processed in the lab.</p>
+                <table>
+                                      <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Telephone</th>
+                            <th>DOB</th>
+                            <th>Age</th>
+                            <th>Residence</th>
+                            <th>Donor Type</th>
+                            <th>Medical Problems</th>
+                            <th>Pregnant</th>
+                            <th>Cancer Treatment</th>
+                            <th>Allergies</th>
+                            <th>Chronic Conditions</th>
+                            <th>Surgeries</th>
+                            <th>Blood Disorder</th>
+                            <th>Medications</th>
+                            <th>Organ Transplant</th>
+                            <th>Breastfeeding</th>
+                            <th>STIs</th>
+                            <th>HIV Contact</th>
+                            <th>Unwell</th>
+                            <th>Temperature</th>
+                            <th>BP Systolic</th>
+                            <th>BP Diastolic</th>
+                            <th>Pulse</th>
+                            <th>Respiration Rate</th>
+                            <th>Heart Examination</th>
+                            <th>Lung Examination</th>
+                            <th>Overall Impression</th>
+                            <th>Consent</th>
+                            <th>Info Accuracy</th>
+                            <th>Signature</th>
+                            <th>Submission Date</th>
+                            <th>Start Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% inProcessing.forEach((process) => { %>
+                            <tr>
+                                <td><%= process.id %></td>
+                                <td><%= process.lastName %></td>
+                                <td><%= process.firstName %></td>
+                                <td><%= process.telephone %></td>
+                                <td><%= process.dob %></td>
+                                <td><%= process.age %></td>
+                                <td><%= process.residence %></td>
+                                <td><%= process.donorType %></td>
+                                <td><%= process.medicalProblems %></td>
+                                <td><%= process.pregnant %></td>
+                                <td><%= process.cancerTreatment %></td>
+                                <td><%= process.allergies %></td>
+                                <td><%= process.chronicConditions %></td>
+                                <td><%= process.surgeries %></td>
+                                <td><%= process.bloodDisorder %></td>
+                                <td><%= process.medications %></td>
+                                <td><%= process.organTransplant %></td>
+                                <td><%= process.breastfeeding %></td>
+                                <td><%= process.stis %></td>
+                                <td><%= process.hivContact %></td>
+                                <td><%= process.unwell %></td>
+                                <td><%= process.temperature %></td>
+                                <td><%= process.bpSystolic %></td>
+                                <td><%= process.bpDiastolic %></td>
+                                <td><%= process.pulse %></td>
+                                <td><%= process.respirationRate %></td>
+                                <td><%= process.heartExamination %></td>
+                                <td><%= process.lungExamination %></td>
+                                <td><%= process.overallImpression %></td>
+                                <td><%= process.consent %></td>
+                                <td><%= process.infoAccuracy %></td>
+                                <td><%= process.signature %></td>
+                                <td><%= process.submissionDate %></td>
+                                <td><%= process.startTime %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>-->
+</main>
+
+<footer>
+    <p>© 2025 Charles Drew - Pamoja Dokita® | Empowering Healthcare Through Innovation</p>
+</footer>
+
+</body>
+  </html>

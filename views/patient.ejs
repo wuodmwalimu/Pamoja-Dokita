@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Records</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 95%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            background: #333;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu a i {
+            margin-right: 8px;
+        }
+
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        tr:hover {
+            background: #f1f1f1;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .pagination button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .pagination button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: #333;
+            color: white;
+            margin-top: 20px;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Menu -->
+        <nav class="menu">
+            <a href="main"><i class="fas fa-home"></i> Main Dashbaord</a>
+            <a href="/add-patient"><i class="fas fa-user-plus"></i> Add Patient</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+
+        <h2>🩸 Patient Records</h2>
+
+        <!-- Table Container for Scrollable Effect -->
+        <div class="table-container">
+            <table id="patientTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Telephone</th>
+                        <th>DOB</th>
+                        <th>Age</th>
+                        <th>Residence</th>
+                        <th>Donor Type</th>
+                        <th>Medical Problems</th>
+                        <th>Pregnant</th>
+                        <th>Blood Disorder</th>
+                        <th>Allergies</th>
+                        <th>Chronic Conditions</th>
+                        <th>Surgeries</th>
+                        <th>Medications</th>
+                        <th>STIs</th>
+                        <th>HIV Contact</th>
+                        <th>Unwell</th>
+                        <th>Temperature</th>
+                        <th>BP Systolic</th>
+                        <th>BP Diastolic</th>
+                        <th>Pulse</th>
+                        <th>Respiration Rate</th>
+                        <th>Heart Exam</th>
+                        <th>Lung Exam</th>
+                        <th>Overall Impression</th>
+                        <th>Consent</th>
+                        <th>Submission Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (patients && patients.length > 0) { %>
+                        <% patients.forEach((patient) => { %>
+                            <tr>
+                                <td><%= patient.id %></td>
+                                <td><%= patient.firstName || "N/A" %></td>
+                                <td><%= patient.lastName || "N/A" %></td>
+                                <td><%= patient.telephone || "N/A" %></td>
+                                <td><%= patient.dob || "N/A" %></td>
+                                <td><%= patient.age || "N/A" %></td>
+                                <td><%= patient.residence || "N/A" %></td>
+                                <td><%= patient.donorType || "N/A" %></td>
+                                <td><%= patient.medicalProblems || "N/A" %></td>
+                                <td><%= patient.pregnant || "N/A" %></td>
+                                <td><%= patient.bloodDisorder || "N/A" %></td>
+                                <td><%= patient.allergies || "N/A" %></td>
+                                <td><%= patient.chronicConditions || "N/A" %></td>
+                                <td><%= patient.surgeries || "N/A" %></td>
+                                <td><%= patient.medications || "N/A" %></td>
+                                <td><%= patient.stis || "N/A" %></td>
+                                <td><%= patient.hivContact || "N/A" %></td>
+                                <td><%= patient.unwell || "N/A" %></td>
+                                <td><%= patient.temperature || "N/A" %></td>
+                                <td><%= patient.bpSystolic || "N/A" %></td>
+                                <td><%= patient.bpDiastolic || "N/A" %></td>
+                                <td><%= patient.pulse || "N/A" %></td>
+                                <td><%= patient.respirationRate || "N/A" %></td>
+                                <td><%= patient.heartExamination || "N/A" %></td>
+                                <td><%= patient.lungExamination || "N/A" %></td>
+                                <td><%= patient.overallImpression || "N/A" %></td>
+                                <td><%= patient.consent || "N/A" %></td>
+                                <td><%= patient.submissionDate || "N/A" %></td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr><td colspan="28" style="text-align:center;">No patient records found.</td></tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination">
+            <button id="prevPage" disabled>⬅️ Previous</button>
+            <span id="pageIndicator">Page 1</span>
+            <button id="nextPage">Next ➡️</button>
+                          </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; <%= new Date().getFullYear() %> Pamoja Dokita. All Rights Reserved.
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const rowsPerPage = 10;
+            let currentPage = 0;
+            const tableBody = document.querySelector("#patientTable tbody");
+            const rows = Array.from(tableBody.getElementsByTagName("tr"));
+            const prevButton = document.getElementById("prevPage");
+            const nextButton = document.getElementById("nextPage");
+            const pageIndicator = document.getElementById("pageIndicator");
+
+            function updatePagination() {
+                const totalPages = Math.ceil(rows.length / rowsPerPage);
+                prevButton.disabled = currentPage === 0;
+                nextButton.disabled = currentPage >= totalPages - 1;
+                pageIndicator.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+                
+                // Hide pagination if no records
+                document.querySelector(".pagination").style.display = rows.length > 0 ? "flex" : "none";
+            }
+
+            function showPage(page) {
+                rows.forEach((row, index) => {
+                    row.style.display = index >= page * rowsPerPage && index < (page + 1) * rowsPerPage ? "" : "none";
+                });
+                updatePagination();
+            }
+
+            prevButton.addEventListener("click", () => {
+                if (currentPage > 0) {
+                    currentPage--;
+                    showPage(currentPage);
+                }
+            });
+
+            nextButton.addEventListener("click", () => {
+                if (currentPage < Math.ceil(rows.length / rowsPerPage) - 1) {
+                    currentPage++;
+                    showPage(currentPage);
+                }
+            });
+
+            showPage(currentPage);
+        });
+    </script>
+
+    <style>
+        /* Basic Styling for Table */
+        .table-container {
+            overflow-x: auto;
+            max-height: 500px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .pagination button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #f4f4f4;
+        }
+    </style>
+
+</body>
+
+
+</html>

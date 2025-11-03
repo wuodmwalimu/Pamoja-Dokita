@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Blood Requests - Pamoja Dokita® 2025</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+
+  
+
+  
+  /* styles.css */
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f7f7f7;
+    color: #333;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 20px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    gap: 10px;
+}
+
+.header h1 {
+    color: #d9534f;
+    font-size: 28px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-dashboard {
+    background: #5bc0de;
+    color: #fff;
+}
+
+.btn-logout {
+    background: #d9534f;
+    color: #fff;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    max-width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    max-height: 70vh; /* Limit height with vertical scrolling */
+}
+
+/* Table Styling */
+.request-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    min-width: 1000px; /* Minimum width for horizontal scroll */
+}
+
+.request-table th,
+.request-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.request-table th {
+    background: #d9534f;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.request-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.request-table tr:hover {
+    background: #f1f1f1;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.pagination button {
+    padding: 10px 15px;
+    border: 1px solid #d9534f;
+    border-radius: 5px;
+    background: #d9534f;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pagination button.disabled {
+    background: #e0e0e0;
+    color: #666;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+}
+
+.pagination button:hover:not(.disabled) {
+    background: #c9302c;
+}
+
+/* Footer */
+.footer {
+    margin-top: 20px;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 2px solid #e0e0e0;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .table-wrapper {
+        max-height: 60vh;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  </head>
+<body>
+  <nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/records">💰 Records</a></li>
+        </ul>
+    </nav>
+  
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-top">
+                <h1><i class="fa fa-tint"></i> Recent Blood Requests</h1>
+                <div class="header-buttons">
+                    <a href="/main" class="btn btn-dashboard">
+                        <i class="fa fa-home"></i> Dashboard
+                    </a>
+                    <form action="/logout" method="POST" class="logout-form">
+                        <button type="submit" class="btn btn-logout">
+                            <i class="fa fa-sign-out-alt"></i> Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="grid-container">
+            <div class="grid-item full-width">
+                <h2><i class="fa fa-list"></i> Blood Request Records</h2>
+
+                <!-- Requests Table -->
+                <div class="table-container">
+                    <table class="request-table" id="bloodRequestsTable">
+                        <thead>
+                            <tr>
+                                <th><i class="fa fa-user"></i> Recipient</th>
+                                <th><i class="fa fa-tint"></i> Blood Type</th>
+                                <th><i class="fa fa-calendar-day"></i> Request Date</th>
+                                <th><i class="fa fa-user-md"></i> Doctor</th>
+                                <th><i class="fa fa-hospital"></i> Hospital</th>
+                                <th><i class="fa fa-location-dot"></i> Location</th>
+                                <th><i class="fa fa-box"></i> Units Needed</th>
+                                <th><i class="fa fa-fire"></i> Urgency</th>
+                                <th><i class="fa fa-phone"></i> Contact</th>
+                                <th><i class="fa fa-sticky-note"></i> Denial Reason</th>
+                                <th><i class="fa fa-clock"></i> Submitted On</th>
+                                <th><i class="fa fa-user-edit"></i> Submitted By</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <% if (requests.length > 0) { %>
+                                <% requests.forEach(request => { %>
+                                    <tr>
+                                        <td><%= request.recipientName %></td>
+                                        <td><span class="badge"><%= request.bloodType %></span></td>
+                                        <td><%= new Date(request.requestDate).toLocaleDateString() %></td>
+                                        <td><%= request.doctor %></td>
+                                        <td><%= request.hospital %></td>
+                                        <td><%= request.location %></td>
+                                        <td><%= request.units %></td>
+                                        <td><span class="urgency"><%= request.urgency %></span></td>
+                                        <td><%= request.contactHospital %></td>
+                                        <td><%= request.reason || 'N/A' %></td>
+                                        <td><%= new Date(request.timestamp).toLocaleString() %></td>
+                                        <td><%= request.submittedBy %></td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="12" class="no-data">
+                                        <i class="fa fa-exclamation-circle"></i> No blood requests found.
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination Controls -->
+                <div class="pagination">
+                    <button onclick="prevPage()" id="btnPrev" class="btn btn-pagination">
+                        <i class="fa fa-chevron-left"></i> Previous
+                    </button>
+                    <span id="pageNumber"></span>
+                    <button onclick="nextPage()" id="btnNext" class="btn btn-pagination">
+                        Next <i class="fa fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <p>&copy; 2025 Pamoja Dokita® Blood Bank System</p>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript for pagination
+        let currentPage = 1;
+        const recordsPerPage = 15;
+
+        function showPage(page) {
+            const table = document.getElementById("bloodRequestsTable").getElementsByTagName("tbody")[0];
+            const rows = table.getElementsByTagName("tr");
+            const totalRows = rows.length;
+
+            const start = (page - 1) * recordsPerPage;
+            const end = start + recordsPerPage;
+
+            for (let i = 0; i < totalRows; i++) {
+                rows[i].style.display = i >= start && i < end ? "" : "none";
+            }
+
+            document.getElementById("pageNumber").innerText = `Page ${page} of ${Math.ceil(totalRows / recordsPerPage)}`;
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+
+        function nextPage() {
+            const table = document.getElementById("bloodRequestsTable").getElementsByTagName("tbody")[0];
+            const rows = table.getElementsByTagName("tr");
+
+            if (currentPage * recordsPerPage < rows.length) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+
+        // Initialize the table view
+        document.addEventListener("DOMContentLoaded", () => {
+            showPage(currentPage);
+        });
+    </script>
+</body>
+              </html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Responses</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file later -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .table th, .table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .table th {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Donor Responses</h1>
+
+        <% donors.forEach(donor => { %>
+            <div class="card">
+                <h2>Donor ID: <%= donor.id %></h2>
+                <div class="grid">
+                    <!-- Personal Information -->
+                    <div>
+                        <h3>Personal Information</h3>
+                        <table class="table">
+                            <tr>
+                                <th>Field</th>
+                                <th>Value</th>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td><%= donor.lastName %></td>
+                            </tr>
+                            <tr>
+                                <td>First Name</td>
+                                <td><%= donor.firstName %></td>
+                            </tr>
+                            <tr>
+                                <td>Telephone</td>
+                                <td><%= donor.telephone %></td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td><%= donor.dob %></td>
+                            </tr>
+                            <tr>
+                                <td>Age</td>
+                                <td><%= donor.age %></td>
+                            </tr>
+                            <tr>
+                                <td>Residence</td>
+                                <td><%= donor.residence %></td>
+                            </tr>
+                            <tr>
+                                <td>Donor Type</td>
+                                <td><%= donor.donorType %></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Medical History -->
+                    <div>
+                        <h3>Medical History</h3>
+                        <table class="table">
+                            <tr>
+                                <th>Field</th>
+                                <th>Value</th>
+                            </tr>
+                            <tr>
+                                <td>Medical Problems</td>
+                                <td><%= donor.medicalProblems %></td>
+                            </tr>
+                            <tr>
+                                <td>Medical Problems Details</td>
+                                <td><%= donor.medicalProblemsSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>Pregnant</td>
+                                <td><%= donor.pregnant %></td>
+                            </tr>
+                            <tr>
+                                <td>Pregnancy Details</td>
+                                <td><%= donor.pregnancySpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>Cancer Treatment</td>
+                                <td><%= donor.cancerTreatment %></td>
+                            </tr>
+                            <tr>
+                                <td>Cancer Treatment Details</td>
+                                <td><%= donor.cancerTreatmentSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>Allergies</td>
+                                <td><%= donor.allergies %></td>
+                            </tr>
+                            <tr>
+                                <td>Allergies Details</td>
+                                <td><%= donor.allergiesSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>Chronic Conditions</td>
+                                <td><%= donor.chronicConditions %></td>
+                            </tr>
+                            <tr>
+                                <td>Chronic Conditions Details</td>
+                                <td><%= donor.chronicConditionsSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>Surgeries</td>
+                                <td><%= donor.surgeries %></td>
+                            </tr>
+                            <tr>
+                                <td>Surgeries Details</td>
+                                <td><%= donor.surgeriesSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>Blood Disorder</td>
+                                <td><%= donor.bloodDisorder %></td>
+                            </tr>
+                            <tr>
+                                <td>Blood Disorder Details</td>
+                                <td><%= donor.bloodDisorderSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>Medications</td>
+                                <td><%= donor.medications %></td>
+                            </tr>
+                            <tr>
+                                <td>Medications Details</td>
+                                <td><%= donor.medicationsSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>Organ Transplant</td>
+                                <td><%= donor.organTransplant %></td>
+                            </tr>
+                            <tr>
+                                <td>Organ Transplant Details</td>
+                                <td><%= donor.organTransplantSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>Breastfeeding</td>
+                                <td><%= donor.breastfeeding %></td>
+                            </tr>
+                            <tr>
+                                <td>Breastfeeding Details</td>
+                                <td><%= donor.breastfeedingSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>STIs</td>
+                                <td><%= donor.stis %></td>
+                            </tr>
+                            <tr>
+                                <td>STIs Details</td>
+                                <td><%= donor.stisSpecify %></td>
+                            </tr>
+                            <tr>
+                                <td>HIV Contact</td>
+                                <td><%= donor.hivContact %></td>
+                            </tr>
+                            <tr>
+                                <td>Currently Unwell</td>
+                                <td><%= donor.unwell %></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Physical Examination -->
+                <div>
+                    <h3>Physical Examination</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Temperature</td>
+                            <td><%= donor.temperature %></td>
+                        </tr>
+                        <tr>
+                            <td>BP Systolic</td>
+                            <td><%= donor.bpSystolic %></td>
+                        </tr>
+                        <tr>
+                            <td>BP Diastolic</td>
+                            <td><%= donor.bpDiastolic %></td>
+                        </tr>
+                        <tr>
+                            <td>Pulse</td>
+                            <td><%= donor.pulse %></td>
+                        </tr>
+                        <tr>
+                            <td>Respiration Rate</td>
+                            <td><%= donor.respirationRate %></td>
+                        </tr>
+                        <tr>
+                            <td>Heart Examination</td>
+                            <td><%= donor.heartExamination %></td>
+                        </tr>
+                        <tr>
+                            <td>Lung Examination</td>
+                            <td><%= donor.lungExamination %></td>
+                        </tr>
+                        <tr>
+                            <td>Overall Impression</td>
+                            <td><%= donor.overallImpression %></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Consent and Submission -->
+                <div>
+                    <h3>Consent and Submission</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Consent for Blood Donation</td>
+                            <td><%= donor.consent %></td>
+                        </tr>
+                        <tr>
+                            <td>Confirm Information Accuracy</td>
+                            <td><%= donor.infoAccuracy %></td>
+                        </tr>
+                        <tr>
+                            <td>Signature</td>
+                            <td><%= donor.signature %></td>
+                        </tr>
+                        <tr>
+                            <td>Submission Date</td>
+                            <td><%= donor.submissionDate %></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</body>
+          </html>

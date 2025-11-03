@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Management</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+       /* General reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff5f6d, #ffc371);
+    color: #333;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header styles */
+h1 {
+    color: #fff;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Info box */
+.info {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.info p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Container and card layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+thead {
+    background: #ff5f6d;
+    color: #fff;
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
+    font-size: 1em;
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Scrollable table container */
+.card table {
+    display: block;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* Button styles */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: 0.3s ease;
+}
+
+.btn-add {
+    background: #28a745;
+    color: #fff;
+}
+
+.btn-cancel {
+    background: #dc3545;
+    color: #fff;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    animation: slideDown 0.3s ease;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal h2 {
+    font-size: 1.5em;
+    color: #ff5f6d;
+}
+
+.modal label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.modal textarea,
+.modal input,
+.modal select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* Close button */
+.close {
+    font-size: 1.5em;
+    color: #ff5f6d;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translate(-50%, -60%);
+    }
+    to {
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+    .info, .container {
+        width: 100%;
+    }
+      }
+    </style>
+</head>
+<body>
+
+<h1><i class="fas fa-tint"></i> Blood Donation Management System</h1>
+
+<div class="info">
+    <p><i class="fas fa-info-circle"></i> Manage blood donations, track donor information, and handle test results efficiently.</p>
+    <p><i class="fas fa-database"></i> Below are the records for donations and their test results.</p>
+</div>
+<div class="navbar">
+    <nav>
+        <a href="/main"><i class="fas fa-home"></i> Home</a>
+        
+        <div class="dropdown">
+            <a href="#"><i class="fas fa-tint"></i> Donations <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+                <a href="/donor"><i class="fas fa-user-edit"></i> Manage Donors</a>
+                <a href="/summer"><i class="fas fa-flask"></i> View Unprocessed Donations</a>
+                <a href="/erick"><i class="fas fa-sync-alt"></i> View Donations Under Processing</a>
+                <a href="/test"><i class="fas fa-vial"></i> Confirm Donation Tests</a>
+                <a href="/questionnaire"><i class="fas fa-file-alt"></i> Donor Questionnaire</a>
+                <a href="/responses"><i class="fas fa-list"></i> Donation Responses</a>
+                <a href="/recentRequests"><i class="fas fa-history"></i> Recent Requests</a>
+                <a href="/inProcessing"><i class="fas fa-spinner"></i> In-Processing Donations</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="#"><i class="fas fa-box"></i> Inventory <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+                <a href="/inventory"><i class="fas fa-warehouse"></i> View Blood Stock</a>
+                <a href="/stock-update"><i class="fas fa-edit"></i> Update Stock</a>
+                <a href="/expiry-check"><i class="fas fa-clock"></i> Expiry Check</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="#"><i class="fas fa-procedures"></i> Transfusions <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+                <a href="/transfusion-records"><i class="fas fa-notes-medical"></i> Transfusion Records</a>
+                <a href="/request"><i class="fas fa-ambulance"></i> Request Blood</a>
+                <a href="/approved-requests"><i class="fas fa-check-circle"></i> Approved Requests</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="#"><i class="fas fa-users"></i> Users <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+                <a href="/users"><i class="fas fa-user"></i> View Users</a>
+                <a href="/add-user"><i class="fas fa-user-plus"></i> Add User</a>
+                <a href="/user-roles"><i class="fas fa-user-tag"></i> Manage Roles</a>
+            </div>
+        </div>
+
+        <a href="/reports"><i class="fas fa-chart-line"></i> Reports</a>
+        <a href="/education"><i class="fas fa-book"></i> Education & Resources</a>
+        <a href="/help"><i class="fas fa-question-circle"></i> Help & Support</a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+</div>
+
+<style>
+/* Navigation Bar Styling */
+.navbar {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    color: #fff;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+nav a:hover {
+    background: #ff4d4d;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1;
+    min-width: 200px;
+    padding: 10px 0;
+}
+
+.dropdown-content a {
+    color: #ff6b6b;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 0;
+}
+
+.dropdown-content a:hover {
+    background: #ff8e53;
+    color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+nav i {
+    margin-right: 8px;
+}
+  </style>
+
+<div class="container">
+    <!-- Trial 4 Records -->
+    <div class="card">
+        <h2><i class="fas fa-users"></i> Deidentified Donations Awaiting Lab Confirnmation </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Telephone</th>
+                    <th>DOB</th>
+                    <th>Age</th>
+                    <th>Blood Group</th>
+                    <th>Rhesus</th>
+                    <th>Volume (ml)</th>
+                    <th>Donation Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% trial4Records.forEach(record => { %>
+                    <tr>
+                        <td><%= record.id %></td>
+                        <td><%= record.firstName %> <%= record.lastName %></td>
+                        <td><%= record.telephone %></td>
+                        <td><%= record.dob %></td>
+                        <td><%= record.age %></td>
+                        <td><%= record.bloodGroup %></td>
+                        <td><%= record.rhesusFactor %></td>
+                        <td><%= record.donationVolume %></td>
+                        <td><%= record.donationDate %></td>
+                        <td>
+                            <button class="btn btn-add" onclick="openModal('<%= record.id %>', '<%= record.firstName %>', '<%= record.lastName %>')">
+                                <i class="fas fa-plus-circle"></i> Add to Trial 5
+                            </button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+<!-- Trial 5 Records -->
+<div class="card">
+    <h2><i class="fas fa-vials"></i> Processed Accepted Donations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Donation ID</th>
+                <th>Full Name</th>
+                <th>Telephone</th>
+                <th>Date of Birth</th>
+                <th>Age</th>
+                <th>Residence</th>
+                <th>Donor Type</th>
+                <th>Submission Date</th>
+                <th>Blood Group</th>
+                <th>Rhesus Factor</th>
+                <th>Donation Volume</th>
+                <th>Hemoglobin Level</th>
+                <th>Donation Type</th>
+                <th>Donation Date</th>
+                <th>HIV Test</th>
+                <th>HBsAg Test</th>
+                <th>HCV Test</th>
+                <th>Syphilis Test</th>
+                <th>Other Tests</th>
+                <th>Notes</th>
+                <th>Date Added</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% trial5Records.forEach(record => { %>
+                <tr>
+                    <td><%= record.donationID %></td>
+                    <td><%= record.firstName %> <%= record.lastName %></td>
+                    <td><%= record.telephone %></td>
+                    <td><%= record.dob %></td>
+                    <td><%= record.age %></td>
+                    <td><%= record.residence %></td>
+                    <td><%= record.donorType %></td>
+                    <td><%= record.submissionDate %></td>
+                    <td><%= record.bloodGroup %></td>
+                    <td><%= record.rhesusFactor %></td>
+                    <td><%= record.donationVolume %></td>
+                    <td><%= record.hemoglobinLevel %></td>
+                    <td><%= record.donationType %></td>
+                    <td><%= record.donationDate %></td>
+                    <td><%= record.hivTest %></td>
+                    <td><%= record.hbsAgTest %></td>
+                    <td><%= record.hcvTest %></td>
+                    <td><%= record.syphilisTest %></td>
+                    <td><%= record.otherTests %></td>
+                    <td><%= record.notes %></td>
+                    <td><%= record.dateAdded %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+              </div>
+          <!-- Modal for Adding Test Results to Trial 5 -->
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2><i class="fas fa-edit"></i> Add Test Results</h2>
+        <form id="addToTrial5Form" action="/add-to-trial5" method="POST">
+            
+            <!-- Hidden Fields -->
+            <input type="hidden" id="recordId" name="recordId">
+            <input type="hidden" id="donationId" name="donationId">
+
+            <!-- HIV Test -->
+            <label>HIV Test:</label>
+            <select id="hivTest" name="hivTest" required>
+                <option value="">Select</option>
+                <option>Negative</option>
+                <option>Positive</option>
+            </select>
+
+            <!-- Hepatitis B Test (HBsAg) -->
+            <label>HBsAg Test:</label>
+            <select id="hbsAgTest" name="hbsAgTest" required>
+                <option value="">Select</option>
+                <option>Negative</option>
+                <option>Positive</option>
+            </select>
+
+            <!-- Hepatitis C Test (HCV) -->
+            <label>HCV Test:</label>
+            <select id="hcvTest" name="hcvTest" required>
+                <option value="">Select</option>
+                <option>Negative</option>
+                <option>Positive</option>
+            </select>
+
+            <!-- Syphilis Test -->
+            <label>Syphilis Test:</label>
+            <select id="syphilisTest" name="syphilisTest" required>
+                <option value="">Select</option>
+                <option>Negative</option>
+                <option>Positive</option>
+            </select>
+
+            <!-- Other Tests/Conditions -->
+            <label>Other Tests/Conditions:</label>
+            <textarea id="otherTests" name="otherTests"></textarea>
+
+            <!-- Notes/Observations -->
+            <label>Notes/Observations:</label>
+            <textarea id="notes" name="notes"></textarea>
+
+            <!-- Submission Date (Auto-filled) -->
+            <label>Submission Date:</label>
+            <input type="date" id="submissionDate" name="submissionDate">
+
+            <!-- Save & Cancel Buttons -->
+            <button type="submit" class="btn btn-add"><i class="fas fa-save"></i> Save</button>
+            <button type="button" class="btn btn-cancel" onclick="closeModal()"><i class="fas fa-times"></i> Cancel</button>
+        </form>
+    </div>
+          </div>
+          <script>
+    function openModal(id, donationId) {
+        document.getElementById('recordId').value = id;
+        document.getElementById('donationId').value = donationId;
+        document.getElementById('submissionDate').value = new Date().toISOString().split('T')[0]; // Auto-fill current date
+        document.getElementById('addModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('addModal').style.display = 'none';
+    }
+          </script>
+    
+</body>
+  </html>

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charles Drew Blood Inventory - Pamoja Dokita® 2025</title>
+    <link rel="stylesheet" href="/styles/sop.css">
+
+  
+  
+  
+  <style>
+  
+  
+  
+  /* Resetting some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Table container styles */
+.table-container {
+    background-color: white;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #4CAF50;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 1em;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+table td {
+    background-color: #f9f9f9;
+    color: #555;
+}
+
+table tr:hover {
+    background-color: #e2f7e2;
+}
+
+table td button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+table td button:hover {
+    color: #4CAF50;
+}
+
+.view-btn i {
+    color: #2196F3;
+}
+
+.edit-btn i {
+    color: #FF9800;
+}
+
+.delete-btn i {
+    color: #F44336;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    transition: all 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h3 {
+    text-align: center;
+    font-size: 1.4em;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form select, form button {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Adaptive Styles for Mobile */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .table-container {
+        padding: 15px;
+    }
+
+    table th, table td {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
+
+/* Styling for the 'Release Donation' button */
+#releaseDonationBtn {
+    padding: 12px 25px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px auto;
+    display: block;
+}
+
+#releaseDonationBtn:hover {
+    background-color: #45a049;
+}
+
+/* Adaptive button styles */
+@media (max-width: 768px) {
+    #releaseDonationBtn {
+        width: 100%;
+    }
+}
+
+    
+    
+    
+    /* Table Container */
+.table-container {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Scrollable Table Wrapper */
+.table-wrapper {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #c0392b;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Responsive Scrolling */
+@media (max-width: 768px) {
+    .table-wrapper {
+        overflow-x: scroll;
+    }
+    }
+    
+    
+  
+  </style>
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+  
+  <body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/main">🏠 Back to Main</a></li>
+            <li><a href="/inventory">💰 Inventory</a></li>
+        </ul>
+    </nav>
+
+    <!-- Inventory Table (Trial5) -->
+    <div class="table-container">
+        <h3>Blood Unit Details (Inventory)</h3>
+        <div class="table-wrapper">
+            <table id="inventoryTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Blood Unit ID</th>
+                        <th>Blood Group & Rhesus</th>
+                        <th>Donation Date</th>
+                        <th>Donation Volume</th>
+                        <th>Donation Type</th>
+                        <th>Residence</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% trial5.forEach((item) => { %>
+                    <tr data-id="<%= item.donationID %>" data-blood-group="<%= item.bloodGroup %>">
+                        <td><%= item.donationID %></td>
+                        <td><%= item.bloodGroup %> <%= item.rhesusFactor %></td>
+                        <td><%= item.donationDate %></td>
+                        <td><%= item.donationVolume %> ml</td>
+                        <td><%= item.donationType %></td>
+                        <td><%= item.residence || 'Main Storage' %></td>
+                        <td>
+                            <button class="view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="delete-btn"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Approved Requests Table -->
+    <div class="table-container">
+        <h3>Approved Blood Requests</h3>
+        <div class="table-wrapper">
+            <table id="approvedRequestsTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Recipient Name</th>
+                        <th>Recipient Blood Type</th>
+                        <th>Units</th>
+                        <th>Hospital</th>
+                        <th>Doctor</th>
+                        <th>Approved Date</th>
+                        <th>Actions</th> <!-- Added Actions column for buttons -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <% approvedRequests.forEach((request) => { %>
+                    <tr data-id="<%= request.id %>" data-blood-type="<%= request.bloodType %>">
+                        <td><%= request.id %></td>
+                        <td><%= request.recipientName %></td>
+                        <td><%= request.bloodType %></td>
+                        <td><%= request.units %></td>
+                        <td><%= request.hospital %></td>
+                        <td><%= request.doctor %></td>
+                        <td><%= request.approvedDate %></td>
+                        <td>
+                            <!-- Added buttons here -->
+                            <button class="process-btn" data-request-id="<%= request.id %>">
+                                <i class="fas fa-check"></i> Process
+                            </button>
+                            <button class="cancel-btn" data-request-id="<%= request.id %>">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Cleared Requests Table -->
+    <div class="table-container">
+        <h3>Cleared Blood Requests</h3>
+        <div class="table-wrapper">
+            <table id="clearedRequestsTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Cleared Request ID</th>
+                        <th>Blood Unit ID</th>
+                        <th>Blood Group</th>
+                        <th>Donation Type</th>
+                        <th>Expiration Date</th>
+                        <th>Recipient Name</th>
+                        <th>Recipient Blood Type</th>
+                        <th>Hospital</th>
+                        <th>Doctor</th>
+                        <th>Approved Date</th>
+                        <th>Release Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% clearedRequests.forEach((cleared) => { %>
+                    <tr data-id="<%= cleared.id %>" data-blood-group="<%= cleared.bloodGroup %>">
+                        <td><%= cleared.id %></td>
+                        <td><%= cleared.bloodUnitID %></td>
+                        <td><%= cleared.bloodGroup %></td>
+                        <td><%= cleared.donationType %></td>
+                        <td><%= cleared.expirationDate %></td>
+                        <td><%= cleared.recipientName %></td>
+                        <td><%= cleared.recipientBloodType %></td>
+                        <td><%= cleared.hospital %></td>
+                        <td><%= cleared.doctor %></td>
+                        <td><%= cleared.approvedDate %></td>
+                        <td><%= cleared.releaseDate %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Release Donation Section -->
+    <div class="card">
+        <h2><i class="fas fa-check-double"></i> Release Donation</h2>
+        <button id="releaseDonationBtn">Release Donation</button>
+
+        <!-- Release Donation Modal -->
+        <div id="releaseModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Select Donation and Request to Release</h3>
+                <form id="releaseForm">
+                    <label><b>Donation Record:</b></label>
+                    <select name="bloodUnitID" required id="bloodUnitSelect">
+                        <% trial5.forEach(record => { %>
+                        <option value="<%= record.id %>" data-blood-group="<%= record.bloodGroup %>">
+                            <%= record.bloodGroup %> - <%= record.donationType %> (Expires: <%= record.expirationDate %>)
+                        </option>
+                        <% }); %>
+                    </select>
+
+                    <label><b>Approved Request:</b></label>
+                    <select name="approvedRequestID" required id="approvedRequestSelect">
+                        <% approvedRequests.forEach(request => { %>
+                        <option value="<%= request.id %>" data-blood-group="<%= request.bloodType %>">
+                            <%= request.recipientName %> - <%= request.bloodType %> (Hospital: <%= request.hospital %>)
+                        </option>
+                        <% }); %>
+                    </select>
+
+                    <button type="submit">Confirm Release</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Charles Drew Blood Bank - Pamoja Dokita® 2025 by Erick Odhiambo Owuor</p>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Modal functionality
+        const modal = document.getElementById("releaseModal");
+        const btn = document.getElementById("releaseDonationBtn");
+        const span = document.getElementsByClassName("close")[0];
+
+        // Open the modal
+        btn.onclick = function () {
+            modal.style.display = "block";
+        };
+
+        // Close the modal when the "X" is clicked
+        span.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        // Close the modal if the user clicks outside of the modal content
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // Form submission logic with blood group matching check
+        document.getElementById("releaseForm").addEventListener("submit", async (e) => {
+            e.preventDefault(); // Prevent default form submission
+
+            const bloodUnitSelect = document.getElementById("bloodUnitSelect");
+            const approvedRequestSelect = document.getElementById("approvedRequestSelect");
+
+            // Get selected blood unit and request details
+            const selectedBloodUnit = bloodUnitSelect.options[bloodUnitSelect.selectedIndex];
+            const selectedApprovedRequest = approvedRequestSelect.options[approvedRequestSelect.selectedIndex];
+
+            // Get the blood group data attributes from both dropdowns
+            const bloodUnitBloodGroup = selectedBloodUnit.getAttribute("data-blood-group");
+            const approvedRequestBloodGroup = selectedApprovedRequest.getAttribute("data-blood-group");
+
+            // Compare blood group and blood type
+            if (bloodUnitBloodGroup !== approvedRequestBloodGroup) {
+                alert("The blood group of the selected donation does not match the approved request. Please select matching blood groups.");
+                return; // Prevent form submission if blood groups don't match
+            }
+
+            // Create the data object to send as JSON
+            const data = {
+                bloodUnitID: bloodUnitSelect.value, // Using the id as the primary key for blood unit
+                approvedRequestID: approvedRequestSelect.value // Using the id as the primary key for approved request
+            };
+
+            try {
+                // Send the data to the server as JSON
+                const response = await fetch('/release-donation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }, // Set content type to JSON
+                    body: JSON.stringify(data) // Send the data as a JSON string
+                });
+
+                // Get the server's response message
+                const result = await response.json();
+                alert(result.message);
+
+                // Handle the response
+                if (result.success) {
+                    window.location.reload(); // Reload the page if the release was successful
+                } else {
+                    alert(result.error || 'An error occurred.');
+                }
+
+            } catch (error) {
+                alert("An error occurred while releasing the donation. Please try again.");
+                console.error(error);
+            }
+        });
+
+        // Add event listeners for buttons
+        document.querySelectorAll('.process-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const requestId = this.getAttribute('data-request-id');
+                alert(`Processing request with ID: ${requestId}`);
+                // Add your logic to process the request here
+            });
+        });
+
+        document.querySelectorAll('.cancel-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const requestId = this.getAttribute('data-request-id');
+                alert(`Canceling request with ID: ${requestId}`);
+                // Add your logic to cancel the request here
+            });
+        });
+    </script>
+
+    <!-- DataTables JS & CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        // Initialize DataTables for pagination
+        $(document).ready(function () {
+            $('#inventoryTable').DataTable({
+                "paging": true,
+                "scrollX": true
+            });
+
+            $('#approvedRequestsTable').DataTable({
+                "paging": true,
+                "scrollX": true
+            });
+
+            $('#clearedRequestsTable').DataTable({
+                "paging": true,
+                "scrollX": true
+            });
+        });
+    </script>
+                              </body>
+  
+  
+  
+  
+  
+  
+  

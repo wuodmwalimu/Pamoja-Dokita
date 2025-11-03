@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Charles Drew | Pamoja Dokita® 2025</title>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+</head>
+<body>
+
+<h1><i class="fa-solid fa-users"></i> User Management</h1>
+
+<!-- Navigation Buttons -->
+<div style="text-align: center; margin-bottom: 20px;">
+    <a href="/main" class="btn btn-primary">
+    <i class="fa-solid fa-tachometer-alt"></i> Main Dashboard
+  </a>
+    <button class="btn btn-primary" onclick="toggleForm()">
+        <i class="fa-solid fa-user-plus"></i> Register New User
+    </button>
+</div>
+
+<!-- User Registration Form -->
+<form id="userForm" action="/register" method="post" style="display: none;">
+    <h2><i class="fa-solid fa-user-plus"></i> Register New User</h2>
+
+    <label for="prefix">Prefix/Title:</label>
+    <select id="prefix" name="prefix">
+        <option value="" disabled selected>Select a prefix</option>
+        <option value="Dr.">Dr.</option>
+        <option value="Mr.">Mr.</option>
+        <option value="Mrs.">Mrs.</option>
+        <option value="Ms.">Ms.</option>
+    </select>
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required oninput="generateEmail()">
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required oninput="generateEmail()">
+
+    <label for="email">Email (Auto-generated):</label>
+    <input type="email" id="email" name="email" placeholder="Email will be generated" readonly>
+
+    <label for="country">Country:</label>
+    <input type="text" id="country" name="country">
+
+    <label for="region">Region:</label>
+    <input type="text" id="region" name="region">
+
+    <label for="hospital">Hospital:</label>
+    <input type="text" id="hospital" name="hospital">
+
+    <label for="role">Role:</label>
+    <select id="role" name="role">
+        <option value="" disabled selected>Select a role</option>
+        <option value="Receptionist">Receptionist</option>
+        <option value="Nurse">Nurse</option>
+        <option value="Blood Bank Technician">Blood Bank Technician</option>
+        <option value="Lab Manager (Doctor)">Lab Manager (Doctor)</option>
+        <option value="Admin">Admin</option>
+       <option value="Cashier">Cashier</option>
+              <option value="Regional Manager">Regional Manager</option>
+
+    </select>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="fa-solid fa-check-circle"></i> Register User
+    </button>
+</form>
+
+<!-- Export Buttons -->
+<div style="text-align: center; margin: 20px 0;">
+    <button class="btn btn-primary" onclick="exportToCSV()">
+        <i class="fa-solid fa-file-csv"></i> Export to CSV
+    </button>
+    <button class="btn btn-primary" onclick="exportToPDF()">
+        <i class="fa-solid fa-file-pdf"></i> Export to PDF
+    </button>
+</div>
+
+<!-- User Table -->
+<h2><i class="fa-solid fa-table"></i> Registered Users</h2>
+<table id="usersTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Prefix</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Country</th>
+            <th>Region</th>
+            <th>Hospital</th>
+            <th>Role</th>
+            <th>Password</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% userz.forEach(user => { %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.prefix %></td>
+                <td><%= user.firstName %></td>
+                <td><%= user.lastName %></td>
+                <td><%= user.email %></td>
+                <td><%= user.country %></td>
+                <td><%= user.region %></td>
+                <td><%= user.hospital %></td>
+                <td><%= user.role %></td>
+                <td><%= user.password %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#usersTable').DataTable({
+            paging: true,
+            scrollX: true,
+            dom: 'Bfrtip',
+            buttons: ['csvHtml5', 'pdfHtml5']
+        });
+    });
+
+    function toggleForm() {
+        const form = document.getElementById('userForm');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function generateEmail() {
+        const firstName = document.getElementById('firstName').value.trim().toLowerCase();
+        const lastName = document.getElementById('lastName').value.trim().toLowerCase();
+        document.getElementById('email').value = firstName && lastName ? `${firstName}.${lastName}@pamoja.com` : '';
+    }
+
+    function exportToCSV() {
+        const table = $('#usersTable').DataTable();
+        table.button('.buttons-csv').trigger();
+    }
+
+    function exportToPDF() {
+        const table = $('#usersTable').DataTable();
+        table.button('.buttons-pdf').trigger();
+    }
+</script>
+
+</body>
+  </html>
